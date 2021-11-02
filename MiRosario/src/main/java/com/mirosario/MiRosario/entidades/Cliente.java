@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Cliente extends Usuario {
+public class Cliente extends Usuario{
 
     private String dni;
     private String nombre;
@@ -95,7 +95,5 @@ public class Cliente extends Usuario {
     public void setComercios(List<Comercio> comercios) {
         this.comercios = comercios;
     }
-    
-    
 
 }

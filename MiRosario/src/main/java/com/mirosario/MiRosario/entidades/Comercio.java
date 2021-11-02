@@ -6,10 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Comercio extends Usuario{

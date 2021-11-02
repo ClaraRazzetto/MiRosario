@@ -1,11 +1,5 @@
 package com.mirosario.MiRosario.web;
 
-<<<<<<< HEAD
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class ConfiguracionSeguridad {
-=======
 import com.mirosario.MiRosario.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
->>>>>>> 5fcf574a854c83b9d556aab63080c6dcacfc6f51
 
 @Configuration
 @EnableWebSecurity
