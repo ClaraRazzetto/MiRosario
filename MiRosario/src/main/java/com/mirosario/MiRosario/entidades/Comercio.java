@@ -30,7 +30,7 @@ public class Comercio extends Usuario{
    
    @OneToOne
    private List<Producto> producto;
-
+   
     public String getCuit() {
         return cuit;
     }
@@ -102,7 +102,9 @@ public class Comercio extends Usuario{
     public void setProducto(List<Producto> producto) {
         this.producto = producto;
     }
-   
+    
+    
+    
 }
 
    

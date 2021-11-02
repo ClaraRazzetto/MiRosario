@@ -24,6 +24,8 @@ public class Usuario{
     
     @Enumerated(EnumType.STRING)
     private Rol rol;
+    
+    private Boolean alta;
 
     public String getId() {
         return id;
@@ -56,5 +58,15 @@ public class Usuario{
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+
+    public Boolean getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
+    }
+
     
+   
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.mirosario.MiRosario.servicios;
 
 import com.mirosario.MiRosario.entidades.Foto;
@@ -28,4 +29,19 @@ public class FotoServicio {
         }
         return null; 
     }
+=======
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mirosario.MiRosario.servicios;
+
+/**
+ *
+ * @author ger
+ */
+class FotoServicio {
+    
+>>>>>>> 56cad3033d943635f6413301c5d0241650d6ca28
 }
