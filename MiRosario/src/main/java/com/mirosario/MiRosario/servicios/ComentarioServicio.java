@@ -1,8 +1,12 @@
 package com.mirosario.MiRosario.servicios;
 
+import com.mirosario.MiRosario.entidades.Cliente;
 import com.mirosario.MiRosario.entidades.Comentario;
+import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.ComentarioRepositorio;
+import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,22 +14,51 @@ import org.springframework.stereotype.Service;
 public class ComentarioServicio {
     @Autowired
     private ComentarioRepositorio comentarioRepositorio;
-    
-    public Comentario guardar(String descripcion) throws ErrorServicio{
-    
-        if (!(descripcion == null || descripcion.isEmpty())) {
-          
+    @Autowired
+    private ClienteServicio clienteServicio;
+    @Autowired
+    private ComercioServicio comercioServicio;
+    @Transactional
+    public Comentario guardar(String descripcion, String idCliente,String idComercio) throws ErrorServicio{
+        validacion(descripcion, idCliente, idComercio);
                 Comentario comentario=new Comentario();
                 comentario.setDescripcion(descripcion);
-                comentario.s
+                comentario.setCliente(clienteServicio.findById(idCliente));
+                comentario.setComercio(comercioServicio.findById(idComercio));
+                comentario.setAlta(true);
                         return comentarioRepositorio.save(comentario);
           
-        } else{
-        throw new ErrorServicio("comentario nulo o vacio");
-        }
-        
-        
-        
+       
     }
-
+     public void validacion(String descripcion,String idCliente,String idComercio) throws ErrorServicio{
+        if (descripcion== null || descripcion.isEmpty()) {
+            throw new ErrorServicio("descripcion nula o vacia");
+        }
+         if (idCliente== null || idCliente.isEmpty()) {
+            throw new ErrorServicio("cliente nulo o vacio");
+        }
+          if (idComercio== null || idComercio.isEmpty()) {
+            throw new ErrorServicio("comercio nulo o vacio");
+        }
+     }
+//    public Comentario guardar(Comentario comentario) throws ErrorServicio{
+//     if (comentario.getDescripcion()== null || comentario.getDescripcion().isEmpty()) {
+//             throw new ErrorServicio("Descripcion nula o vacia");
+//        }
+//      if (comentario.getCliente()== null) {
+//             throw new ErrorServicio("Cliente nulo referente al comentario");
+//        }
+//       if (comentario.getComercio()== null) {
+//             throw new ErrorServicio("Comercio nulo referente al comentario");
+//        }
+//       //buscamos por id el cliente  que genera el comentario y el comercio que lo recibe para setear el parametro en la entidad Comentario//
+//       comentario.setCliente(clienteServicio.buscarPorID);
+//       comentario.setComercio(comercioServicio.buscarPorID);
+//              comentario.setAlta(true);
+//    return comentarioRepositorio.save(comentario);
+//    }
+             public List<Comentario> mostrarListaComentarios(){
+    return comentarioRepositorio.findAll();
+    }
+     
 }
