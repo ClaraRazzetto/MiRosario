@@ -17,6 +17,15 @@ public class Foto {
     private String id;
     private String nombre;
     private String mime;
+    private Boolean alta;
+
+    public Boolean getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
+    }
 
     public String getId() {
         return id;
@@ -52,5 +61,7 @@ public class Foto {
       @Lob @Basic(fetch = FetchType.LAZY)
     //mandamos el contenido en un arreglo de bytes
     private byte[] contenido;
+
+   
 
 }
