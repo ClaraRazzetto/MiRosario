@@ -2,12 +2,15 @@ package com.mirosario.MiRosario.servicios;
 
 import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.entidades.Foto;
+import com.mirosario.MiRosario.entidades.Producto;
 import com.mirosario.MiRosario.enums.Rol;
 import com.mirosario.MiRosario.enums.Rubro;
 import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.ComercioRepositorio;
 import com.mirosario.MiRosario.repositorios.FotoRepositorio;
+import com.mirosario.MiRosario.repositorios.ProductoRepositorio;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +31,15 @@ public class ComercioServicio {
   @Autowired
   private FotoServicio fotoServicio;
   
+  @Autowired
+  private ProductoRepositorio productoRepositorio;
+  @Autowired
+  private ProductoServicio productoServicio;
   
   @Transactional
-  public Comercio guardar(MultipartFile archivo, String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String mail) throws ErrorServicio, Exception{
+  public Comercio guardar(MultipartFile archivo, String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String telefono, String mail) throws ErrorServicio, Exception{
     
-    validar(nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, mail);  
+    validar(nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);  
     
     if(comercioRepositorio.buscarPorUsuario(nombreUsuario) != null){
         throw new ErrorServicio("ya existe un comercio registrado con ese usuario");
@@ -63,6 +70,60 @@ public class ComercioServicio {
     return comercioRepositorio.save(comercio);
   }
   
+  @Transactional
+  public Comercio editar (String id, MultipartFile archivo, String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String telefono, String mail) throws ErrorServicio, Exception{
+    
+    validar(nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
+    
+    Comercio comercio = findById(id);
+    
+    comercio.setNombreUsuario(nombreUsuario);
+    comercio.setPassword(password);
+    comercio.setCuit(cuit);
+    comercio.setDireccion(direccion);
+    comercio.setZona(zona);
+    comercio.setRubro(rubro);
+    comercio.setTelefono(telefono);
+    comercio.setMail(mail);
+    comercio.setDescripcion(descripcion);
+    
+    String idFoto = null;
+    if(comercio.getFoto() != null){
+        idFoto = comercio.getFoto().getId();
+    }
+    Foto foto = fotoServicio.editar(idFoto, archivo);
+    comercio.setFoto(foto);
+    
+    return comercioRepositorio.save(comercio);
+  }
+  
+  @Transactional
+  public List<Producto> guardarProducto(String idComercio, String idProducto) throws ErrorServicio{
+      
+      Comercio comercio = findById(idComercio);
+      
+      Producto producto = productoServicio.findById(idProducto);
+      
+      comercio.getProducto().add(producto);
+      
+      return comercio.getProducto();
+  }
+  
+  
+  @Transactional
+    public void darDeAlta(String id) throws ErrorServicio{
+        Comercio comercio = findById(id);
+        comercio.setAlta(true);
+        comercioRepositorio.save(comercio);
+    }
+    
+    @Transactional
+    public void darDeBaja(String id) throws ErrorServicio{
+        Comercio comercio = findById(id);
+        comercio.setAlta(false);
+        comercioRepositorio.save(comercio);
+    }
+  
   public Comercio findById(String id) throws ErrorServicio {
         Optional<Comercio> respuesta = comercioRepositorio.findById(id);
         if (respuesta.isPresent()) {
@@ -73,7 +134,7 @@ public class ComercioServicio {
     }
   
   
-  public void validar (String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String mail)throws ErrorServicio{
+  public void validar (String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String telefono, String mail)throws ErrorServicio{
     if(nombreUsuario == null || nombreUsuario.isEmpty()){
       throw new ErrorServicio("el usuario no puede estar vacio");
     }
@@ -115,6 +176,10 @@ public class ComercioServicio {
     
     if(mail == null || mail.isEmpty()){
       throw new ErrorServicio("la direccion de e-mail no puede estar vacia");
+    }
+    
+     if(telefono == null || telefono.isEmpty()){
+      throw new ErrorServicio("El telefono no puede estar vacio");
     }
   }
   
