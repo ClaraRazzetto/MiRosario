@@ -20,10 +20,10 @@ public class ClienteServicio {
     private ClienteRepositorio clienteRepositorio;
 
     @Autowired
-    private FotoSerivicio fotoServicio;
+    private FotoServicio fotoServicio;
 
     @Transactional
-    public Cliente guardar(String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona, MultipartFile archivo) throws ErrorServicio {
+    public Cliente guardar(String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona, MultipartFile archivo) throws ErrorServicio, Exception {
 
         validar(nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona);
 
@@ -36,7 +36,7 @@ public class ClienteServicio {
         }
 
         Cliente cliente = new Cliente();
-        cliente.setAlta = (true);
+        cliente.setAlta = (Boolean.TRUE);
         cliente.setNombreUsuario(nombreUsuario);
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setRol(Rol.CLIENTE);
