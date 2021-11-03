@@ -72,14 +72,9 @@ public class ComentarioServicio {
 //              comentario.setAlta(true);
 //    return comentarioRepositorio.save(comentario);
 //    }
-<<<<<<< HEAD
     
     public List<Comentario> mostrarListaComentarios(){
-=======
-             
-    public List<Comentario> mostrarListaComentarios(){
         
->>>>>>> cea45f4c039ffde542c6df3c18f34f0061fb8965
     return comentarioRepositorio.findAll();
     }
     
