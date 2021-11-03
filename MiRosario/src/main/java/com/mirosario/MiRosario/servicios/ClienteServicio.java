@@ -63,7 +63,7 @@ public class ClienteServicio {
     }
 
     @Transactional
-    public Cliente editar(String id, String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona, MultipartFile archivo) throws ErrorServicio {
+    public Cliente editar(String id, String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona, MultipartFile archivo) throws ErrorServicio, Exception {
 
         validar(nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona);
 
