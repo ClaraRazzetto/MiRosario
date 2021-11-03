@@ -36,7 +36,7 @@ public class ClienteServicio {
         }
 
         Cliente cliente = new Cliente();
-        cliente.setAlta = (Boolean.TRUE);
+        cliente.setAlta(Boolean.TRUE);
         cliente.setNombreUsuario(nombreUsuario);
         cliente.setPassword(new BCryptPasswordEncoder().encode(password));
         cliente.setRol(Rol.CLIENTE);
