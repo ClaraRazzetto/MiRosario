@@ -1,8 +1,6 @@
 package com.mirosario.MiRosario.servicios;
 
-import com.mirosario.MiRosario.entidades.Cliente;
 import com.mirosario.MiRosario.entidades.Comentario;
-import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.ComentarioRepositorio;
 import java.util.List;
@@ -21,18 +19,23 @@ public class ComentarioServicio {
     @Transactional
     public Comentario guardar(String descripcion, String idCliente,String idComercio) throws ErrorServicio{
         validacion(descripcion, idCliente, idComercio);
-                Comentario comentario=new Comentario();
-                comentario.setDescripcion(descripcion);
-                comentario.setCliente(clienteServicio.findById(idCliente));
-                comentario.setComercio(comercioServicio.findById(idComercio));
-                comentario.setAlta(true);
-                        return comentarioRepositorio.save(comentario);
+        
+        Comentario comentario=new Comentario();
+        comentario.setDescripcion(descripcion);
+        comentario.setCliente(clienteServicio.findById(idCliente));
+        comentario.setComercio(comercioServicio.findById(idComercio));
+        comentario.setAlta(true);
+                
+        return comentarioRepositorio.save(comentario);
           
-       
     }
-     public void validacion(String descripcion,String idCliente,String idComercio) throws ErrorServicio{
+    
+    public void validacion(String descripcion,String idCliente,String idComercio) throws ErrorServicio{
         if (descripcion== null || descripcion.isEmpty()) {
             throw new ErrorServicio("descripcion nula o vacia");
+        }
+        if (descripcion.length() > 100 ) {
+            throw new ErrorServicio("El comentario no puede exceder los 100 caracteres");
         }
          if (idCliente== null || idCliente.isEmpty()) {
             throw new ErrorServicio("cliente nulo o vacio");
@@ -40,7 +43,7 @@ public class ComentarioServicio {
           if (idComercio== null || idComercio.isEmpty()) {
             throw new ErrorServicio("comercio nulo o vacio");
         }
-     }
+    }
 //    public Comentario guardar(Comentario comentario) throws ErrorServicio{
 //     if (comentario.getDescripcion()== null || comentario.getDescripcion().isEmpty()) {
 //             throw new ErrorServicio("Descripcion nula o vacia");

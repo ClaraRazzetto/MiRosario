@@ -1,11 +1,13 @@
 package com.mirosario.MiRosario.servicios;
 
 import com.mirosario.MiRosario.entidades.Cliente;
+import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.entidades.Foto;
 import com.mirosario.MiRosario.enums.Rol;
 import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.ClienteRepositorio;
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,12 @@ public class ClienteServicio {
 
     @Autowired
     private FotoServicio fotoServicio;
+    
+    @Autowired
+    private ComercioServicio comercioServicio;
+    
+    @Autowired
+    private ComentarioServicio comentarioServicio;
 
     @Transactional
     public Cliente guardar(String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona, MultipartFile archivo) throws ErrorServicio, Exception {
@@ -138,5 +146,20 @@ public void validar(String nombreUsuario, String password, String password2, Str
         Cliente cliente = findById(id);
         cliente.setAlta(false);
         clienteRepositorio.save(cliente);
+    }
+    
+    public void comentar(String id, String descripcion, String idComercio) throws ErrorServicio {
+        comentarioServicio.guardar(id, descripcion, idComercio);
+    }
+    
+    public List<Comercio> guardarComercios(String id, String idComercio) throws ErrorServicio{
+        
+        Cliente cliente = findById(id);
+        
+        Comercio comercio = comercioServicio.findById(idComercio);
+        
+        cliente.getComercios().add(comercio);
+        
+        return cliente.getComercios();
     }
 }
