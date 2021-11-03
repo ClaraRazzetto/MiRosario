@@ -30,8 +30,8 @@ public class ComentarioServicio {
         return comentarioRepositorio.save(comentario);
           
     }
-<<<<<<< HEAD
-    @Autowired
+
+    @Transactional
     public Comentario editar(String id, String descripcion,String idCliente, String idComercio) throws ErrorServicio{
          validacion(descripcion, idCliente, idComercio);
         Comentario comentario =findById(id);
@@ -40,11 +40,9 @@ public class ComentarioServicio {
     return comentarioRepositorio.save(comentario);
     }
     
-     public void validacion(String descripcion,String idCliente,String idComercio) throws ErrorServicio{
-=======
     
     public void validacion(String descripcion,String idCliente,String idComercio) throws ErrorServicio{
->>>>>>> 3b849175ab09b228e3d104ac417a2f07dd203d48
+
         if (descripcion== null || descripcion.isEmpty()) {
             throw new ErrorServicio("descripcion nula o vacia");
         }
@@ -74,10 +72,14 @@ public class ComentarioServicio {
 //              comentario.setAlta(true);
 //    return comentarioRepositorio.save(comentario);
 //    }
-             public List<Comentario> mostrarListaComentarios(){
+             
+    public List<Comentario> mostrarListaComentarios(){
+        
     return comentarioRepositorio.findAll();
     }
-                 public Comentario findById(String id) throws ErrorServicio{
+    
+    public Comentario findById(String id) throws ErrorServicio{
+        
         Optional<Comentario> opcional = comentarioRepositorio.findById(id);
         if (opcional.isPresent()){
             return opcional.get();
@@ -85,7 +87,8 @@ public class ComentarioServicio {
             throw new ErrorServicio("No se encuentra el comentario solicitado");
         }
     }
-                 @Transactional
+    
+    @Transactional
     public void DarDeAlta(String id) throws ErrorServicio{
         Comentario comentario = findById(id);
         comentario.setAlta(true);
