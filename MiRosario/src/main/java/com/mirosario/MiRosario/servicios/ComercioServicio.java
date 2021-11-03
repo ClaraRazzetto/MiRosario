@@ -11,6 +11,7 @@ import com.mirosario.MiRosario.repositorios.FotoRepositorio;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,11 +30,11 @@ public class ComercioServicio {
   
   
   @Transactional
-  public Comercio guardar(MultipartFile archivo, String id, String usuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String mail) throws ErrorServicio{
+  public Comercio guardar(MultipartFile archivo, String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String mail) throws ErrorServicio, Exception{
     
-    validar(usuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, mail);  
+    validar(nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, mail);  
     
-    if(comercioRepositorio.buscarPorUsuario(usuario) != null){
+    if(comercioRepositorio.buscarPorUsuario(nombreUsuario) != null){
         throw new ErrorServicio("ya existe un comercio registrado con ese usuario");
     }
     
@@ -45,8 +46,8 @@ public class ComercioServicio {
     
     comercio.setAlta(Boolean.TRUE);
     comercio.setRol(Rol.COMERCIO);
-    comercio.setNombreUsuario(nombreComercio);
-    comercio.setCuit(password);
+    comercio.setNombreUsuario(nombreUsuario);
+    comercio.setPassword(new BCryptPasswordEncoder().encode(password));
     comercio.setCuit(cuit); 
     comercio.setNombreComercio(nombreComercio);
     comercio.setRubro(rubro);
@@ -72,8 +73,8 @@ public class ComercioServicio {
     }
   
   
-  public void validar (String usuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String mail)throws ErrorServicio{
-    if(usuario == null || usuario.isEmpty()){
+  public void validar (String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String mail)throws ErrorServicio{
+    if(nombreUsuario == null || nombreUsuario.isEmpty()){
       throw new ErrorServicio("el usuario no puede estar vacio");
     }
     
@@ -97,7 +98,7 @@ public class ComercioServicio {
     }
     
     if(rubro == null || rubro.toString().isEmpty()){
-      throw new ErrorServicio("el numero de cuit no puede estar vacio");
+      throw new ErrorServicio("el rubro no puede estar vacio");
     }
     
     if(direccion == null || direccion.isEmpty()){
