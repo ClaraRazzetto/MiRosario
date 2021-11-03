@@ -63,9 +63,9 @@ public class ClienteServicio {
     }
 
     @Transactional
-    public Cliente editar(String id, String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona Zona, MultipartFile archivo) throws ErrorServicio {
+    public Cliente editar(String id, String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona, MultipartFile archivo) throws ErrorServicio {
 
-        validar(nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, Zona);
+        validar(nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona);
 
         Cliente cliente = findById(id);
         cliente.setNombreUsuario(nombreUsuario);
@@ -76,7 +76,7 @@ public class ClienteServicio {
         cliente.setDireccion(direccion);
         cliente.setTelefono(telefono);
         cliente.setMail(mail);
-        cliente.setZona(Zona);
+        cliente.setZona(zona);
 
         String idFoto = null;
         if (cliente.getFoto() != null) {
@@ -135,14 +135,14 @@ public void validar(String nombreUsuario, String password, String password2, Str
     }
     
     @Transactional
-    public void DarDeAlta(String id) throws ErrorServicio{
+    public void darDeAlta(String id) throws ErrorServicio{
         Cliente cliente = findById(id);
         cliente.setAlta(true);
         clienteRepositorio.save(cliente);
     }
     
     @Transactional
-    public void DarDeBaja(String id) throws ErrorServicio{
+    public void darDeBaja(String id) throws ErrorServicio{
         Cliente cliente = findById(id);
         cliente.setAlta(false);
         clienteRepositorio.save(cliente);
