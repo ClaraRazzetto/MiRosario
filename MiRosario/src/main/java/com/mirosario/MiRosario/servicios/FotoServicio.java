@@ -29,21 +29,32 @@ public class FotoServicio {
         }
         return null; 
     }
-    @Transactional
-    public Foto editar( String id,MultipartFile archivo){
-    
-      if (archivo != null) {
+   
+     @Transactional
+    public Foto editar(String idFoto, MultipartFile archivo) throws Exception{
+         if (archivo != null) {
             try {
-                 Foto foto = findById(id);
+                Foto foto = new Foto();
+                //Si ya habia una foto, busco el id y la cambio
+                if (idFoto != null) {
+                    Optional<Foto> resp = fotoRepositorio.findById(idFoto);
+                    if (resp.isPresent()) {
+                        foto = resp.get();
+                    }
+                }
+                //si no tenia foto también funciona
                 foto.setMime(archivo.getContentType());
                 foto.setNombre(archivo.getName());
                 foto.setContenido(archivo.getBytes());
+               
                 return fotoRepositorio.save(foto);
             } catch (Exception e) {
-                System.err.println("error"+e.getMessage());
+                System.err.println(e.getMessage());
             }
         }
+        //si el archivo falla creo uno en blanco
         return null; 
+        
     }
      @Transactional
     public void borrarFoto(String id){

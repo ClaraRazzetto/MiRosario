@@ -29,12 +29,16 @@ public class ProductoServicio {
                         return productoRepositorio.save(producto);
     }
     @Autowired
-    public Producto editar(String id, String nombre, Double precio, String descripcion, MultipartFile archivo,String idFoto) throws ErrorServicio{
+    public Producto editar(String id, String nombre, Double precio, String descripcion, MultipartFile archivo) throws ErrorServicio, Exception{
         validacion(nombre, precio, descripcion);
         Producto producto=findById(nombre);
         producto.setNombre(nombre);
         producto.setPrecio(precio);
         producto.setDescripcion(descripcion);
+         String idFoto = null;
+        if (producto.getFoto() != null) {
+            idFoto=producto.getFoto().getId();
+        }
         producto.setFoto(fotoServicio.editar(idFoto, archivo));
         
     return productoRepositorio.save(producto);
