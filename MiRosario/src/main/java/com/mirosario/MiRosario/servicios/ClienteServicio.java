@@ -20,7 +20,7 @@ public class ClienteServicio {
     private ClienteRepositorio clienteRepositorio;
 
     @Autowired
-    private FotoSerivicio fotoServicio;
+    private FotoServicio fotoServicio;
 
     @Transactional
     public Cliente guardar(String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona, MultipartFile archivo) throws ErrorServicio {
@@ -127,15 +127,15 @@ public void validar(String nombreUsuario, String password, String password2, Str
     }
     
     @Transactional
-    public void DarAlta(String id) throws ErrorServicio{
-        Cliente cliente = BuscarId(id);
+    public void DarDeAlta(String id) throws ErrorServicio{
+        Cliente cliente = findById(id);
         cliente.setAlta(true);
         clienteRepositorio.save(cliente);
     }
     
     @Transactional
-    public void DarBaja(String id) throws ErrorServicio{
-        Cliente cliente = BuscarId(id);
+    public void DarDeBaja(String id) throws ErrorServicio{
+        Cliente cliente = findById(id);
         cliente.setAlta(false);
         clienteRepositorio.save(cliente);
     }
