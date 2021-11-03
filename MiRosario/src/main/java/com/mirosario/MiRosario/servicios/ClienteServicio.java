@@ -152,6 +152,7 @@ public void validar(String nombreUsuario, String password, String password2, Str
         comentarioServicio.guardar(id, descripcion, idComercio);
     }
     
+    @Transactional
     public List<Comercio> guardarComercios(String id, String idComercio) throws ErrorServicio{
         
         Cliente cliente = findById(id);

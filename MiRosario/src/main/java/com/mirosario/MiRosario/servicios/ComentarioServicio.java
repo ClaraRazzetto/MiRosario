@@ -16,6 +16,7 @@ public class ComentarioServicio {
     private ClienteServicio clienteServicio;
     @Autowired
     private ComercioServicio comercioServicio;
+    
     @Transactional
     public Comentario guardar(String descripcion, String idCliente,String idComercio) throws ErrorServicio{
         validacion(descripcion, idCliente, idComercio);
@@ -26,8 +27,7 @@ public class ComentarioServicio {
         comentario.setComercio(comercioServicio.findById(idComercio));
         comentario.setAlta(true);
                 
-        return comentarioRepositorio.save(comentario);
-          
+        return comentarioRepositorio.save(comentario);     
     }
     
     public void validacion(String descripcion,String idCliente,String idComercio) throws ErrorServicio{
@@ -60,7 +60,8 @@ public class ComentarioServicio {
 //              comentario.setAlta(true);
 //    return comentarioRepositorio.save(comentario);
 //    }
-             public List<Comentario> mostrarListaComentarios(){
+    
+    public List<Comentario> mostrarListaComentarios(){
     return comentarioRepositorio.findAll();
     }
      
