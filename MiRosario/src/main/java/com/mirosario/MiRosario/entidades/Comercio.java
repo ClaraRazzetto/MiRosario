@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -30,7 +31,7 @@ public class Comercio extends Usuario{
    @OneToOne
    private Foto foto;
    
-   @OneToOne
+   @OneToMany
    private List<Producto> producto;
 
     public String getTelefono() {

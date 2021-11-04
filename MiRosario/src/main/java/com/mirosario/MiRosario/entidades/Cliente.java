@@ -19,8 +19,10 @@ public class Cliente extends Usuario{
     private String mail;
     @Enumerated(EnumType.STRING)
     private Zona zona;
+    
     @OneToOne
     private Foto foto;
+    
     @OneToMany
     private List<Comercio> comercios;
 
