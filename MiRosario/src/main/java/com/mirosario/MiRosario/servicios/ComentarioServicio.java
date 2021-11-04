@@ -56,33 +56,11 @@ public class ComentarioServicio {
             throw new ErrorServicio("comercio nulo o vacio");
         }
     }
-<<<<<<< HEAD
-             
-    public List<Comentario> mostrarListaComentarios(){
-        
-    return comentarioRepositorio.findAll();
-=======
-//    public Comentario guardar(Comentario comentario) throws ErrorServicio{
-//     if (comentario.getDescripcion()== null || comentario.getDescripcion().isEmpty()) {
-//             throw new ErrorServicio("Descripcion nula o vacia");
-//        }
-//      if (comentario.getCliente()== null) {
-//             throw new ErrorServicio("Cliente nulo referente al comentario");
-//        }
-//       if (comentario.getComercio()== null) {
-//             throw new ErrorServicio("Comercio nulo referente al comentario");
-//        }
-//       //buscamos por id el cliente  que genera el comentario y el comercio que lo recibe para setear el parametro en la entidad Comentario//
-//       comentario.setCliente(clienteServicio.buscarPorID);
-//       comentario.setComercio(comercioServicio.buscarPorID);
-//              comentario.setAlta(true);
-//    return comentarioRepositorio.save(comentario);
-//    }
 
     public List<Comentario> mostrarListaComentarios() {
 
         return comentarioRepositorio.findAll();
->>>>>>> ca38e04bc8419e8068578aaa14a162151ddc76eb
+
     }
 
     public Comentario findById(String id) throws ErrorServicio {

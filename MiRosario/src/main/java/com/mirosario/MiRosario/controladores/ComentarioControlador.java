@@ -47,7 +47,7 @@ public class ComentarioControlador {
     
         @GetMapping("/baja")
     public String darBajaComentario(@RequestParam(required = true) String id) throws ErrorServicio{
-        comentarioServicio.DarDeBaja(id);
+        comentarioServicio.darDeBaja(id);
         return "vista-cliente.html";
     }
 

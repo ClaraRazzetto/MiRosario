@@ -52,7 +52,7 @@ public class ProductoControlador {
     
         @GetMapping("/baja")
     public String darBajaProducto(@RequestParam(required = true) String id) throws ErrorServicio{
-        productoServicio.DarDeBaja(id);
+        productoServicio.darDeBaja(id);
         return "perfil-comercio.html";
     }
        
