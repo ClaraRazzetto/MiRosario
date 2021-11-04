@@ -4,6 +4,8 @@ import com.mirosario.MiRosario.enums.Rubro;
 import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
+import com.mirosario.MiRosario.servicios.RubroServicio;
+import com.mirosario.MiRosario.servicios.ZonaServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -51,7 +53,7 @@ public class ComercioControlador {
         modelo.put("cuit", cuit);
         modelo.put("nombreComercio", nombreComercio);
         modelo.put("direccion", direccion);
-        modelo.put("zona", zonaServicio.litarZonas());
+        modelo.put("zona", zonaServicio.listarZonas());
         modelo.put("rubro", rubroServicio.listarRubros());
         modelo.put("telefono", telefono);
         modelo.put("mail", mail);
