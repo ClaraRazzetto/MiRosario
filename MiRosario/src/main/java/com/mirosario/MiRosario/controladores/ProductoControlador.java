@@ -1,11 +1,13 @@
 package com.mirosario.MiRosario.controladores;
 
+import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.entidades.Producto;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ProductoServicio;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/producto")
@@ -41,13 +44,36 @@ public class ProductoControlador {
         }
       }
       @GetMapping("/editar")
-      public String editarProducto(ModelMap modelo,@RequestParam String id) {
-       
-            return "editar-producto.html";
+      public String editarProducto(HttpSession httpsession, ModelMap modelo,@RequestParam String id, RedirectAttributes redirect) {
+        try {
+            Comercio comercio = (Comercio) httpsession.getAttribute("usuarioSesion");
+            if (comercio == null || !comercio.getId().equals(id)) {
+                redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
+                return "redirect:/inicio";
+            }
+            modelo.addAttribute("producto", productoServicio.findById(id));
+        
+        } catch (ErrorServicio ex) {
+            System.out.println("error"+ex.getMessage());
+            
+        }
+          return "editar-producto.html";
     }
       @PostMapping("/editar")
-      public String editarProductoPost(@RequestParam MultipartFile archivo, @RequestParam String nombre,@RequestParam Double precio,@RequestParam String descripcion){
-           return "perfil-comercio.html";
+      public String editarProductoPost(HttpSession httpsession, Model modelo,@RequestParam String id, @RequestParam MultipartFile archivo, @RequestParam String nombre,@RequestParam Double precio,@RequestParam String descripcion,RedirectAttributes redirect){
+            try {
+            Comercio comercio = (Comercio) httpsession.getAttribute("usuarioSesion");
+            if (comercio == null || !comercio.getId().equals(id)) {
+                redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
+                return "redirect:/inicio";
+            }
+            modelo.addAttribute("producto", productoServicio.findById(id));
+        //por terminar//
+        } catch (ErrorServicio ex) {
+            System.out.println("error"+ex.getMessage());
+            
+        }
+          return "perfil-comercio.html";
       }
     
         @GetMapping("/baja")
