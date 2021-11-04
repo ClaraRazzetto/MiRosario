@@ -1,12 +1,11 @@
 package com.mirosario.MiRosario.controladores;
 
+import com.mirosario.MiRosario.entidades.Cliente;
 import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/cliente")
@@ -60,7 +60,12 @@ public class ClienteControlador {
     }
     
     @GetMapping("/editar")
-    public String editar(){
+    public String editar(ModelMap modelo, HttpSession httpsession, @RequestParam String id, RedirectAttributes redirect){
+        Cliente cliente = (Cliente) httpsession.getAttribute("usuarioSesion");
+        if (cliente == null || !cliente.getId().equals(id)) {
+            redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
+            return "redirect:/inicio";
+        }
         return "editar-cliente.html";
     }
     

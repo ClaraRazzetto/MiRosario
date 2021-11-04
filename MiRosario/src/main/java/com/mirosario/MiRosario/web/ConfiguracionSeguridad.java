@@ -30,7 +30,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 
         http.headers().frameOptions().sameOrigin().and()
                 .authorizeRequests()
-                .antMatchers("")
+                .antMatchers("/css/ /img/")
                 .permitAll()
                 .and().formLogin()
                     .loginPage("/login")
