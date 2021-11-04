@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -23,14 +24,24 @@ public class Comercio extends Usuario{
    private Zona zona;
    
    private String descripcion;
+   private String telefono;
    private String mail;
+   
    
    @OneToOne
    private Foto foto;
    
-   @OneToOne
+   @OneToMany
    private List<Producto> producto;
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
     public String getCuit() {
         return cuit;
     }
@@ -102,7 +113,9 @@ public class Comercio extends Usuario{
     public void setProducto(List<Producto> producto) {
         this.producto = producto;
     }
-   
+    
+    
+    
 }
 
    
