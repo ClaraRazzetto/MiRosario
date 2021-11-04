@@ -23,10 +23,10 @@ public class ClienteServicio {
 
     @Autowired
     private FotoServicio fotoServicio;
-    
+
     @Autowired
     private ComercioServicio comercioServicio;
-    
+
     @Autowired
     private ComentarioServicio comentarioServicio;
 
@@ -86,9 +86,9 @@ public class ClienteServicio {
         cliente.setFoto(foto);
 
         return clienteRepositorio.save(cliente);
-}
+    }
 
-public void validar(String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona) throws ErrorServicio {
+    public void validar(String nombreUsuario, String password, String password2, String dni, String nombre, String apellido, String direccion, String telefono, String mail, Zona zona) throws ErrorServicio {
 
         if (nombreUsuario == null || nombreUsuario.isEmpty()) {
             throw new ErrorServicio("El nombre de usuario no puede ser nulo");
@@ -96,7 +96,7 @@ public void validar(String nombreUsuario, String password, String password2, Str
         if (password == null || password2 == null || password.isEmpty() || password2.isEmpty()) {
             throw new ErrorServicio("La contraseña no puede ser nula");
         }
-        if (password.length() < 5 || password2.length() < 5 || password.length() > 10  || password2.length() > 10){
+        if (password.length() < 5 || password2.length() < 5 || password.length() > 10 || password2.length() > 10) {
             throw new ErrorServicio("La contraseña no puede ser nula");
         }
         if (!password.equals(password2)) {
@@ -124,43 +124,43 @@ public void validar(String nombreUsuario, String password, String password2, Str
             throw new ErrorServicio("La zona no puede ser nula");
         }
     }
-    
-    public Cliente findById(String id) throws ErrorServicio{
+
+    public Cliente findById(String id) throws ErrorServicio {
         Optional<Cliente> opcional = clienteRepositorio.findById(id);
-        if (opcional.isPresent()){
+        if (opcional.isPresent()) {
             return opcional.get();
-        }else{
+        } else {
             throw new ErrorServicio("No se encuentra el usuario solicitado");
         }
     }
-    
+
     @Transactional
-    public void darDeAlta(String id) throws ErrorServicio{
+    public void darDeAlta(String id) throws ErrorServicio {
         Cliente cliente = findById(id);
         cliente.setAlta(true);
         clienteRepositorio.save(cliente);
     }
-    
+
     @Transactional
-    public void darDeBaja(String id) throws ErrorServicio{
+    public void darDeBaja(String id) throws ErrorServicio {
         Cliente cliente = findById(id);
         cliente.setAlta(false);
         clienteRepositorio.save(cliente);
     }
-    
+
     public void comentar(String id, String descripcion, String idComercio) throws ErrorServicio {
         comentarioServicio.guardar(id, descripcion, idComercio);
     }
-    
+
     @Transactional
-    public List<Comercio> guardarComercios(String id, String idComercio) throws ErrorServicio{
-        
+    public List<Comercio> guardarComercios(String id, String idComercio) throws ErrorServicio {
+
         Cliente cliente = findById(id);
-        
+
         Comercio comercio = comercioServicio.findById(idComercio);
-        
+
         cliente.getComercios().add(comercio);
-        
+
         return cliente.getComercios();
     }
 }

@@ -28,8 +28,5 @@ public class UsuarioControlador {
         }
         return "login.html";
     }
-    
-        
-    //configurar la vista de usuario loggeado con exito dependiendo del rol.
 
 }
