@@ -16,13 +16,13 @@
 
  <!-- fondo body  -->
 
-<body style="background-image: url(/MiRosario/src/main/resources/static/img/atardecer.jfif);" >
+<body style="background-image: url(/img/atardecer.jfif);" >
 
       <!-- Menu responsive  -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark row">
 
                         
-        <a class="navbar-brand; margin-left:10px" href="index.html">
+        <a class="navbar-brand; margin-left:10px" th:href="@{/}">
           <img src="/img/logoMIR1.jpeg" width="60px" height="50px"  class="d-inline-block align-top rounded" alt="" >
         </a>   
 
@@ -31,7 +31,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-item nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
             <a class="nav-item nav-link" href="#">Productos</a>
             <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
@@ -47,7 +47,7 @@
               <div class="card-body bg-dark" style="border-style: solid; color:floralwhite">
                 <h3 class="card-title" style="color:floralwhite">¿Sos un comercio?</h3>
                 <p class="card-text" style="color:floralwhite">¡Ofrecé beneficios exclusivos y aumenta tus ventas!</p>
-                <a th:href="@{/cliente/registro}" class="btn btn-outline-warning">Registrate </a>
+                <a th:href="@{/comercio/registro}" class="btn btn-outline-warning">Registrate </a>
                 <a th:href="@{/login}" class="btn btn-outline-warning">Iniciar sesion</a>
               </div>
             </div>
@@ -57,7 +57,7 @@
               <div class="card-body bg-dark" style="border-style: solid; color:floralwhite">
                 <h3 class="card-title" style="color:floralwhite">¿Sos un consumidor?</h3>
                 <p class="card-text"style="color:floralwhite">¡Ahora podés encontrar todo lo que buscas!</p>
-                <a th:href="@{/comercio/registro}" class="btn btn-outline-warning">Registrate </a>
+                <a th:href="@{/cliente/registro}" class="btn btn-outline-warning">Registrate </a>
                 <a th:href="@{/login}" class="btn btn-outline-warning">Iniciar sesion</a>
               </div>
             </div>
