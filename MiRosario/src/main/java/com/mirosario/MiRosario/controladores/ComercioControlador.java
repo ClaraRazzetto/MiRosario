@@ -7,6 +7,8 @@ import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
 import com.mirosario.MiRosario.servicios.RubroServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,25 +71,57 @@ public class ComercioControlador {
     }
     
     @GetMapping("/editar")
-    public String editar(ModelMap modelo, HttpSession httpssesion, @RequestParam String id, RedirectAttributes redirect){
+    public String editar(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect){
        
         modelo.put("zonas", zonaServicio.listarZonas());
         modelo.put("rubros", rubroServicio.listarRubros());
         
-        Comercio comercio = (Comercio) httpssesion.getAttribute("usuarioSesion");
+        try {
+            
+            
+            Comercio comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+            
+            if(comercio == null || !comercio.getId().equals(id)){
+                redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
+                
+                return "redirect:/";
+            }
+            
+            modelo.put("comercio", comercioServicio.findById(id)); 
+               
+        } catch (ErrorServicio error) {
+            
+            modelo.put("error", error.getMessage());
+        }
+        return "editar-comercio.html";
+    }
+
+    @PostMapping("/editar")
+    public String editarPost( HttpSession sesion, @RequestParam String id, RedirectAttributes redirect, ModelMap modelo, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String password, @RequestParam String password2, @RequestParam String cuit, @RequestParam String nombreComercio, @RequestParam Rubro rubro, @RequestParam String direccion, @RequestParam Zona zona, @RequestParam String descripcion, @RequestParam String telefono, @RequestParam String mail) throws Exception {
+                
+        Comercio comercio = null;
         
+        try{
+            
+        comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+       
         if(comercio == null || !comercio.getId().equals(id)){
             redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
             
             return "redirect:/";
         }
-       
-
-        return "editar-comercio.html";
-    }
-
-    @PostMapping("/editar")
-    public String editarPost() {
+                
+        comercio = comercioServicio.editar(id, archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
+        
+        sesion.setAttribute("usuarioSesion", comercio);
+                
+        }catch(ErrorServicio error){
+            
+            modelo.put("error", error.getMessage());
+            modelo.put("comercio", comercio); 
+            
+        }
+        
         return "perfil-comercio.html";
     }
 
@@ -101,4 +135,9 @@ public class ComercioControlador {
         return "inicio.html";
     }
 
+    
+    
+    
+    
+    
 }

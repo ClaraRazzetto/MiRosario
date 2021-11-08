@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="/MiRosario/src/main/resources/static/css/style-login.css"> 
+    <link rel="stylesheet" href="/css/style-login.css"> 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -16,15 +16,15 @@
 
  <!-- fondo body  -->
 
-<body style="background-image: url(/MiRosario/src/main/resources/static/img/atardecer.jfif);" >
+<body style="background-image: url(/img/atardecer.jfif);" >
 
       <!-- Menu responsive  -->
 
                          <nav class="navbar navbar-expand-lg navbar-dark bg-dark row">
 
                         
-                          <a class="navbar-brand; margin-left:10px" href="index.html">
-                            <img src="/MiRosario/src/main/resources/static/img/logoMIR1.jpeg" width="60px" height="50px"  class="d-inline-block align-top rounded"" alt="" >
+                          <a class="navbar-brand; margin-left:10px" th:href="@{/}">
+                            <img src="/img/logoMIR1.jpeg" width="60px" height="50px"  class="d-inline-block align-top rounded" alt="" >
                           </a>   
 
                           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
                           </button>
                           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                              <a class="nav-item nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+                              <a class="nav-item nav-link" th:href="@{/}">Inicio <span class="sr-only">(current)</span></a>
                               <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
                               <a class="nav-item nav-link" href="#">Productos</a>
                               <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
@@ -46,7 +46,7 @@
                               <form method="post" action="/comercio/registro" enctype="multipart/form-data">
                                   <div class="">
                                     <span>
-                                      <img src="/MiRosario/src/main/resources/static/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"  style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;"  alt="" >
+                                      <img src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"  style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;"  alt="" >
                                     </span>
                                   </div>
 

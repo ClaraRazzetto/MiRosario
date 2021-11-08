@@ -18,4 +18,13 @@ public class MainControlador {
         return "quienes-somos.html";
     }
     
+    @GetMapping("/vista-cliente")
+    public String vistaCliente(){
+        return "vista-cliente.html";
+    }
+    
+    @GetMapping("/perfil-comercio")
+    public String perfilComercio(){
+        return "perfil-comercio.html";
+    }
 }
