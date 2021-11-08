@@ -1,6 +1,7 @@
 package com.mirosario.MiRosario.controladores;
 
 import com.mirosario.MiRosario.entidades.Comercio;
+import com.mirosario.MiRosario.entidades.Producto;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ProductoServicio;
 import javax.servlet.http.HttpSession;
@@ -48,7 +49,7 @@ public class ProductoControlador {
             Comercio comercio = (Comercio) httpsession.getAttribute("usuarioSesion");
             if (comercio == null || !comercio.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
-                return "redirect:/inicio";
+                return "redirect:/";
             }
             modelo.addAttribute("producto", productoServicio.findById(id));
 
@@ -60,15 +61,15 @@ public class ProductoControlador {
     }
 
     @PostMapping("/editar")
-    public String editarProductoPost(HttpSession httpsession, Model modelo, @RequestParam String id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) {
+    public String editarProductoPost(HttpSession httpsession, Model modelo, @RequestParam String id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) throws Exception {
+        Producto producto=null;
         try {
             Comercio comercio = (Comercio) httpsession.getAttribute("usuarioSesion");
             if (comercio == null || !comercio.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
-                return "redirect:/inicio";
+                return "redirect:/";
             }
-            modelo.addAttribute("producto", productoServicio.findById(id));
-            //por terminar//
+           producto = productoServicio.editar(id, nombre, precio, descripcion, archivo);
         } catch (ErrorServicio ex) {
             System.out.println("error" + ex.getMessage());
 
