@@ -1,0 +1,124 @@
+    <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MIR</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+   <link rel="stylesheet" href="/MiRosario/src/main/resources/static/css/style-login.css"> 
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+ <!-- fondo body  -->
+
+<body style="background-image: url(/MiRosario/src/main/resources/static/img/atardecer.jfif);" >
+
+      <!-- Menu responsive  -->
+
+                         <nav class="navbar navbar-expand-lg navbar-dark bg-dark row">
+
+                        
+                          <a class="navbar-brand; margin-left:10px" href="index.html">
+                            <img src="/MiRosario/src/main/resources/static/img/logoMIR1.jpeg" width="60px" height="50px"  class="d-inline-block align-top rounded"" alt="" >
+                          </a>   
+
+                          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                              <a class="nav-item nav-link" href="index.html">Inicio <span class="sr-only">(current)</span></a>
+                              <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
+                              <a class="nav-item nav-link" href="#">Productos</a>
+                              <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
+                            </div>
+                          </div>
+                        </nav>
+                       
+ <!-- formulario  -->
+
+                            <div class="registration-form">
+                              <form>
+                                  <div class="">
+                                    <span>
+                                      <img src="/MiRosario/src/main/resources/static/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"  style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;"  alt="" >
+                                    </span>
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="text" class="form-control item" id="nombreCliente" placeholder="Nombre">
+                                  </div>
+                                  <div class="form-group">
+                                    <input type="text" class="form-control item" id="apellidoCliente" placeholder="Apellido">
+                                 </div>
+                                  <div class="form-group">
+                                    <input type="number" class="form-control item" id="dniCliente" placeholder="D.N.I">
+                                 </div>
+                                  <div class="form-group">
+                                      <input type="password" class="form-control item" id="Contraseña" placeholder="Contraseña">
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="text" class="form-control item" id="email" placeholder="Email">
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="number" class="form-control item" id="telefono" placeholder="Telefono">
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="text" class="form-control item" id="direccion" placeholder="Direccion">
+                                  </div>
+                                  <div class="form-group">
+                                      <button type="button" class="btn btn-block create-account">Crear Cuenta</button>
+                                  </div>
+                              </form>
+                        
+                          </div>
+  <!-- card registro -->
+  <!-- banner carrucel -->   
+  <!-- fin banner carrucl -->
+  <!--Container quienes somos-->
+
+   
+     <div class="container ; margin-left: 0px; col-sm-12 text-center" >
+         <h2 class="main__title">Quienes somos?</h2>
+         <a name="ancla-1">
+         <p class="main_txt">Somos una empresa, dedicada a ofrecer productos, contenidos, servicios y tips.
+          Pensando en el usuario, redefiniendo el concepto, formando pensamientos positivos, sonrisas y alegria.</p>
+         <h2 class="main__title">Vision</h2>
+         <p class="main_txt">Consolidarnos en todo nivel, decidimos diseñar una nueva app para los rosarinos, estábamos seguros de que no era posible hacerlo sin tu ayuda. </p>
+         <p class="main_txt">Queríamos comprender plenamente las necesidades de nuestros vecinos y para lograrlo, debíamos trabajar juntos.</p>
+          <p class="main_txt">Así que colaboramos con comerciantes y clientes de la ciudad para diseñar, evaluar y construir tu nueva experiencia con la aplicación, el resultado es una app mejorada.</p>
+         <!--  , caracterizandonos por nuestra calidad y atencion al cliente-->
+      </div>
+ <!--footer pie de pagina-->
+  <footer >
+    <a name="ancla-3">
+    <div class="footer-">
+    <div class="copyright text-center" style="background-color: bg-dark  ;">
+        <div class="container-fluid" style="background-color:  bg-dark  ; color: #bbdefb;">
+          <h5>MiRosario.com © 2021</h5>
+          <h7>Todos los derechos reservados info@mirosario.com</h5>
+        
+    
+        </div>
+    </div>
+</div>
+  </footer>
+ 
+   <!-- scrips-********-->
+
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+      </script>
+  <!--  fin scrips-->
+
+  </body>
+</html>

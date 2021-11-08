@@ -30,7 +30,7 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
 
         http.headers().frameOptions().sameOrigin().and()
                 .authorizeRequests()
-                .antMatchers("")
+                .antMatchers("/css/ /img/")
                 .permitAll()
                 .and().formLogin()
                     .loginPage("/login")
@@ -38,12 +38,12 @@ public class ConfiguracionSeguridad extends WebSecurityConfigurerAdapter {
                     .usernameParameter("nombreUsuario")
                     .passwordParameter("password")
                     //configurar la vista de usuario loggeado con exito dependiendo del rol.
-                    .defaultSuccessUrl("/inicio")
+                    .defaultSuccessUrl("/")
                     .failureUrl("/login?error=error")
                     .permitAll()
                 .and().logout()
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/inicio")
+                    .logoutSuccessUrl("/")
                     .permitAll()
                     .and().csrf().disable();
 

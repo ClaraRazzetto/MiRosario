@@ -21,27 +21,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/comercio")
 public class ComercioControlador {
-    
+
     @Autowired
     private ComercioServicio comercioServicio;
-    
+
     @Autowired
     private ZonaServicio zonaServicio;
-    
+
     @Autowired
     private RubroServicio rubroServicio;
-    
+
     @GetMapping("/regritro")
-    public String registro(ModelMap modelo){
-        
+    public String registro(ModelMap modelo) {
+
         modelo.put("zona", zonaServicio.listarZonas());
         modelo.put("rubro", rubroServicio.listarRubros());
-  
+
         return "formulario-comercio.html";
     }
-    
+
     @PostMapping("/registro")
     public String registroPost(ModelMap modelo, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String password, @RequestParam String password2, @RequestParam String cuit, @RequestParam String nombreComercio, @RequestParam Rubro rubro, @RequestParam String direccion, @RequestParam Zona zona, @RequestParam String descripcion, @RequestParam String telefono, @RequestParam String mail) throws Exception {
+
         
     try {
         comercioServicio.guardar( archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
@@ -63,6 +64,7 @@ public class ComercioControlador {
         modelo.put("descripcion", descripcion);
             
         return "perfil-comercio.html";
+
         }
     }
     
@@ -75,33 +77,24 @@ public class ComercioControlador {
             
             return "redirect:/inicio";
         }
-        
+       
+
         return "editar-comercio.html";
     }
-    
+
     @PostMapping("/editar")
-    public String editarPost(){
+    public String editarPost() {
         return "perfil-comercio.html";
-    }    
-    
+    }
+
     @GetMapping("/baja")
-    public String darDeBaja(){
+    public String darDeBaja() {
         return "eliminar.html";
     }
-    
+
     @PostMapping("/baja")
-    public String darDeBajaPost(){
+    public String darDeBajaPost() {
         return "inicio.html";
     }
-        
-        
-        
-        
-}
-    
-    
-    
-    
-    
-    
 
+}
