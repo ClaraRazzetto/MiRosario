@@ -25,6 +25,11 @@ public class ClienteControlador {
     
     @Autowired
     public ZonaServicio zonaServicio;
+    
+    @GetMapping("/vista-cliente")
+    public String vistaCliente(){
+        return "vista-cliente.html";
+    }
 
     @GetMapping("/registro")
     public String registro(ModelMap modelo){
@@ -40,7 +45,7 @@ public class ClienteControlador {
         try {
             clienteServicio.guardar(nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona, archivo);
             
-            return "vista-cliente.html";
+            return "redirect:/vista-cliente";
             
         } catch (ErrorServicio error) {
             
@@ -94,7 +99,7 @@ public class ClienteControlador {
             modelo.put("error", error.getMessage());
             modelo.put("cliente", cliente);
         }
-        return "vista-cliente.html";
+        return "redirect:/vista-cliente.html";
     }
     
     @GetMapping("/baja")
@@ -104,7 +109,7 @@ public class ClienteControlador {
     
     @PostMapping("/baja")
     public String darDeBajaPost(){
-        return "inicio.html";
+        return "redirect:/";
     }
     
 }

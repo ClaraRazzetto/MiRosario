@@ -24,7 +24,7 @@
 
                         
                           <a class="navbar-brand; margin-left:10px" th:href="@{/}">
-                            <img src="/img/logoMIR1.jpeg" width="60px" height="50px"  class="d-inline-block align-top rounded"" alt="" >
+                            <img src="/img/logoMIR1.jpeg" width="60px" height="50px"  class="d-inline-block align-top rounded" alt="" >
                           </a>   
 
                           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@
                                 </div>
 
                                 <div class="form-group"> 
-                                  <select  name="zona" class="form-control item"><option th:each="zona :${zonas}"></option></select>
+                                  <select  name="zona" class="form-control item" ><option th:each="zona,iterator :${zonas}" th:text="${zona}"></option></select>
                                 </div>
 
                                   <div class="form-group">
