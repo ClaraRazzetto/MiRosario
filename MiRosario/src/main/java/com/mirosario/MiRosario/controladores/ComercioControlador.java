@@ -31,11 +31,11 @@ public class ComercioControlador {
     @Autowired
     private RubroServicio rubroServicio;
 
-    @GetMapping("/regritro")
+    @GetMapping("/registro")
     public String registro(ModelMap modelo) {
 
-        modelo.put("zona", zonaServicio.listarZonas());
-        modelo.put("rubro", rubroServicio.listarRubros());
+        modelo.put("zonas", zonaServicio.listarZonas());
+        modelo.put("rubros", rubroServicio.listarRubros());
 
         return "formulario-comercio.html";
     }
@@ -57,8 +57,8 @@ public class ComercioControlador {
         modelo.put("cuit", cuit);
         modelo.put("nombreComercio", nombreComercio);
         modelo.put("direccion", direccion);
-        modelo.put("zona", zonaServicio.listarZonas());
-        modelo.put("rubro", rubroServicio.listarRubros());
+        modelo.put("zonas", zonaServicio.listarZonas());
+        modelo.put("rubros", rubroServicio.listarRubros());
         modelo.put("telefono", telefono);
         modelo.put("mail", mail);
         modelo.put("descripcion", descripcion);
@@ -70,12 +70,16 @@ public class ComercioControlador {
     
     @GetMapping("/editar")
     public String editar(ModelMap modelo, HttpSession httpssesion, @RequestParam String id, RedirectAttributes redirect){
+       
+        modelo.put("zonas", zonaServicio.listarZonas());
+        modelo.put("rubros", rubroServicio.listarRubros());
+        
         Comercio comercio = (Comercio) httpssesion.getAttribute("usuarioSesion");
         
         if(comercio == null || !comercio.getId().equals(id)){
             redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
             
-            return "redirect:/inicio";
+            return "redirect:/";
         }
        
 

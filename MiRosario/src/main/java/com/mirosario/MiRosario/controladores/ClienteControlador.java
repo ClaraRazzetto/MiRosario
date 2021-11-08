@@ -63,11 +63,14 @@ public class ClienteControlador {
     
     @GetMapping("/editar")
     public String editar(ModelMap modelo, HttpSession httpsession, @RequestParam String id, RedirectAttributes redirect){
+       
+        modelo.put("zonas", zonaServicio.listarZonas());
+        
         try {
             Cliente cliente = (Cliente) httpsession.getAttribute("usuarioSesion");
             if (cliente == null || !cliente.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
-                return "redirect:/inicio";
+                return "redirect:/";
             }
             modelo.addAttribute("cliente", clienteServicio.findById(id));
             
@@ -84,7 +87,7 @@ public class ClienteControlador {
             cliente = (Cliente) httpsession.getAttribute("usuarioSesion");
             if (cliente == null || !cliente.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
-                return "redirect:/inicio";
+                return "redirect:/";
             }
             cliente = clienteServicio.editar(id, nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona, archivo);
             httpsession.setAttribute("usuarioSesion",cliente);   
