@@ -5,8 +5,6 @@ import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,12 +60,12 @@ public class ClienteControlador {
     }
     
     @GetMapping("/editar")
-    public String editar(ModelMap modelo, HttpSession httpsession, @RequestParam String id, RedirectAttributes redirect){
+    public String editar(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect){
        
         modelo.put("zonas", zonaServicio.listarZonas());
         
         try {
-            Cliente cliente = (Cliente) httpsession.getAttribute("usuarioSesion");
+            Cliente cliente = (Cliente) sesion.getAttribute("usuarioSesion");
             if (cliente == null || !cliente.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
                 return "redirect:/";
@@ -81,17 +79,18 @@ public class ClienteControlador {
     }
     
     @PostMapping("/editar")
-    public String editarPost(ModelMap modelo, MultipartFile archivo,@RequestParam String id, @RequestParam String nombreUsuario,@RequestParam String password, @RequestParam String password2,@RequestParam String dni,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String telefono,@RequestParam String mail,@RequestParam Zona zona, RedirectAttributes redirect,HttpSession httpsession){
+    public String editarPost(ModelMap modelo, MultipartFile archivo,@RequestParam String id, @RequestParam String nombreUsuario,@RequestParam String password, @RequestParam String password2,@RequestParam String dni,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String telefono,@RequestParam String mail,@RequestParam Zona zona, RedirectAttributes redirect,HttpSession sesion) throws Exception{
         Cliente cliente = null;
         try {
-            cliente = (Cliente) httpsession.getAttribute("usuarioSesion");
+            cliente = (Cliente) sesion.getAttribute("usuarioSesion");
             if (cliente == null || !cliente.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
                 return "redirect:/";
             }
             cliente = clienteServicio.editar(id, nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona, archivo);
-            httpsession.setAttribute("usuarioSesion",cliente);   
-        } catch (Exception error) {
+            sesion.setAttribute("usuarioSesion",cliente);   
+        } catch (ErrorServicio error) {
+            
             modelo.put("error", error.getMessage());
             modelo.put("cliente", cliente);
         }
