@@ -24,7 +24,6 @@ public class ProductoControlador {
 
     @GetMapping("/guardar")
     public String agregarProducto() {
-
         return "formulario-producto.html";
     }
 
@@ -54,7 +53,6 @@ public class ProductoControlador {
 
         } catch (ErrorServicio ex) {
             System.out.println("error" + ex.getMessage());
-
         }
         return "editar-producto.html";
     }
