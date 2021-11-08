@@ -1,9 +1,13 @@
 package com.mirosario.MiRosario.controladores;
 
+import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.enums.Rubro;
 import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
+import com.mirosario.MiRosario.servicios.RubroServicio;
+import com.mirosario.MiRosario.servicios.ZonaServicio;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/comercio")
@@ -51,7 +56,7 @@ public class ComercioControlador {
         modelo.put("cuit", cuit);
         modelo.put("nombreComercio", nombreComercio);
         modelo.put("direccion", direccion);
-        modelo.put("zona", zonaServicio.litarZonas());
+        modelo.put("zona", zonaServicio.listarZonas());
         modelo.put("rubro", rubroServicio.listarRubros());
         modelo.put("telefono", telefono);
         modelo.put("mail", mail);
@@ -62,7 +67,15 @@ public class ComercioControlador {
     }
     
     @GetMapping("/editar")
-    public String editar(){
+    public String editar(ModelMap modelo, HttpSession httpssesion, @RequestParam String id, RedirectAttributes redirect){
+        Comercio comercio = (Comercio) httpssesion.getAttribute("usuarioSesion");
+        
+        if(comercio == null || !comercio.getId().equals(id)){
+            redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
+            
+            return "redirect:/inicio";
+        }
+        
         return "editar-comercio.html";
     }
     
