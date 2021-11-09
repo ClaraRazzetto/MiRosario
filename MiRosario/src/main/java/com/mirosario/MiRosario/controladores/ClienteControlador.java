@@ -26,11 +26,7 @@ public class ClienteControlador {
     @Autowired
     public ZonaServicio zonaServicio;
     
-    @GetMapping("/vista-cliente")
-    public String vistaCliente(){
-        return "vista-cliente.html";
-    }
-
+    
     @GetMapping("/registro")
     public String registro(ModelMap modelo){
         
