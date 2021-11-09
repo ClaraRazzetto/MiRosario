@@ -26,9 +26,14 @@ public class MainControlador {
     }
     
     @GetMapping("/vista-cliente")
-    public String vistaCliente(ModelMap modelo, HttpSession sesion){
-        
-        
+    public String vistaCliente(ModelMap modelo, HttpSession sesion,@RequestParam(required = false) String q){
+    
+        if (q != null) {
+            modelo.addAttribute("comercios", comercioServicio.buscarComercio(q));    
+        }else{
+            modelo.addAttribute("comercios", comercioServicio.listar());
+            
+        }
         
         return "vista-cliente.html";
     }

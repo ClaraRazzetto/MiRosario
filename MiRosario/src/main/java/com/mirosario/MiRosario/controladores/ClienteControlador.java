@@ -5,6 +5,8 @@ import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,7 +66,6 @@ public class ClienteControlador {
     public String editar(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect){
        
         modelo.put("zonas", zonaServicio.listarZonas());
-        
         try {
             Cliente cliente = (Cliente) sesion.getAttribute("usuarioSesion");
             if (cliente == null || !cliente.getId().equals(id)) {
@@ -72,7 +73,6 @@ public class ClienteControlador {
                 return "redirect:/";
             }
             modelo.addAttribute("cliente", clienteServicio.findById(id));
-            
         } catch (ErrorServicio error) {
             modelo.put("error", error.getMessage());
         }
@@ -91,9 +91,9 @@ public class ClienteControlador {
             cliente = clienteServicio.editar(id, nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona, archivo);
             sesion.setAttribute("usuarioSesion",cliente);   
         } catch (ErrorServicio error) {
-            
             modelo.put("error", error.getMessage());
             modelo.put("cliente", cliente);
+            return "editar-cliente.html";
         }
         return "redirect:/vista-cliente.html";
     }
@@ -104,7 +104,12 @@ public class ClienteControlador {
     }
     
     @PostMapping("/baja")
-    public String darDeBajaPost(){
+    public String darDeBajaPost(ModelMap modelo,HttpSession sesion){
+        try {
+            clienteServicio.darDeBaja(sesion.getId());
+        } catch (ErrorServicio error) {
+            modelo.put("error", error.getMessage()); 
+        }
         return "redirect:/";
     }
     

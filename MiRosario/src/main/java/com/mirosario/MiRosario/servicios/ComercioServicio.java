@@ -10,6 +10,7 @@ import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.ComercioRepositorio;
 import com.mirosario.MiRosario.repositorios.FotoRepositorio;
 import com.mirosario.MiRosario.repositorios.ProductoRepositorio;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -178,6 +179,17 @@ public class ComercioServicio {
         if (telefono == null || telefono.isEmpty()) {
             throw new ErrorServicio("El telefono no puede estar vacio");
         }
+    }
+    
+    public List<Comercio> listar(String q, Rubro rubro, Zona zona){
+        List<Comercio> comercios = new ArrayList<>();
+        if (q != null) {
+            comercios.add(comercioRepositorio.buscarComercio("%" + q + "%"));
+        }
+        if (rubro != null) {
+            
+        }
+        return comercios;
     }
 
 }
