@@ -11,6 +11,8 @@ import com.mirosario.MiRosario.repositorios.ComercioRepositorio;
 import com.mirosario.MiRosario.repositorios.FotoRepositorio;
 import com.mirosario.MiRosario.repositorios.ProductoRepositorio;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -183,11 +185,29 @@ public class ComercioServicio {
     
     public List<Comercio> listar(String q, Rubro rubro, Zona zona){
         List<Comercio> comercios = new ArrayList<>();
-        if (q != null) {
-            comercios.add(comercioRepositorio.buscarComercio("%" + q + "%"));
-        }
-        if (rubro != null) {
-            
+        if(q != null){
+            if (rubro !=null && zona != null) {
+                comercios = comercioRepositorio.buscarComercioRubroZona("%"+ q + "%", zona, rubro);
+            }else{
+                comercios = comercioRepositorio.buscarComercio("%"+ q + "%");
+            }
+            if (zona == null && rubro != null) {
+                comercios = comercioRepositorio.buscarComercioRubro("%"+ q + "%", rubro);
+            } else {
+                comercios = comercioRepositorio.buscarComercioZona("%"+ q + "%", zona);
+            }
+        }else{  
+            if(rubro != null && zona == null){
+                comercios = comercioRepositorio.buscarPorRubro(rubro);
+            } else {
+                comercios = comercioRepositorio.buscarPorZona(zona);
+            }       
+            if (rubro != null && zona != null) {
+                comercios = comercioRepositorio.buscarPorRubroZona(zona, rubro);
+            }else{
+                comercios = comercioRepositorio.findAll().subList(0, 4);  
+                Collections.shuffle(comercios);
+            }
         }
         return comercios;
     }
