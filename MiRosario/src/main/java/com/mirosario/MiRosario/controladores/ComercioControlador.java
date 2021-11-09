@@ -33,7 +33,7 @@ public class ComercioControlador {
     @Autowired
     private RubroServicio rubroServicio;
 
-    @GetMapping("/registro")
+    @GetMapping("/registro") 
     public String registro(ModelMap modelo) {
 
         modelo.put("zonas", zonaServicio.listarZonas());
@@ -49,7 +49,7 @@ public class ComercioControlador {
     try {
         comercioServicio.guardar( archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
         
-        return "vista-comercio.html";
+        return "redirect:/perfil-comercio.html";
     }   
     catch (ErrorServicio error){
         
@@ -65,7 +65,7 @@ public class ComercioControlador {
         modelo.put("mail", mail);
         modelo.put("descripcion", descripcion);
             
-        return "perfil-comercio.html";
+        return "formulario-comercio.html";
 
         }
     }
@@ -122,7 +122,7 @@ public class ComercioControlador {
             
         }
         
-        return "perfil-comercio.html";
+        return "redirect:/perfil-comercio.html";
     }
 
     @GetMapping("/baja")
@@ -132,7 +132,7 @@ public class ComercioControlador {
 
     @PostMapping("/baja")
     public String darDeBajaPost() {
-        return "inicio.html";
+        return "redirect:/";
     }
 
     
