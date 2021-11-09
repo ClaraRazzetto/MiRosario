@@ -127,11 +127,36 @@ public class ComercioControlador {
 
     @GetMapping("/baja")
     public String darDeBaja() {
-        return "eliminar.html";
+        
+        
+        return "eliminar-usuario.html";
     }
 
     @PostMapping("/baja")
-    public String darDeBajaPost() {
+    public String darDeBajaPost(HttpSession sesion, @RequestParam String id, RedirectAttributes redirect, ModelMap modelo) throws Exception {
+        
+        Comercio comercio = null;
+        
+        try{
+            
+        comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+       
+        if(comercio == null || !comercio.getId().equals(id)){
+            redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
+            
+            return "redirect:/";
+        }
+                
+        comercioServicio.darDeBaja(id);
+        
+        sesion.setAttribute("usuarioSesion", comercio);
+                
+        }catch(ErrorServicio error){
+            
+            modelo.put("error", error.getMessage());
+          
+        }
+        
         return "inicio.html";
     }
 
