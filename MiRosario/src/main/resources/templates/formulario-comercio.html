@@ -54,9 +54,9 @@
                                       <input th:value="${nombreUsuario}" name="nombreUsuario" type="text" class="form-control item" id="nombreUsuario" placeholder="Nombre Usuarios">
                                   </div>
 
-                                  <select name="rubros" class="form-control item" ><option th:each="rubro :${rubros}"></option></select>
+                                  <select name="rubros" class="form-control item" ><option th:each="rubro,iterator :${rubros}" th:text="${rubro}"></option></select>
 
-                                  <select name="zona" class="form-control item" ><option th:each="zona :${zonas}"></option></select>
+                                  <select name="zona" class="form-control item" ><option th:each="zona,iterator :${zonas}" th:text="${zona}"></option></select>
                                   
                                   <div class="form-group">
                                     <input name="nombreComercio" type="text" class="form-control item" id="nombreComercio" placeholder="Nombre Comercio">
