@@ -3,6 +3,7 @@ package com.mirosario.MiRosario.controladores;
 import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.entidades.Producto;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
+import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ProductoServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class ProductoControlador {
 
     @Autowired
     private ProductoServicio productoServicio;
+    @Autowired
+    private ClienteServicio clienteServicio;
 
     @GetMapping("/guardar")
     public String agregarProducto() {
@@ -76,9 +79,20 @@ public class ProductoControlador {
     }
 
     @GetMapping("/baja")
-    public String darBajaProducto(@RequestParam(required = true) String id) throws ErrorServicio {
-        productoServicio.darDeBaja(id);
-        return "perfil-comercio.html";
+    public String darBajaProducto() {
+        
+        return "eliminar.html";
+    }
+     @PostMapping("/baja")
+    public String darBajaProductoPost(ModelMap modelo ,HttpSession sesion) throws ErrorServicio {
+         try {
+             productoServicio.darDeBaja(sesion.getId());
+         } catch (ErrorServicio e) {
+             modelo.addAttribute("error", e.getMessage());
+             return "redirect:/producto/editar";
+         }
+        
+        return "redirect:/logout";
     }
 
 }
