@@ -120,10 +120,6 @@ public class ComercioControlador {
         return "redirect:/perfil-comercio.html";
     }
 
-    @GetMapping("/baja")
-    public String darDeBaja() {
-        return "eliminar.html";
-    }
 
     @PostMapping("/baja")
     public String darDeBajaPost() {

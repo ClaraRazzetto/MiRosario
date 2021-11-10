@@ -93,18 +93,6 @@ public class ComercioServicio {
     }
 
     @Transactional
-    public List<Producto> guardarProducto(String idComercio, String idProducto) throws ErrorServicio {
-
-        Comercio comercio = findById(idComercio);
-
-        Producto producto = productoServicio.findById(idProducto);
-
-        comercio.getProducto().add(producto);
-
-        return comercio.getProducto();
-    }
-
-    @Transactional
     public void darDeAlta(String id) throws ErrorServicio {
         Comercio comercio = findById(id);
         comercio.setAlta(true);

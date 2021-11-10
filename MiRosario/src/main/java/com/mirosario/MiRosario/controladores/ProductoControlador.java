@@ -68,12 +68,12 @@ public class ProductoControlador {
             Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
             Producto producto = productoServicio.findById(id);
 
-            if (comercio == null || !comercio.getId().equals(id) || !comercio.getProducto().contains(producto)) {
+            if (comercio == null || !comercio.getId().equals(idComercio) || !comercio.getProducto().contains(producto)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
                 return "redirect:/";
             }
 
-            modelo.put("producto", productoServicio.findById(id));
+            modelo.put("producto", producto);
 
             return "editar-producto.html";
         } catch (ErrorServicio error) {

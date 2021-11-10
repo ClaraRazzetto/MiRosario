@@ -117,19 +117,19 @@ public class ClienteControlador {
         }
         return "redirect:/vista-cliente.html";
     }
-    
-    @GetMapping("/baja")
-    public String darDeBaja(){
-        return "eliminar.html";
-    }
-    
+        
     @PostMapping("/baja")
-    public String darDeBajaPost(ModelMap modelo,HttpSession sesion){
+    public String darDeBajaPost(ModelMap modelo,HttpSession sesion, @RequestParam String id, RedirectAttributes redirect){
+        Cliente cliente = null;
         try {
-            clienteServicio.darDeBaja(sesion.getId());
+            cliente = (Cliente) sesion.getAttribute("usuariosesion");
+            if (cliente == null || !cliente.getId().equals(id)) {
+                redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
+                return "redirect:/";
+            }
+            clienteServicio.darDeBaja(cliente.getId());
         } catch (ErrorServicio error){
             modelo.put("error", error.getMessage()); 
-            return "redirect:/cliente/editar";
         }
         return "redirect:/logout";
     }
@@ -143,6 +143,5 @@ public class ClienteControlador {
             modelo.put("error", error);
         }
     }
-    
     
 }
