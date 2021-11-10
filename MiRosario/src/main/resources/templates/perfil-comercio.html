@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MIR</title>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <!-- Font Awesome JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
+</head>
+
+<!-- fondo body  -->
+
+<body style="background-image: url(/img/atardecer.jfif);">
+
+  <!-- Menu responsive  -->
+  <nav th:replace="/fragmentos/navbar :: navbar"></nav>
+  
+<div th:object="${comercio}">
+
+  <div class="header">
+    <img class="avatar" src="LOGO-DEL-COMERCIO" />
+    <h1 class="user-name">Coto</h1>
+  </div>
+  <ul class="socials">
+    <li>Descripcion</li>
+    <hr>
+    <li>Zona</li>
+    <hr>
+    <li>Direccion</li>
+    <hr>
+    <li>Telefono</li>
+    <hr>
+    <li>Mail</li>
+    <hr>
+
+  </ul>
+
+</div>
+  <button type="button" class="btn btn-secondary">Comentario</button>
+  <button type="button" class="btn btn-secondary">Guardar comercio</button>
+  
+ <!--Container quienes somos-->
+ <div th:replace="/fragmentos/quienesSomos :: quienesSomos"></div>
+ <!--footer pie de pagina-->
+ <footer th:replace="/fragmentos/footer :: footer"></footer>
+ <!-- scripts-->
+ <div th:replace="/fragmentos/scripts :: scripts"></div>
+
+</body>
+
+</html>
