@@ -29,7 +29,7 @@
         <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
         <a class="dropdown-item" th:href="@{/cliente/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
         <!--  confirmacion de eliminar cuenta --->
-        <form method="post" th:attr="action=@{/cliente/baja}+'?id='+${session.usuariosesion.id}" onsubmit="return confirmation()">
+        <form method="post" th:action="@{/cliente/baja}+'?id='+${session.usuariosesion.id}" onsubmit="return confirmation()">
           <button class="dropdown-item" type="submit">Eliminar cuenta</button>
         </form>
 
@@ -62,7 +62,7 @@
       <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
       <a class="dropdown-item" th:href="@{/comercio/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
       <!--  confirmacion de eliminar cuenta --->
-      <form method="post" th:attr="action=@{/comercio/baja}+'?id='+${session.usuariosesion.id}" onsubmit="return confirmation()">
+      <form method="post" th:action="@{/comercio/baja}+'?id='+${session.usuariosesion.id}" onsubmit="return confirmation()">
         <button class="dropdown-item" type="submit">Eliminar cuenta</button>
       </form>
 

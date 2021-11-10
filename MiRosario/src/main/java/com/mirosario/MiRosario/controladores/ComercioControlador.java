@@ -132,6 +132,7 @@ public class ComercioControlador {
             }
             comercioServicio.darDeBaja(comercio.getId());
             redirect.addFlashAttribute("exito", "Su usuario se ha eliminado correctamente");
+
         }catch (ErrorServicio error){
             modelo.put("error", error.getMessage());
         }

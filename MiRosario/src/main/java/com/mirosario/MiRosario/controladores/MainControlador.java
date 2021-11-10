@@ -48,8 +48,8 @@ public class MainControlador {
             }
             
         }else{
-            
-            comercio = (Comercio) sesion.getAttribute(sesion.getId());
+         
+            comercio = (Comercio) sesion.getAttribute("usuariosesion");
             modelo.put("comercio", comercio);
         }
         
