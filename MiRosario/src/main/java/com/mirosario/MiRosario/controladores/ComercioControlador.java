@@ -119,15 +119,7 @@ public class ComercioControlador {
         
         return "redirect:/perfil-comercio.html";
     }
-    
-    //revisar luego como es el tema de la advertencia en el front.-
-    @GetMapping("/baja")
-    public String darDeBaja() {
-        
-        return "eliminar.html";
-    }
 
-    
     @PostMapping("/baja")
     public String darDeBajaPost(HttpSession sesion, ModelMap modelo, @RequestParam String id, RedirectAttributes redirect) throws Exception {
         Comercio comercio = null;
