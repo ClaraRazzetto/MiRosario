@@ -48,7 +48,4 @@ public interface ComercioRepositorio extends JpaRepository<Comercio, String>{
     @Query("SELECT c FROM Comercio c WHERE c.zona = :zona ")
     public List<Comercio> buscarPorZona(@Param("zona") Zona zona);
     
-    //buscandoProducto
-    @Query("select c.producto from Comercio c where c.id = :id and c.producto.id = :idProducto ")
-    public Optional<Producto> buscarProductoPorId(@Param("id") String id,@Param("idProducto") String idProducto);
 }

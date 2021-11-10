@@ -11,7 +11,6 @@ import com.mirosario.MiRosario.repositorios.ComercioRepositorio;
 import com.mirosario.MiRosario.repositorios.FotoRepositorio;
 import com.mirosario.MiRosario.repositorios.ProductoRepositorio;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -26,16 +25,10 @@ public class ComercioServicio {
 
     @Autowired
     private ComercioRepositorio comercioRepositorio;
-    @Autowired
-    private ComercioServicio comercioServicio;
-
-    @Autowired
-    private FotoRepositorio fotoRepositorio;
+   
     @Autowired
     private FotoServicio fotoServicio;
 
-    @Autowired
-    private ProductoRepositorio productoRepositorio;
     @Autowired
     private ProductoServicio productoServicio;
 
@@ -133,15 +126,15 @@ public class ComercioServicio {
             throw new ErrorServicio("No se encuentra el usuario solicitado");
         }
     }
-    
-    
-        public Producto buscarProductoPorId(String id, String idProducto) throws ErrorServicio{
-   Optional<Producto> opcional = comercioRepositorio.buscarProductoPorId(id, idProducto);
-        if (opcional.isPresent()) {
-            return opcional.get();
-        } else {
-            throw new ErrorServicio("No se encuentra el producto solicitado");
-        }
+     
+    @Transactional
+    public List<Producto> guardarProducto(String idComercio, MultipartFile archivo, String nombre, Double precio, String descripcion) throws ErrorServicio, Exception {
+
+        Comercio comercio = findById(idComercio);
+
+        comercio.getProducto().add(productoServicio.guardar(nombre, precio, descripcion, archivo));
+
+        return comercio.getProducto();
     }
 
     public void validar(String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String telefono, String mail) throws ErrorServicio {
