@@ -135,13 +135,21 @@ public class ClienteControlador {
     }
     
     @PostMapping("/comercio-favorito")
-    public void guardarComercio(ModelMap modelo,HttpSession sesion,@RequestParam String idComercio){
+    public String guardarComercio(ModelMap modelo,HttpSession sesion,@RequestParam String id,@RequestParam String idComercio, RedirectAttributes redirect){
+       Cliente cliente = null;
         try {
-            clienteServicio.guardarComercios(sesion.getId(), idComercio);
+            cliente = (Cliente) sesion.getAttribute("usuariosesion");
+            if (cliente == null || !cliente.getId().equals(id)) {
+                redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
+                return "redirect:/";
+            }
+            clienteServicio.guardarComercios(cliente.getId(), idComercio);
             modelo.put("exito", "El comercio se ha guardado entre favoritos!");
         } catch (ErrorServicio error) {
             modelo.put("error", error);
             }
+        //arreglar
+        return ":/";
     }
     
 }

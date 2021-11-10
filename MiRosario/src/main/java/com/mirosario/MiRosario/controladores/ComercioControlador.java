@@ -130,7 +130,7 @@ public class ComercioControlador {
                 redirect.addFlashAttribute("error", "tu usuario no tiene permiso para realizar esta acción");
                 return "redirect:/";
             }
-            comercioServicio.darDeBaja(sesion.getId());
+            comercioServicio.darDeBaja(comercio.getId());
         }catch (ErrorServicio error){
             modelo.put("error", error.getMessage());
         }
