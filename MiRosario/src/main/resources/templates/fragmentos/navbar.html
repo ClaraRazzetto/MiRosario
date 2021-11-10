@@ -28,9 +28,10 @@
       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
         <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
         <a class="dropdown-item" th:href="@{/cliente/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
-        <a class="dropdown-item" th:href="@{/cliente/baja}+'?id='+${session.usuariosesion.id}">Eliminar cuenta</a>
-        <a class="dropdown-item" th:href="@{/cliente/comercio-favorito}+'?id='+${session.usuariosesion.id}">Comercios
-          favoritos</a>
+        <form method="POST">
+          <a class="dropdown-item" th:href="@{/cliente/baja}+'?id='+${session.usuariosesion.id}">Eliminar cuenta</a>
+        </form>
+        <a class="dropdown-item" th:href="@{/cliente/lista-comercios}+'?id='+${session.usuariosesion.id}">Comercios Favoritos</a>
       </div>
     </div>
 
@@ -44,7 +45,9 @@
       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
         <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
         <a class="dropdown-item" th:href="@{/comercio/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
-        <a class="dropdown-item" th:href="@{/comercio/baja}+'?id='+${session.usuariosesion.id}">Eliminar cuenta</a>
+        <form method="POST">
+          <a class="dropdown-item" th:href="@{/comercio/baja}+'?id='+${session.usuariosesion.id}">Eliminar cuenta</a>
+        </form>
       </div>
     </div>
 

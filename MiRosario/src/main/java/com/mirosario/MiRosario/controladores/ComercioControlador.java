@@ -113,10 +113,8 @@ public class ComercioControlador {
         sesion.setAttribute("usuariosesion", comercio);
                 
         }catch(ErrorServicio error){
-            
             modelo.put("error", error.getMessage());
-            modelo.put("comercio", comercio); 
-            
+            modelo.put("comercio", comercio);   
         }
         
         return "redirect:/perfil-comercio.html";
