@@ -8,6 +8,8 @@ import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
 import com.mirosario.MiRosario.servicios.RubroServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -131,5 +133,16 @@ public class ClienteControlador {
         }
         return "redirect:/logout";
     }
+    
+    @PostMapping("/comercio-favorito")
+    public void guardarComercio(ModelMap modelo,HttpSession sesion,@RequestParam String idComercio){
+        try {
+            clienteServicio.guardarComercios(sesion.getId(), idComercio);
+            modelo.put("exito", "El comercio se ha guardado entre favoritos!");
+        } catch (ErrorServicio error) {
+            modelo.put("error", error);
+        }
+    }
+    
     
 }

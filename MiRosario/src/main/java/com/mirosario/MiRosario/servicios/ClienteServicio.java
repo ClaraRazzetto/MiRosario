@@ -153,14 +153,16 @@ public class ClienteServicio {
     }
 
     @Transactional
-    public List<Comercio> guardarComercios(String id, String idComercio) throws ErrorServicio {
-
+    public void guardarComercios(String id, String idComercio) throws ErrorServicio {
+        
         Cliente cliente = findById(id);
 
         Comercio comercio = comercioServicio.findById(idComercio);
 
         cliente.getComercios().add(comercio);
-
-        return cliente.getComercios();
+    }
+    
+    public List<Comercio> listaComercios(String id) throws ErrorServicio {
+        return findById(id).getComercios();
     }
 }
