@@ -2,7 +2,10 @@ package com.mirosario.MiRosario.controladores;
 
 import com.mirosario.MiRosario.entidades.Cliente;
 import com.mirosario.MiRosario.entidades.Comercio;
+import com.mirosario.MiRosario.enums.Rubro;
+import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
+import com.mirosario.MiRosario.servicios.ComentarioServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,26 +22,23 @@ public class MainControlador {
     
     @Autowired
     private ComercioServicio comercioServicio;
+    
+    @Autowired
+    private ComentarioServicio comentarioServicio;
 
     @GetMapping("")
     public String inicio(){
         return "inicio.html";
     }
     
-    @GetMapping("/vista-cliente")
-    public String vistaCliente(ModelMap modelo, HttpSession sesion){
-        
-        
-        
-        return "vista-cliente.html";
-    }
-    
     @GetMapping("/perfil-comercio")
     public String perfilComercio(ModelMap modelo, @RequestParam(required = false) String idComercio, HttpSession sesion, RedirectAttributes redirect){
+        
         Comercio comercio = null;
-        if (sesion.getAttribute(idComercio) instanceof Cliente) {
-            try{
-                if (idComercio !=null) {
+ 
+        if (sesion.getAttribute(sesion.getId()) instanceof Cliente) {
+            try {
+                if (idComercio != null) {
                     comercio = comercioServicio.findById(idComercio);
                     modelo.put("comercio", comercio);
                 }
@@ -46,10 +46,15 @@ public class MainControlador {
                 redirect.addFlashAttribute("error", error);
                 return "redirect:/vista-cliente";
             }
-        } else{
-            comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+            
+        }else{
+            
+            comercio = (Comercio) sesion.getAttribute(sesion.getId());
             modelo.put("comercio", comercio);
         }
+        
+        modelo.put("comentarios", comentarioServicio.listaComentariosPorComercio(comercio.getId()));
+        
         return "perfil-comercio.html";
     }
     

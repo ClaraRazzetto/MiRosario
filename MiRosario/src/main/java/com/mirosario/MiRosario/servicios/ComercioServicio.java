@@ -10,6 +10,8 @@ import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.ComercioRepositorio;
 import com.mirosario.MiRosario.repositorios.FotoRepositorio;
 import com.mirosario.MiRosario.repositorios.ProductoRepositorio;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -23,16 +25,10 @@ public class ComercioServicio {
 
     @Autowired
     private ComercioRepositorio comercioRepositorio;
-    @Autowired
-    private ComercioServicio comercioServicio;
-
-    @Autowired
-    private FotoRepositorio fotoRepositorio;
+   
     @Autowired
     private FotoServicio fotoServicio;
 
-    @Autowired
-    private ProductoRepositorio productoRepositorio;
     @Autowired
     private ProductoServicio productoServicio;
 
@@ -130,6 +126,16 @@ public class ComercioServicio {
             throw new ErrorServicio("No se encuentra el usuario solicitado");
         }
     }
+     
+    @Transactional
+    public List<Producto> guardarProducto(String idComercio, MultipartFile archivo, String nombre, Double precio, String descripcion) throws ErrorServicio, Exception {
+
+        Comercio comercio = findById(idComercio);
+
+        comercio.getProducto().add(productoServicio.guardar(nombre, precio, descripcion, archivo));
+
+        return comercio.getProducto();
+    }
 
     public void validar(String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String telefono, String mail) throws ErrorServicio {
         if (nombreUsuario == null || nombreUsuario.isEmpty()) {
@@ -178,6 +184,35 @@ public class ComercioServicio {
         if (telefono == null || telefono.isEmpty()) {
             throw new ErrorServicio("El telefono no puede estar vacio");
         }
+    }
+    
+    public List<Comercio> listar(String q, Rubro rubro, Zona zona){
+        List<Comercio> comercios = new ArrayList<>();
+        if(q != null){
+            if (rubro !=null && zona != null) {
+                comercios = comercioRepositorio.buscarComercioRubroZona("%"+ q + "%", zona, rubro);
+            }else{
+                comercios = comercioRepositorio.buscarComercio("%"+ q + "%");
+            }
+            if (zona == null && rubro != null) {
+                comercios = comercioRepositorio.buscarComercioRubro("%"+ q + "%", rubro);
+            } else {
+                comercios = comercioRepositorio.buscarComercioZona("%"+ q + "%", zona);
+            }
+        }else{  
+            if(rubro != null && zona == null){
+                comercios = comercioRepositorio.buscarPorRubro(rubro);
+            } else {
+                comercios = comercioRepositorio.buscarPorZona(zona);
+            }       
+            if (rubro != null && zona != null) {
+                comercios = comercioRepositorio.buscarPorRubroZona(zona, rubro);
+            }else{
+                comercios = comercioRepositorio.findAll().subList(0, 4);  
+                Collections.shuffle(comercios);
+            }
+        }
+        return comercios;
     }
 
 }

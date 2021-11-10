@@ -7,8 +7,6 @@ import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
 import com.mirosario.MiRosario.servicios.RubroServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,8 +76,7 @@ public class ComercioControlador {
         
         try {
             
-            
-            Comercio comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+            Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
             
             if(comercio == null || !comercio.getId().equals(id)){
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
@@ -103,7 +100,7 @@ public class ComercioControlador {
         
         try{
             
-        comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+        comercio = (Comercio) sesion.getAttribute("usuariosesion");
        
         if(comercio == null || !comercio.getId().equals(id)){
             redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
@@ -113,7 +110,7 @@ public class ComercioControlador {
                 
         comercio = comercioServicio.editar(id, archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
         
-        sesion.setAttribute("usuarioSesion", comercio);
+        sesion.setAttribute("usuariosesion", comercio);
                 
         }catch(ErrorServicio error){
             

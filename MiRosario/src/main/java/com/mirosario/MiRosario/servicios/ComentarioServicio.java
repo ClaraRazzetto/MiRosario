@@ -57,10 +57,8 @@ public class ComentarioServicio {
         }
     }
 
-    public List<Comentario> mostrarListaComentarios() {
-
-        return comentarioRepositorio.findAll();
-
+    public List<Comentario> listaComentariosPorComercio(String idComercio) {
+       return comentarioRepositorio.listarPorComercio(idComercio);  
     }
 
     public Comentario findById(String id) throws ErrorServicio {
