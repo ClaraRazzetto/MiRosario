@@ -6,6 +6,7 @@ import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
+import com.mirosario.MiRosario.servicios.RubroServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,14 @@ public class ClienteControlador {
     @Autowired
     private ZonaServicio zonaServicio;
     
+    @Autowired
+    private RubroServicio rubroServicio;
+    
     @GetMapping("/vista-cliente")
     public String vistaCliente(ModelMap modelo, @RequestParam(required = false) String q, @RequestParam(required = false) Rubro rubro,@RequestParam(required = false) Zona zona){
+        
+        modelo.put("zonas", zonaServicio.listarZonas());
+        modelo.put("rubros", rubroServicio.listarRubros());
         
         modelo.put("comercios", comercioServicio.listar(q, rubro, zona));
         

@@ -21,19 +21,19 @@ public interface ComercioRepositorio extends JpaRepository<Comercio, String>{
     public Comercio buscarPorUsuario(@Param("nombreUsuario") String nombreUsuario);
 
     //solo con el buscador
-    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE = :q OR c.descripcion LIKE :q")
+    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE :q OR c.descripcion LIKE :q")
     public List<Comercio> buscarComercio(@Param("q") String q);
     
     //buscador + filtro de rubro
-    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE = :q OR c.descripcion LIKE :q AND c.rubro = :rubro")
+    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE :q OR c.descripcion LIKE :q AND c.rubro = :rubro")
     public List<Comercio> buscarComercioRubro(@Param("q") String q, @Param("rubro") Rubro rubro);
  
     //buscador + filtro de zona
-    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE = :q OR c.descripcion LIKE :q AND c.zona = :zona")
+    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE :q OR c.descripcion LIKE :q AND c.zona = :zona")
     public List<Comercio> buscarComercioZona(@Param("q") String q, @Param("zona") Zona zona);
     
     //buscador + zona + rubro
-    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE = :q OR c.descripcion LIKE :q AND c.zona = :zona AND rubro = :rubro")
+    @Query("SELECT c FROM Comercio c WHERE c.nombreComercio LIKE :q OR c.descripcion LIKE :q AND c.zona = :zona AND rubro = :rubro")
     public List<Comercio> buscarComercioRubroZona(@Param("q") String q, @Param("zona") Zona zona, @Param("rubro") Rubro rubro);
    
     //zona + rubro
