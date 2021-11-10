@@ -1,55 +1,86 @@
+
+
 <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark row">
-  <a class="navbar-brand; margin-left:10px" th:href="@{/}">
-    <img src="/img/logoMIR1.jpeg" width="60px" height="50px" class="d-inline-block align-top rounded">
-  </a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+                        
+    <a class="navbar-brand; margin-left:10px" th:href="@{/}">
+      <img src="/img/logoMIR1.jpeg" width="60px" height="50px"  class="d-inline-block align-top rounded" alt="" >
+    </a>   
 
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-  
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" th:href="@{/}">Inicio<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
-      <a class="nav-item nav-link" href="#">Productos</a>
-      <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
-    </div>
-  
-    <!--botoones derechos navbar-->
-    <div sec:authorize="isAuthenticated()" class="btn-group" role="group">
-  
-      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        <span th:text="${session.usuariosesion.nombreUsuario}"></span> Nombre cliente
-      </button>
-  
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
-        <a class="dropdown-item" th:href="@{/cliente/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
-        <form method="POST">
-          <a class="dropdown-item" th:href="@{/cliente/baja}+'?id='+${session.usuariosesion.id}">Eliminar cuenta</a>
-        </form>
-        <a class="dropdown-item" th:href="@{/cliente/comercios-favoritos}+'?id='+${session.usuariosesion.id}">Comercios Favoritos</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" th:href="@{/}">Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
+        <a class="nav-item nav-link" href="#">Productos</a>
+        <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
       </div>
-    </div>
+        <!--botoones derechos navbar-->
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Nombre cliente
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              <a class="dropdown-item" href="#">Cerrar sesion</a>
+              <a class="dropdown-item" href="#">Editar perfil</a>
 
-    <div sec:authorize="isAuthenticated()" class="btn-group" role="group">
+
+                 <!--  confirmacion de eliminar cuenta --->
+                      <form method="post" action="claseDestino.php" onsubmit="return confirmation()">
+                        <button class="dropdown-item" type="submit" >Eliminar cuenta</button> 
+                     </form>			
+                   
+                      <script type="text/javascript">
+                       function confirmation() 
+                       {
+                          if(confirm("Esta seguro que desea eliminar la?"))
+                    {
+                       return true;
+                    }
+                    else
+                    {
+                       return false;
+                    }
+                       }
+                      </script>
+
+                         <!-- fin  confirmacion de eliminar cuenta --->
+
+              <a class="dropdown-item" href="#">Comercios favoritos</a>
+            </div>
+        </div>
+        <div class="btn-group" role="group">
+          <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Nombre comercio
+          </button>
+          <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+            <a class="dropdown-item" href="#">Cerrar sesion</a>
+            <a class="dropdown-item" href="#">Editar perfil</a>
+           <!--  confirmacion de eliminar cuenta --->
+           <form method="post" action="claseDestino.php" onsubmit="return confirmation()">
+            <button class="dropdown-item" type="submit" >Eliminar cuenta</button> 
+         </form>			
+       
+          <script type="text/javascript">
+           function confirmation() 
+           {
+              if(confirm("Esta seguro que desea eliminar la?"))
+        {
+           return true;
+        }
+        else
+        {
+           return false;
+        }
+           }
+          </script>
+
+             <!-- fin  confirmacion de eliminar cuenta --->
+          </div>
+      </div>
+  <!--    -->
+    </div>
     
-      <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        <span th:text="${session.usuariosesion.nombreUsuario}"></span> Nombre comercio
-      </button>
-
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
-        <a class="dropdown-item" th:href="@{/comercio/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
-        <form method="POST">
-          <a class="dropdown-item" th:href="@{/comercio/baja}+'?id='+${session.usuariosesion.id}">Eliminar cuenta</a>
-        </form>
-      </div>
-    </div>
-
-  </div>
-</nav>
+  </nav>
