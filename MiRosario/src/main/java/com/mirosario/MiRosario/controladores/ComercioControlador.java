@@ -119,21 +119,29 @@ public class ComercioControlador {
         
         return "redirect:/perfil-comercio.html";
     }
-
+    
+    //revisar luego como es el tema de la advertencia en el front.-
     @GetMapping("/baja")
     public String darDeBaja() {
         
         return "eliminar.html";
     }
 
+    
     @PostMapping("/baja")
-    public String darDeBajaPost(HttpSession sesion, ModelMap modelo) throws Exception {
+    public String darDeBajaPost(HttpSession sesion, ModelMap modelo, @RequestParam String id, RedirectAttributes redirect) throws Exception {
+        Comercio comercio = null;
         
         try{
+            comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+            if(comercio == null || !comercio.getId().equals(id)){
+                redirect.addFlashAttribute("error", "tu usuario no tiene permiso para realizar esta acción");
+                return "redirect:/";
+            }
             comercioServicio.darDeBaja(sesion.getId());
         }catch (ErrorServicio error){
             modelo.put("error", error.getMessage());
-            return "redirect:/cliente/editar";
+            return "redirect:/comercio/editar";
         }
 
         return "redirect:/logout";

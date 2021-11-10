@@ -141,7 +141,7 @@ public class ClienteControlador {
             modelo.put("exito", "El comercio se ha guardado entre favoritos!");
         } catch (ErrorServicio error) {
             modelo.put("error", error);
-        }
+            }
     }
     
     
