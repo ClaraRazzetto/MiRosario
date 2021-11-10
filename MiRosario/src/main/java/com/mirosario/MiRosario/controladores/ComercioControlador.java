@@ -133,7 +133,7 @@ public class ComercioControlador {
         Comercio comercio = null;
         
         try{
-            comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+            comercio = (Comercio) sesion.getAttribute("usuariosesion");
             if(comercio == null || !comercio.getId().equals(id)){
                 redirect.addFlashAttribute("error", "tu usuario no tiene permiso para realizar esta acción");
                 return "redirect:/";
@@ -141,7 +141,6 @@ public class ComercioControlador {
             comercioServicio.darDeBaja(sesion.getId());
         }catch (ErrorServicio error){
             modelo.put("error", error.getMessage());
-            return "redirect:/comercio/editar";
         }
 
         return "redirect:/logout";
