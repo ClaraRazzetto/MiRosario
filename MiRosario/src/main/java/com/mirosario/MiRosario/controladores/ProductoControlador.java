@@ -4,6 +4,7 @@ import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.entidades.Producto;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
+import com.mirosario.MiRosario.servicios.ComercioServicio;
 import com.mirosario.MiRosario.servicios.ProductoServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class ProductoControlador {
     private ProductoServicio productoServicio;
     @Autowired
     private ClienteServicio clienteServicio;
+    @Autowired
+    private ComercioServicio comercioServicio;
 
     @GetMapping("/guardar")
     public String agregarProducto() {
@@ -62,20 +65,24 @@ public class ProductoControlador {
     }
 
     @PostMapping("/editar")
-    public String editarProductoPost(HttpSession httpsession, Model modelo, @RequestParam String id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) throws Exception {
+    public String editarProductoPost(HttpSession sesion, Model modelo, @RequestParam String id,@RequestParam String idProducto  ,@RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) throws Exception {
         Producto producto=null;
         try {
-            Comercio comercio = (Comercio) httpsession.getAttribute("usuarioSesion");
+            Comercio comercio = (Comercio) sesion.getAttribute("usuarioSesion");
             if (comercio == null || !comercio.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
                 return "redirect:/";
             }
-           producto = productoServicio.editar(id, nombre, precio, descripcion, archivo);
+            if (comercioServicio.buscarProductoPorId(id, id).getId().equals(idProducto)) {
+                 producto = productoServicio.editar(idProducto, nombre, precio, descripcion, archivo);
+            }
+            sesion.setAttribute("usuarioSesion", comercio);
         } catch (ErrorServicio ex) {
             System.out.println("error" + ex.getMessage());
-
+            modelo.addAttribute("producto", producto);
+            return "redirect:/producto/editar";
         }
-        return "perfil-comercio.html";
+        return "redirect:/perfil-comercio";
     }
 
     @GetMapping("/baja")

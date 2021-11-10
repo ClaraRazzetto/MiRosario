@@ -1,9 +1,11 @@
 package com.mirosario.MiRosario.repositorios;
 
 import com.mirosario.MiRosario.entidades.Comercio;
+import com.mirosario.MiRosario.entidades.Producto;
 import com.mirosario.MiRosario.enums.Rubro;
 import com.mirosario.MiRosario.enums.Zona;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -45,4 +47,8 @@ public interface ComercioRepositorio extends JpaRepository<Comercio, String>{
     //zona
     @Query("SELECT c FROM Comercio c WHERE c.zona = :zona ")
     public List<Comercio> buscarPorZona(@Param("zona") Zona zona);
+    
+    //buscandoProducto
+    @Query("select c.producto from Comercio c where c.id = :id and c.producto.id = :idProducto ")
+    public Optional<Producto> buscarProductoPorId(@Param("id") String id,@Param("idProducto") String idProducto);
 }

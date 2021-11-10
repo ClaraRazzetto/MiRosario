@@ -133,6 +133,16 @@ public class ComercioServicio {
             throw new ErrorServicio("No se encuentra el usuario solicitado");
         }
     }
+    
+    
+        public Producto buscarProductoPorId(String id, String idProducto) throws ErrorServicio{
+   Optional<Producto> opcional = comercioRepositorio.buscarProductoPorId(id, idProducto);
+        if (opcional.isPresent()) {
+            return opcional.get();
+        } else {
+            throw new ErrorServicio("No se encuentra el producto solicitado");
+        }
+    }
 
     public void validar(String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String telefono, String mail) throws ErrorServicio {
         if (nombreUsuario == null || nombreUsuario.isEmpty()) {
