@@ -85,7 +85,7 @@ public class ClienteControlador {
        
         modelo.put("zonas", zonaServicio.listarZonas());
         try {
-            Cliente cliente = (Cliente) sesion.getAttribute("usuarioSesion");
+            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");
             if (cliente == null || !cliente.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
                 return "redirect:/";
@@ -101,7 +101,7 @@ public class ClienteControlador {
     public String editarPost(ModelMap modelo, MultipartFile archivo,@RequestParam String id, @RequestParam String nombreUsuario,@RequestParam String password, @RequestParam String password2,@RequestParam String dni,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String direccion,@RequestParam String telefono,@RequestParam String mail,@RequestParam Zona zona, RedirectAttributes redirect,HttpSession sesion) throws Exception{
         Cliente cliente = null;
         try {
-            cliente = (Cliente) sesion.getAttribute("usuarioSesion");
+            cliente = (Cliente) sesion.getAttribute("usuariosesion");
             if (cliente == null || !cliente.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
                 return "redirect:/";

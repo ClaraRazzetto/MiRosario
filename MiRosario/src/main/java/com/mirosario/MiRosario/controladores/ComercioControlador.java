@@ -76,8 +76,7 @@ public class ComercioControlador {
         
         try {
             
-            
-            Comercio comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+            Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
             
             if(comercio == null || !comercio.getId().equals(id)){
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
@@ -101,7 +100,7 @@ public class ComercioControlador {
         
         try{
             
-        comercio = (Comercio) sesion.getAttribute("usuarioSesion");
+        comercio = (Comercio) sesion.getAttribute("usuariosesion");
        
         if(comercio == null || !comercio.getId().equals(id)){
             redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
@@ -111,7 +110,7 @@ public class ComercioControlador {
                 
         comercio = comercioServicio.editar(id, archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
         
-        sesion.setAttribute("usuarioSesion", comercio);
+        sesion.setAttribute("usuariosesion", comercio);
                 
         }catch(ErrorServicio error){
             
