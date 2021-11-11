@@ -1,9 +1,11 @@
 package com.mirosario.MiRosario.servicios;
 
 import com.mirosario.MiRosario.entidades.Usuario;
+import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -44,5 +46,13 @@ public class UsuarioServicio implements UserDetailsService {
             return null;
         }
     }
+//     public Usuario findById(String id) throws ErrorServicio {
+//        Optional<Usuario> opcional = usuarioRepositorio.findById(id);
+//        if (opcional.isPresent()) {
+//            return opcional.get();
+//        } else {
+//            throw new ErrorServicio("No se encuentra el usuario solicitado");
+//        }
+//    }
 
 }

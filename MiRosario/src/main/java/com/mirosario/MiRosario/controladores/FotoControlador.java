@@ -1,6 +1,19 @@
 package com.mirosario.MiRosario.controladores;
 
+import com.mirosario.MiRosario.entidades.Cliente;
+import com.mirosario.MiRosario.entidades.Usuario;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
+import com.mirosario.MiRosario.servicios.ClienteServicio;
+import com.mirosario.MiRosario.servicios.ComercioServicio;
+import com.mirosario.MiRosario.servicios.UsuarioServicio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,33 +30,27 @@ public class FotoControlador {
           
             return "formulario-comentario.html";
     }
-//      @PostMapping("/guardar")
-//      public String agregarComentarioPost(ModelMap modelo,@RequestParam String descripcion,@RequestParam String idCliente,@RequestParam String idComercio){
-//        try {
-//            comentarioServicio.guardar(descripcion, idCliente, idComercio);
-//            return "vista-cliente.html";
-//        } catch (Exception ex) {
-//            System.out.println("error"+ex.getMessage());
-//            modelo.addAttribute("descripcion",descripcion);
-//            modelo.addAttribute("idCliente",idCliente);
-//            modelo.addAttribute("idComercio",idComercio);
-//            return "formulario-comentario.html";
-//        }
-//      }
-//      @GetMapping("/editar")
-//      public String editarComentario(ModelMap modelo,@RequestParam String id) {
-//       
-//            return "editar-comentario.html";
-//    }
-//      @PostMapping("/editar")
-//      public String editarComentarioPost(@RequestParam MultipartFile archivo, @RequestParam String nombre,@RequestParam Double precio,@RequestParam String descripcion){
-//           return "vista-cliente.html";
-//      }
-//    
-//        @GetMapping("/baja")
-//    public String darBajaComentario(@RequestParam(required = true) String id) throws ErrorServicio{
-//        comentarioServicio.darDeBaja(id);
-//        return "vista-cliente.html";
-//    }
+ @Autowired
+ private ClienteServicio clienteServicio;
+ @Autowired
+ private ComercioServicio comercioServicio;
+ @Autowired
+ private UsuarioServicio usuarioServicio;
+ @GetMapping("/usuario")
+ public ResponseEntity<byte[]>fotoUsuario(String idUsuario){
+          try {
+              Cliente cliente= clienteServicio.findById(idUsuario);
+                 byte[]foto= cliente.getFoto().getContenido();
+                 HttpHeaders headers = new HttpHeaders();
+                 headers.setContentType(MediaType.IMAGE_JPEG);
+                 
+                 return new ResponseEntity<>(foto, headers, HttpStatus.OK);
+                      
+                      } catch (ErrorServicio ex) {
+              System.out.println("error"+ex.getMessage());
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          }
+     
+ }
 
 }
