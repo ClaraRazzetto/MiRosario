@@ -55,6 +55,10 @@
       </div>
 
       <div class="form-group">
+        <input type="file" class="form-control item" id="foto" name="archivo" th:value="${archivo}">
+      </div>
+
+      <div class="form-group">
         <select name="zona" class="form-control item">
           <option th:each="zona,iterator :${zonas}" th:text="${zona}"></option>
         </select>
