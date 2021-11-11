@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>MIR</title>
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" href="/css/styles.css">
+        <!-- Font Awesome JS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+                integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+                integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+    </head>
+
+    <!-- fondo body  -->
+
+    <body style="background-image: url(/img/atardecer.jfif);">
+
+        <!-- Menu responsive  -->
+        <nav th:replace="/fragmentos/navbar :: navbar"></nav>
+
+        <!--<div th:object="${comercio}">-->
+        <title>Perfil comercio</title>
+
+        <div class="" style="margin:2rem"> 
+            <div class="header">
+                <img class="avatar" src="/img/coto.png">
+                <h1 class="user-name" style="color:black">Coto</h1>
+            </div>
+        
+                <div class="col-sm-12" style="text-align:right; margin:2rem; margin-left:5px; background-color: white">
+                       <div class="socials">
+                           <div class="" style="margin-right:30%">
+                <ul>
+                    <li>COTO comenzó su historia hace casi medio siglo abriendo su primera carnicería con un moderno sistema de desposte aéreo y cortes a la vista. Hoy es mucho más que un supermercado, es una empresa argentina que exporta al mundo.</li>
+                    <hr>
+                    <li>Zona sur</li>
+                    <hr>
+                    <li>3 de febrero 1602</li>
+                    <hr>
+                    <li>0341-4254913</li>
+                    <hr>
+                    <li>Mail</li>
+                </ul>
+                </div>
+                 </div>
+                    <a href="#" class="btn btn-primary" style="margin:20px; position:absolute; top:40%;">Comentario</a>
+                    <a href="#" class="btn btn-primary" style="margin:20px ">Gurdar Comentario</a>
+
+                </div>
+            </div>
+            
+      
+
+    <!--Container quienes somos-->
+    <div th:replace="/fragmentos/quienesSomos :: quienesSomos"></div>
+    <!--footer pie de pagina-->
+    <footer th:replace="/fragmentos/footer :: footer"></footer>
+    <!-- scripts-->
+    <div th:replace="/fragmentos/scripts :: scripts"></div>
+
+</body>
+
+</html>

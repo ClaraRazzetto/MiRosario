@@ -26,6 +26,8 @@
 
   <!-- Menu responsive  -->
   <nav th:replace="/fragmentos/navbar :: navbar"></nav>
+  
+  
   <!-- buscador -->
   <form method="GET">
     <div class="col-auto">
@@ -35,17 +37,21 @@
       <button type="submit" class="btn btn-dark mb-3">Buscar</button>
     </div>
     <select name="rubros" class="form-control item">
-      <option th:each="rubro,iterator :${rubros}" th:text="${rubro}>
-	</option>
+<!--      <option th:each="rubro,iterator :${rubros}" th:text="${rubro}>
+	</option>-->
   </select>
   <select name=" zonas" class="form-control item">
-      <option th:each="zona,iterator :${zonas}" th:text="${zona}>
-	</option>
+<!--      <option th:each="zona,iterator :${zonas}" th:text="${zona}>
+	</option>-->
   </select>
   <div class=" col-auto">
         <button type="submit" class="btn btn-dark mb-3">Aplicar filtros</button>
         </div>
   </form>
+  
+   <li>COTO comenzó su historia hace casi medio siglo abriendo su primera carnicería con un moderno sistema de desposte aéreo y cortes a la vista. Hoy es mucho más que un supermercado, es una empresa argentina que exporta al mundo.</li>
+                    <hr>
+                    <li>Zona sur</li>
   <!-- fin buscador -->
 
   <!-- lista de comercios -->
