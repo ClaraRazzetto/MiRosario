@@ -32,6 +32,53 @@ body {
     background-color: #66999;
     
     }
+    /** estilo de perfil comercio**/
+     .header{
+            text-align: center;
+             margin: 0px;
+            margin-left:30px;
+            margin-right: 30px;
+            height: 300px;
+            padding:20px;
+            
+            background-image: url(/);
+            background-color:lightskyblue;
+            background-position:center center;
+            background-size:cover;
+        }
+        .avatar{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        .user-name{
+            front-size: 18px;
+            margin-top: 14px;
+            color: #fff;
+        }
+        .socials {
+            list-style: none;
+            text-align: center;
+            padding: 20px;
+            background-color:white;
+        }
+        .socials, li{
+            display: inline-block;
+            margin: ;
+            margin-left:;
+            margin-right: ;
+            font-weight:bold;
+            float:;
+            text-align:left;
+            
+            .btnC{
+                position:absolute;
+                text-align:right;
+                float:right;
+                height:200px;
+            }
+    /** fin estilo de perfil comercio**/
+        }
     html {
         min-height: 100%;
         position: relative;

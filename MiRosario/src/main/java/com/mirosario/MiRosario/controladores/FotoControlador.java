@@ -1,6 +1,7 @@
 package com.mirosario.MiRosario.controladores;
 
 import com.mirosario.MiRosario.entidades.Cliente;
+import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.entidades.Usuario;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/foto")
 public class FotoControlador {
+<<<<<<< HEAD
  @Autowired
  private ClienteServicio clienteServicio;
  @Autowired
@@ -47,5 +49,34 @@ public class FotoControlador {
           }
      
  }
+=======
+>>>>>>> 46520a31b9329db4cb2d4c0b945d41b3e7595385
 
+    @Autowired
+    private ClienteServicio clienteServicio;
+    @Autowired
+    private ComercioServicio comercioServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
+    @GetMapping("/cliente")
+    public ResponseEntity<byte[]> fotoCliente (@RequestParam String id, HttpSession sesion) {
+        try {
+            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");;
+            if(cliente.getFoto() == null){
+                throw new ErrorServicio("El usuario no posee una foto asignada");
+            }
+            
+            byte[] foto = cliente.getFoto().getContenido();
+            
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+
+            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
+
+        } catch (ErrorServicio ex) {
+            System.out.println("error" + ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
