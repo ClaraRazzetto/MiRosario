@@ -35,16 +35,23 @@ public class ClienteControlador {
     @Autowired
     private RubroServicio rubroServicio;
     
-    @GetMapping("/vista-cliente")
-    public String vistaCliente(ModelMap modelo, @RequestParam(required = false) String q, @RequestParam(required = false) Rubro rubro,@RequestParam(required = false) Zona zona){
-        
-        modelo.put("zonas", zonaServicio.listarZonas());
-        modelo.put("rubros", rubroServicio.listarRubros());
-        
-        modelo.put("comercios", comercioServicio.listar(q, rubro, zona));
-        
-        return "vista-cliente.html";
-    }
+      @GetMapping("/vista-cliente")
+    public String vistaCliente(){
+     return "vista-cliente.html";
+}
+    
+    
+    
+//    @GetMapping("/vista-cliente")
+//    public String vistaCliente(ModelMap modelo, @RequestParam(required = false) String q, @RequestParam(required = false) Rubro rubro,@RequestParam(required = false) Zona zona){
+//        
+//        modelo.put("zonas", zonaServicio.listarZonas());
+//        modelo.put("rubros", rubroServicio.listarRubros());
+//        
+//        modelo.put("comercios", comercioServicio.listar(q, rubro, zona));
+//        
+//        return "vista-cliente.html";
+//    }
     
     @GetMapping("/registro")
     public String registro(ModelMap modelo){
