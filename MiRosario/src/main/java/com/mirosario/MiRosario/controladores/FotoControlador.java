@@ -1,6 +1,7 @@
 package com.mirosario.MiRosario.controladores;
 
 import com.mirosario.MiRosario.entidades.Cliente;
+import com.mirosario.MiRosario.entidades.Comercio;
 import com.mirosario.MiRosario.entidades.Usuario;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
@@ -25,32 +26,32 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/foto")
 public class FotoControlador {
-      @GetMapping("/guardar")
-      public String agregarComentario() {
-          
-            return "formulario-comentario.html";
-    }
- @Autowired
- private ClienteServicio clienteServicio;
- @Autowired
- private ComercioServicio comercioServicio;
- @Autowired
- private UsuarioServicio usuarioServicio;
- @GetMapping("/usuario")
- public ResponseEntity<byte[]>fotoUsuario(String idUsuario){
-          try {
-              Cliente cliente= clienteServicio.findById(idUsuario);
-                 byte[]foto= cliente.getFoto().getContenido();
-                 HttpHeaders headers = new HttpHeaders();
-                 headers.setContentType(MediaType.IMAGE_JPEG);
-                 
-                 return new ResponseEntity<>(foto, headers, HttpStatus.OK);
-                      
-                      } catch (ErrorServicio ex) {
-              System.out.println("error"+ex.getMessage());
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-          }
-     
- }
 
+    @Autowired
+    private ClienteServicio clienteServicio;
+    @Autowired
+    private ComercioServicio comercioServicio;
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
+    @GetMapping("/cliente")
+    public ResponseEntity<byte[]> fotoCliente (@RequestParam String id, HttpSession sesion) {
+        try {
+            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");;
+            if(cliente.getFoto() == null){
+                throw new ErrorServicio("El usuario no posee una foto asignada");
+            }
+            
+            byte[] foto = cliente.getFoto().getContenido();
+            
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+
+            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
+
+        } catch (ErrorServicio ex) {
+            System.out.println("error" + ex.getMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
