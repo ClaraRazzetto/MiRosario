@@ -31,7 +31,7 @@
   <!-- formulario  -->
 
   <div class="registration-form">
-    <form method="post" action="/comercio/registro" enctype="multipart/form-data">
+    <form method="post" action="/comercio/editar" enctype="multipart/form-data">
       <div class="">
         <span>
           <img src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
@@ -42,30 +42,34 @@
       <input hidden name="id" th:value="${comercio.id}">
 
       <div class="form-group">
-        <input th:value="${comercio.nombreUsuario}" name="comercio.nombreUsuario" type="text" class="form-control item"
+        <input th:value="${comercio.nombreUsuario}" name="nombreUsuario" type="text" class="form-control item"
           id="nombreUsuario" placeholder="Nombre Usuarios">
       </div>
 
-      <select name="rubros" class="form-control item">
+      <div class="form-group">
+        <input type="file" class="form-control item" name="foto" th:value="${comercio.foto}">
+      </div>
+
+      <select name="rubro" class="form-control item">
         <option th:each="rubro,iterator :${rubros}" th:text="${rubro}"></option>
       </select>
 
-      <select name="zonas" class="form-control item">
+      <select name="zona" class="form-control item">
         <option th:each="zona,iterator :${zonas}" th:text="${zona}"></option>
       </select>
 
       <div class="form-group">
-        <input th:value="${comercio.nombreComercio}" name="comercio.nombreComercio" type="text"
+        <input th:value="${comercio.nombreComercio}" name="nombreComercio" type="text"
           class="form-control item" id="nombreComercio" placeholder="Nombre Comercio">
       </div>
 
       <div class="form-group">
-        <input th:value="${comercio.cuit}" name="comercio.cuit" type="text" class="form-control item" id="cuitComercio"
+        <input th:value="${comercio.cuit}" name="cuit" type="text" class="form-control item" id="cuitComercio"
           placeholder="C.U.I.T">
       </div>
 
       <div class="form-group">
-        <input name="comercio.password" type="password" class="form-control item"
+        <input name="password" type="password" class="form-control item"
           id="Contraseña" placeholder="Contraseña">
       </div>
 
@@ -75,22 +79,22 @@
       </div>
 
       <div class="form-group">
-        <input th:value="${comercio.mail}" name="comercio.mail" type="text" class="form-control item" id="emailComercio"
+        <input th:value="${comercio.mail}" name="mail" type="text" class="form-control item" id="emailComercio"
           placeholder="Email">
       </div>
 
       <div class="form-group">
-        <input th:value="${comercio.telefono}" name="comercio.telefono" type="text" class="form-control item"
+        <input th:value="${comercio.telefono}" name="telefono" type="text" class="form-control item"
           id="telefonoComercio" placeholder="Telefono">
       </div>
 
       <div class="form-group">
-        <input th:value="${comercio.descripcion}" name="comercio.descripcion" type="text" class="form-control item"
+        <input th:value="${comercio.descripcion}" name="descripcion" type="text" class="form-control item"
           id="direccionComercio" placeholder="Direccion">
       </div>
 
       <div class="form-group">
-        <input th:value="${comercio.direccion}" name="comercio.direccion" type="text" class="form-control item"
+        <input th:value="${comercio.direccion}" name="direccion" type="text" class="form-control item"
           id="descripcionComercio" placeholder="Descripcion">
       </div>
 

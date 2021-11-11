@@ -42,17 +42,21 @@
       <input hidden name="id" th:value="${cliente.id}">
 
       <div class="form-group">
-        <input th:value="${cliente.nombre}" name="cliente.nombre" type="text" class="form-control item"
+        <input th:value="${cliente.nombre}" name="nombre" type="text" class="form-control item"
           id="nombreCliente" placeholder="Nombre">
       </div>
 
       <div class="form-group">
-        <input th:value="${cliente.apellido}" name="cliente.apellido" type="text" class="form-control item"
+        <input th:value="${cliente.apellido}" name="apellido" type="text" class="form-control item"
           id="apellidoCliente" placeholder="Apellido">
       </div>
 
       <div class="form-group">
-        <input th:value="${cliente.nombreUsuario}" name="cliente.nombreUsuario" type="text" class="form-control item"
+        <input type="file" class="form-control item" name="archivo" th:value="${cliente.foto}">
+      </div>
+
+      <div class="form-group">
+        <input th:value="${cliente.nombreUsuario}" name="nombreUsuario" type="text" class="form-control item"
           id="nombreUsuario" placeholder="Nombre Usuario">
       </div>
 
@@ -63,12 +67,12 @@
       </div>
 
       <div class="form-group">
-        <input th:value="${cliente.dni}" name="cliente.dni" type="text" class="form-control item" id="dniCliente"
+        <input th:value="${cliente.dni}" name="dni" type="text" class="form-control item" id="dniCliente"
           placeholder="D.N.I">
       </div>
 
       <div class="form-group">
-        <input name="cliente.password" type="password" class="form-control item"
+        <input name="password" type="password" class="form-control item"
           id="Contraseña" placeholder="Contraseña">
       </div>
 
@@ -78,17 +82,17 @@
       </div>
 
       <div class="form-group">
-        <input th:value="${cliente.mail}" name="cliente.mail" type="text" class="form-control item" id="email"
+        <input th:value="${cliente.mail}" name="mail" type="text" class="form-control item" id="email"
           placeholder="Email">
       </div>
 
       <div class="form-group">
-        <input th:value="${cliente.telefono}" name="cliente.telefono" type="text" class="form-control item"
+        <input th:value="${cliente.telefono}" name="telefono" type="text" class="form-control item"
           id="telefono" placeholder="Telefono">
       </div>
 
       <div class="form-group">
-        <input th:value="${cliente.direccion}" name="cliente.direccion" type="text" class="form-control item"
+        <input th:value="${cliente.direccion}" name="direccion" type="text" class="form-control item"
           id="direccion" placeholder="Direccion">
       </div>
 
