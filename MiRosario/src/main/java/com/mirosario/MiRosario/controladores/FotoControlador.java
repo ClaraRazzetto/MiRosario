@@ -25,11 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 @RequestMapping("/foto")
 public class FotoControlador {
-      @GetMapping("/guardar")
-      public String agregarComentario() {
-          
-            return "formulario-comentario.html";
-    }
  @Autowired
  private ClienteServicio clienteServicio;
  @Autowired
