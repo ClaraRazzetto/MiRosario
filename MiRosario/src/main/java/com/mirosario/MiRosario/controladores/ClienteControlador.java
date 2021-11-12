@@ -69,7 +69,7 @@ public class ClienteControlador {
             clienteServicio.guardar(nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona, archivo);
             redirect.addFlashAttribute("exito", "Te registraste con exito!");
 //            return "redirect:/vista-cliente";
-return "redirect:/";
+        return "redirect:/";
             
         } catch (ErrorServicio error) {
             

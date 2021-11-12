@@ -41,13 +41,14 @@ public class ComercioControlador {
     }
 
     @PostMapping("/registro")
-    public String registroPost(ModelMap modelo, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String password, @RequestParam String password2, @RequestParam String cuit, @RequestParam String nombreComercio, @RequestParam Rubro rubro, @RequestParam String direccion, @RequestParam Zona zona, @RequestParam String descripcion, @RequestParam String telefono, @RequestParam String mail) throws Exception {
+    public String registroPost(RedirectAttributes redirect, ModelMap modelo, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String password, @RequestParam String password2, @RequestParam String cuit, @RequestParam String nombreComercio, @RequestParam Rubro rubro, @RequestParam String direccion, @RequestParam Zona zona, @RequestParam String descripcion, @RequestParam String telefono, @RequestParam String mail) throws Exception {
 
         
     try {
         comercioServicio.guardar( archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
-        
+        redirect.addFlashAttribute("exito", "Te registraste con exito!");
         return "redirect:/perfil-comercio.html";
+        
     }   
     catch (ErrorServicio error){
         
@@ -104,14 +105,13 @@ public class ComercioControlador {
        
         if(comercio == null || !comercio.getId().equals(id)){
             redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
-            
             return "redirect:/";
         }
                 
         comercio = comercioServicio.editar(id, archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
         
         sesion.setAttribute("usuariosesion", comercio);
-                
+        redirect.addFlashAttribute("exito", "Los cambios se guardaron con éxito");        
         }catch(ErrorServicio error){
             modelo.put("error", error.getMessage());
             modelo.put("comercio", comercio);   
@@ -131,6 +131,8 @@ public class ComercioControlador {
                 return "redirect:/";
             }
             comercioServicio.darDeBaja(comercio.getId());
+            redirect.addFlashAttribute("exito", "Su usuario se ha eliminado correctamente");
+
         }catch (ErrorServicio error){
             modelo.put("error", error.getMessage());
         }
