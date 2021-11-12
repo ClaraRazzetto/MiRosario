@@ -30,39 +30,36 @@ public class MainControlador {
     public String inicio(){
         return "inicio.html";
     }
-     @GetMapping("/perfil-comercio")
-     public String perfilComercio(){
-         return "perfil-comercio";
-                
-             
-     }
+//     @GetMapping("/perfil-comercio")
+//     public String perfilComercio(){
+//         return "perfil-comercio";
+//                
+//             
+//     }
              
     
-//    @GetMapping("/perfil-comercio")
-//    public String perfilComercio(ModelMap modelo, @RequestParam(required = false) String idComercio, HttpSession sesion, RedirectAttributes redirect){
-//        
-//        Comercio comercio = null;
-// 
-//        if (sesion.getAttribute(sesion.getId()) instanceof Cliente) {
-//            try {
-//                if (idComercio != null) {
-//                    comercio = comercioServicio.findById(idComercio);
-//                    modelo.put("comercio", comercio);
-//                }
-//            } catch (ErrorServicio error) {
-//                redirect.addFlashAttribute("error", error);
-//                return "redirect:/vista-cliente";
-//            }
-//            
-//        }else{
-//         
-//            comercio = (Comercio) sesion.getAttribute("usuariosesion");
-//            modelo.put("comercio", comercio);
-//        }
-//        
-//        modelo.put("comentarios", comentarioServicio.listaComentariosPorComercio(comercio.getId()));
-//        
-//        return "perfil-comercio.html";
-//    }
+    @GetMapping("/perfil-comercio")
+    public String perfilComercio(ModelMap modelo, @RequestParam(required = false) String id, HttpSession sesion, RedirectAttributes redirect){
+        
+        Comercio comercio = null;
+ 
+        if (sesion.getAttribute("usuariosesion") instanceof Cliente) {
+            try {
+                    comercio = comercioServicio.findById(id);
+                    modelo.addAttribute("comercio", comercio);
+            } catch (ErrorServicio error) {
+                redirect.addFlashAttribute("error", error);
+                return "redirect:/vista-cliente";
+            }
+            
+        }else{
+            comercio = (Comercio) sesion.getAttribute("usuariosesion");
+            modelo.addAttribute("comercio", comercio);
+        }
+        
+        //modelo.put("comentarios", comentarioServicio.listaComentariosPorComercio(comercio.getId()));
+        
+        return "perfil-comercio.html";
+    }
     
 }

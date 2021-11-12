@@ -11,7 +11,7 @@ public class RubroServicio {
     public List<Rubro> listarRubros() {
 
         List<Rubro> rubros = new ArrayList<>();
-
+         
         rubros.add(Rubro.ALIMENTOS);
         rubros.add(Rubro.BARES);
         rubros.add(Rubro.FARMACIA);

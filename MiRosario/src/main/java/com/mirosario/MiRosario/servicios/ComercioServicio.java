@@ -196,7 +196,8 @@ public class ComercioServicio {
             if (rubro != null && zona != null) {
                 comercios = comercioRepositorio.buscarPorRubroZona(zona, rubro);
             }else{
-                comercios = comercioRepositorio.findAll().subList(0, 4);  
+//                comercios = comercioRepositorio.findAll().subList(0, 4);  
+                comercios = comercioRepositorio.findAll();  
                 Collections.shuffle(comercios);
             }
         }

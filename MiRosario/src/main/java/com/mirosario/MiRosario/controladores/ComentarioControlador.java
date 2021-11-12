@@ -26,17 +26,17 @@ public class ComentarioControlador {
             
             comentarioServicio.guardar(descripcion, sesion.getId(), idComercio);
             redirect.addFlashAttribute("exito", "El comentario se ha guardado con exito");
-            return "redirect:/vista-cliente.html";
         
         } catch (Exception ex) {
             
-            System.out.println("error" + ex.getMessage());
-            modelo.addAttribute("descripcion", descripcion);
-            modelo.addAttribute("idCliente", sesion.getId());
-            modelo.addAttribute("idComercio", idComercio);
-           
-            return "formulario-comentario.html";
+            redirect.addFlashAttribute("error" + ex.getMessage());
+            redirect.addFlashAttribute("descripcion", descripcion);
+            redirect.addFlashAttribute("idCliente", sesion.getId());
+            redirect.addFlashAttribute("idComercio", idComercio);
+        
         }
+        
+        return "redirect:/perfil-comercio.html";
     }
     
     @PostMapping("/editar")

@@ -26,43 +26,77 @@
 
   <!-- Menu responsive  -->
   <nav th:replace="/fragmentos/navbar :: navbar"></nav>
-  
-  
+
+
   <!-- buscador -->
-  <form method="GET">
-    <div class="col-auto">
-      <input type="text" class="form-control" name="q">
-    </div>
-    <div class="col-auto">
-      <button type="submit" class="btn btn-dark mb-3">Buscar</button>
-    </div>
-    <select name="rubros" class="form-control item">
-<!--      <option th:each="rubro,iterator :${rubros}" th:text="${rubro}>
-	</option>-->
-  </select>
-  <select name=" zonas" class="form-control item">
-<!--      <option th:each="zona,iterator :${zonas}" th:text="${zona}>
-	</option>-->
-  </select>
-  <div class=" col-auto">
-        <button type="submit" class="btn btn-dark mb-3">Aplicar filtros</button>
+  <div class="card" style="background-color: cadetblue;">
+    <form method="GET" class="flex-container m-3">
+
+      <div class="col-12 m-1">
+        <input type="text" class="form-control" name="q">
+      </div>
+
+      <div class="col-12 m-1 mt-2">
+        <button type="submit" class="btn btn-dark">Buscar</button>
+      </div>
+
+      <div class="row col-12 m-1">
+
+        <div class="col-6" style="padding-left: 0%; padding-right: 1%;">
+
+          <label for="rubro">Rubro</label>
+          <select name="rubro" id="rubro" class="form-control" >
+            <option th:each="rubro,iterator :${rubros}" th:text="${rubro}"></option>
+          </select>
+
         </div>
-  </form>
-  
-   <li>COTO comenzó su historia hace casi medio siglo abriendo su primera carnicería con un moderno sistema de desposte aéreo y cortes a la vista. Hoy es mucho más que un supermercado, es una empresa argentina que exporta al mundo.</li>
-                    <hr>
-                    <li>Zona sur</li>
+
+        <div class="col-6"  style="padding: 0px;">
+
+          <label for="zona">Zona</label>
+          <select name="zona" id="zona" class="form-control">
+            <option th:each="zona,iterator :${zonas}" th:text="${zona}"></option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="col-12 m-1 mt-2">
+        <button type="submit" class="btn btn-dark">Aplicar filtros</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card" th:each="comercio : ${comercios}" style="background-color: cadetblue;">
+    <div class="row g-0">
+      <div class="col-5 col-sm-2">
+        <img src="/img/coto.png" class="img-fluid w-80 m-2" alt="card-horizontal-image" style="border-radius: 100px;">
+      </div>
+      <div class="col-7 col-sm-10">
+        <div class="card-body">
+          <a th:href="@{/perfil-comercio}+'?id='+${comercio.id}">
+            <h5 class="card-title" th:text="${comercio.nombreComercio}"></h5>
+          </a>
+          <p class="card-text" th:text="${comercio.descripcion}"></p>
+          <p class="card-text" th:text="${comercio.direccion}"><small class="text-muted"></small></p>
+          <p class="card-text" th:if="${comercios.isEmpty()}">La busqueda no tiene resultados</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- fin buscador -->
 
   <!-- lista de comercios -->
 
-  
- <!--Container quienes somos-->
- <div th:replace="/fragmentos/quienesSomos :: quienesSomos"></div>
- <!--footer pie de pagina-->
- <footer th:replace="/fragmentos/footer :: footer"></footer>
- <!-- scripts-->
- <div th:replace="/fragmentos/scripts :: scripts"></div>
+
+  <!--Container quienes somos-->
+  <div th:replace="/fragmentos/quienesSomos :: quienesSomos"></div>
+  <!--footer pie de pagina-->
+  <footer th:replace="/fragmentos/footer :: footer"></footer>
+  <!-- scripts-->
+  <div th:replace="/fragmentos/scripts :: scripts"></div>
 
 </body>
 
