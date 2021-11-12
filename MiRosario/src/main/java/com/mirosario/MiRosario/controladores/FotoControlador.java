@@ -32,8 +32,6 @@ public class FotoControlador {
     @Autowired
     private ComercioServicio comercioServicio;
     @Autowired
-    private UsuarioServicio usuarioServicio;
-    @Autowired
     private ProductoServicio productoServicio;
 
     @GetMapping("/cliente")
