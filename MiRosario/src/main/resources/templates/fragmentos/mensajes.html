@@ -1,15 +1,14 @@
 <!-- si hay un error se muestra -->
 <div th:fragment="error" th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
     <strong th:text="${error}"></strong>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
 <!-- mensaje de exito -->
-<div th:fragment="success" th:if="${success}" class="alert alert-success d-flex align-items-center" role="alert">
+<div th:fragment="exito" th:if="${exito}" class="alert alert-success d-flex align-items-center" role="alert">
     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
         <use xlink:href="#check-circle-fill" />
     </svg>
-    <strong th:text="${success}"></strong>
+    <strong th:text="${exito}"></strong>
 </div>
 
 <!-- HAY QUE AGREGAR ESTO EN LAS VISTAS

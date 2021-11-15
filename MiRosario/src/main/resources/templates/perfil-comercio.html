@@ -65,7 +65,7 @@
                     </ul>
                 </div> -->
 
-                <form method="post" th:action="@{/cliente/comercio-favorito}+'?id='+${session.usuariosesion.id}+'&idComercio='+${comercio.id}">
+                <form method="post" th:action="@{/cliente/comercio-favorito(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
                     <button style="margin:20px" type="submit">Agregar a favoritos</button>
                 </form>
            

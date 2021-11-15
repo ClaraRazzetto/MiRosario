@@ -11,7 +11,7 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
     <div class="navbar-nav">
-      <a class="nav-item nav-link" th:href="@{/}">Inicio<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" th:href="@{/}">Inicio<span class="sr-only"></span></a>
       <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
       <a class="nav-item nav-link" href="#">Productos</a>
       <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
@@ -22,7 +22,7 @@
 
       <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <span th:text="${session.usuariosesion.nombreUsuario}"></span> Nombre cliente
+        <span th:text="${session.usuariosesion.nombreUsuario}"></span>
       </button>
 
       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -55,7 +55,7 @@
 
     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      <span th:text="${session.usuariosesion.nombreUsuario}"></span> Nombre comercio
+      <span th:text="${session.usuariosesion.nombreUsuario}"></span>
     </button>
 
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
