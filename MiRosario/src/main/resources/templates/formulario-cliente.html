@@ -50,51 +50,61 @@
       </div>
 
       <div class="form-group">
+        <label for="apellidoCliente">Apellido</label>
         <input th:value="${apellido}" name="apellido" type="text" class="form-control item" id="apellidoCliente"
-          placeholder="Apellido">
+          placeholder="Apellido" required>
       </div>
 
       <div class="form-group">
+        <label for="nombreUsuario">Usuario</label>
         <input th:value="${nombreUsuario}" name="nombreUsuario" type="text" class="form-control item" id="nombreUsuario"
-          placeholder="Nombre Usuario">
+          placeholder="Nombre Usuario" required>
       </div>
 
       <div class="form-group">
+        <label for="foto">Foto</label>
         <input type="file" class="form-control item" id="foto" name="archivo" th:value="${archivo}">
       </div>
 
       <div class="form-group">
+        <label for="zonas">Zona</label>
         <select name="zona" class="form-control item">
-          <option style="text-transform: lowercase;" th:each="zona,iterator :${zonas}" th:text="${zona}"></option>
+          <option id="zonas" style="text-transform: lowercase;" th:each="zona,iterator :${zonas}" th:text="${zona}"></option>
         </select>
       </div>
 
       <div class="form-group">
-        <input th:value="${dni}" name="dni" type="text" class="form-control item" id="dniCliente" placeholder="D.N.I" minlength="8" maxlength="8">
+        <label for="dniCliente">D.N.I</label>
+        <input th:value="${dni}" name="dni" type="text" class="form-control item" id="dniCliente" placeholder="D.N.I" minlength="8" maxlength="8" required>
       </div>
 
       <div class="form-group">
+        <label for="Contraseña">Contraseña</label>
         <input th:value="${password}" name="password" type="password" class="form-control item" id="Contraseña"
-          placeholder="Contraseña" minlength="5" maxlength="10">
+          placeholder="Contraseña" minlength="5" maxlength="10" required>
       </div>
 
       <div class="form-group">
+        <label for="confirmacionContraseña">Confimrar contraseña</label>
         <input th:value="${password2}" name="password2" type="password" class="form-control item"
-          id="confrimacionContraseña" placeholder="Confirmar contraseña">
+          id="confirmacionContraseña" placeholder="Confirmar contraseña" minlength="5" maxlength="10" required>
       </div>
 
       <div class="form-group">
-        <input th:value="${mail}" name="mail" type="text" class="form-control item" id="email" placeholder="Email">
+        <label for="email">Email</label>
+        <input th:value="${mail}" name="mail" type="text" class="form-control item" id="email" placeholder="Email" required>
       </div>
 
       <div class="form-group">
+        <label for="telefono">Numero de telefono</label>
         <input th:value="${telefono}" name="telefono" type="text" class="form-control item" id="telefono"
-          placeholder="Telefono">
+          placeholder="Telefono" required>
       </div>
 
       <div class="form-group">
+        <label for="direccion">Direccion</label>
         <input th:value="${direccion}" name="direccion" type="text" class="form-control item" id="direccion"
-          placeholder="Direccion">
+          placeholder="Direccion" required>
       </div>
 
       <div class="form-group">
