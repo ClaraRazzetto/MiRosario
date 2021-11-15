@@ -158,6 +158,10 @@ public class ClienteServicio {
         Cliente cliente = findById(id);
 
         Comercio comercio = comercioServicio.findById(idComercio);
+        
+        if (cliente.getComercios().contains(comercio)) {
+            throw new ErrorServicio("El comercio seleccionado ya esta en tu lista de favoritos");
+        }
 
         cliente.getComercios().add(comercio);
     }

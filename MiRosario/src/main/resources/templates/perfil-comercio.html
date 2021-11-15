@@ -79,13 +79,13 @@
                     <div class="card-body">
                         <p class="card-text" th:text="${comentario.descripcion}"></p>
                         <a th:if="${comentario.cliente.id == session.usuariosesion.id}"
-    
-                            th:href="@{/comentario/editar}+'?id='+${session.usuariosesion.id}+'?idComentario='+${comentario.id}+'?idComercio='+${comercio.id}"
-                            class="btn btn-primary">Editar</a>
+                            th:href="@{/comentario/editar(id=${session.usuariosesion.id},idComentario=${comentario.id},idComercio='${comercio.id})}"
+                            class="btn btn-primary">Editar
+                        </a>
                     </div>
                     <div class=""></div>
                 </div>
-                <form method="POST" th:action="@{/comentario/guardar}+'?id='+${session.usuariosesion.id}+'?idComercio='+${comercio.id}">
+                <form method="POST" th:action="@{/comentario/guardar(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
                     <textarea name="descripcion" rows="10" cols="40">Escribe tu comentario…</textarea>
                     <button type="submit">Agregar comentario</button>
                 </form>

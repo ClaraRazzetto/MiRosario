@@ -46,7 +46,7 @@
 
         <!-- fin  confirmacion de eliminar cuenta --->
       </div>
-      <a class="dropdown-item" th:href="@{/cliente/comercios-favoritos}+'?id='+${session.usuariosesion.id}">Comercios
+      <a class="dropdown-item" th:href="@{/cliente/vista-cliente(id=${session.usuariosesion.id})}">Comercios
         Favoritos</a>
     </div>
   </div>

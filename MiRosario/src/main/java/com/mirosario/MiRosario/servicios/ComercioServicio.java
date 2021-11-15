@@ -174,7 +174,7 @@ public class ComercioServicio {
         }
     }
     
-    public List<Comercio> listar(String q, Rubro rubro, Zona zona){
+    public List<Comercio> listarBusqueda(String q, Rubro rubro, Zona zona){
         List<Comercio> comercios = new ArrayList<>();
         if(q != null){
             if (rubro !=null && zona != null) {
@@ -195,13 +195,13 @@ public class ComercioServicio {
             }       
             if (rubro != null && zona != null) {
                 comercios = comercioRepositorio.buscarPorRubroZona(zona, rubro);
-            }else{
-//                comercios = comercioRepositorio.findAll().subList(0, 4);  
-                comercios = comercioRepositorio.findAll();  
-                Collections.shuffle(comercios);
             }
         }
         return comercios;
+    }
+    
+    public List<Comercio> listar(){
+        return comercioRepositorio.findAll();
     }
 
 }
