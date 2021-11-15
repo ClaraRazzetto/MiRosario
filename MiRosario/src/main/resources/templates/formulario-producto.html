@@ -24,6 +24,11 @@
 <body>
     <nav th:replace="/fragmentos/navbar :: navbar"></nav>
 
+    <!-- Mensajes de exito y error -->
+    
+  <div th:replace="/fragmentos/mensajes :: error"></div>
+  <div th:replace="/fragmentos/mensajes :: exito"></div> 
+
     <div class="registration-form">
         <form method="post" action="/producto/guardar" enctype="multipart/form-data">
             <div class="">
@@ -34,21 +39,25 @@
             </div>
 
             <div class="form-group">
-                <input th:value="${nombre}" name="nombre" type="text" class="form-control item"
-                    placeholder="Nombre Producto">
+                <label for="nombreProducto">Nonbre del producto</label>
+                <input th:value="${nombre}" name="nombre" type="text" class="form-control item" id="nombreProducto"
+                    placeholder="Nombre Producto" required>
             </div>
 
             <div class="form-group">
-                <input type="file" class="form-control item" id="foto" name="archivo" th:value="${archivo}">
+                <label for="foto"></label>
+                <input  type="file" class="form-control item" id="foto" name="archivo" th:value="${archivo}" >
             </div>
 
             <div class="form-group">
-                <input th:value="${precio}" name="precio" type="double" class="form-control item" placeholder="Precio">
+                <label for="precio"> Precio</label>
+                <input  id="precio" th:value="${precio}" name="precio" type="double" class="form-control item" placeholder="Precio">
             </div>
 
             <div class="form-group">
-                <input th:value="${descripcion}" name="descripcion" type="text" class="form-control item"
-                    placeholder="Descripcion">
+                <label for="descripcion">Descripcion</label>
+                <input id="descripcion" th:value="${descripcion}" name="descripcion" type="text" class="form-control item"
+                    placeholder="Descripcion" required>
             </div>
 
             <div class="form-group">

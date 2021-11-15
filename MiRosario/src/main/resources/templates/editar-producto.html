@@ -24,6 +24,11 @@
 <body>
     <nav th:replace="/fragmentos/navbar :: navbar"></nav>
 
+    <!-- Mensajes de exito y error -->
+    
+  <div th:replace="/fragmentos/mensajes :: error"></div>
+  <div th:replace="/fragmentos/mensajes :: exito"></div> 
+
     <div class="registration-form">
         <form method="post" action="/producto/editar" enctype="multipart/form-data">
             <div class="">
