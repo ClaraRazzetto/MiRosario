@@ -1,11 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <link href="../static/css/error.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div class="mainbox">
-      <div class="err">4</div>
-      <i class="far fa-question-circle fa-spin"></i>
-      <div class="err2">4</div>
-      <div class="msg">Quizas esta pagina se movio? Se elimino? Nunca existio en primer lugar?<p>Vuelve al <a href="@{/inicio}">incio</a> he intenta desde ahi.</p></div>
-        </div>
+  <link href="/css/error.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="mainbox">
+    <i class="far fa-question-circle fa-spin"></i>
+    <div class="msg">
+      <div class="err" th:text="${codigo}"></div>
+      <p th:text="${mensaje == null ? 'Intenta nuevamete' : mensaje}">
+        Quizas esta pagina se movio? Se elimino? Nunca existio en primer lugar?
+      </p>
+      <p>Vuelve al <a href="@{/}">incio</a> he intenta desde ahi.</p>
+    </div>
+  </div>
+</body>
+
+</html>
