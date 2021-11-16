@@ -41,11 +41,11 @@ public interface ComercioRepositorio extends JpaRepository<Comercio, String>{
     public List<Comercio> buscarPorRubroZona(@Param("zona") Zona zona, @Param("rubro") Rubro rubro);
     
     //rubro
-    @Query("SELECT c FROM Comercio c WHERE c.rubro = :rubro ")
+    @Query("SELECT c FROM Comercio c WHERE c.rubro = :rubro")
     public List<Comercio> buscarPorRubro(@Param("rubro") Rubro rubro);
 
     //zona
-    @Query("SELECT c FROM Comercio c WHERE c.zona = :zona ")
+    @Query("SELECT c FROM Comercio c WHERE c.zona = :zona")
     public List<Comercio> buscarPorZona(@Param("zona") Zona zona);
     
 }

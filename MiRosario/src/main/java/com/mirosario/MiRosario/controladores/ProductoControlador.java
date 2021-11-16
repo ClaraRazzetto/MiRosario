@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 @Controller
 @RequestMapping("/producto")
@@ -36,10 +34,12 @@ public class ProductoControlador {
     }
 
     @PostMapping("/guardar")
-    public String agregarProductoPost(ModelMap modelo, HttpSession sesion, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) {
+    public String agregarProductoPost(ModelMap modelo, HttpSession sesion, MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) {
+         
+        Comercio comercio = null;
         try {
 
-            Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
+            comercio = (Comercio) sesion.getAttribute("usuariosesion");
 
             if (comercio == null) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
@@ -50,17 +50,17 @@ public class ProductoControlador {
 
             sesion.setAttribute("usuariosesion", comercio);
 
-            return "redirect:/perfil-comercio.html";
-
         } catch (Exception ex) {
 
-            System.out.println("error" + ex.getMessage());
+            modelo.addAttribute("error", ex.getMessage());
             modelo.addAttribute("nombre", nombre);
             modelo.addAttribute("precio", precio);
             modelo.addAttribute("descripcion", descripcion);
 
             return "formulario-producto.html";
         }
+
+        return "redirect:/perfil-comercio?id=" + comercio.getId();
     }
 
     @GetMapping("/editar")
@@ -71,18 +71,18 @@ public class ProductoControlador {
             Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
             Producto producto = productoServicio.findById(id);
 
-            if (comercio == null || !comercio.getId().equals(idComercio) || !comercio.getProducto().contains(producto)) {
+            if (comercio == null || !comercio.getId().equals(idComercio) || !comercioServicio.listaProducto(idComercio).contains(producto)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
                 return "redirect:/";
             }
-            
+
             modelo.put("producto", producto);
             modelo.put("idComercio", comercio.getId());
-            
-            return "editar-producto.html";
+
         } catch (ErrorServicio error) {
 
-            modelo.put("error", error);
+            redirect.addFlashAttribute("error", error.getMessage());
+            return "redirect:/perfil-comercio?id=" + idComercio;
 
         }
 
@@ -90,16 +90,15 @@ public class ProductoControlador {
     }
 
     @PostMapping("/editar")
-    public String editarProductoPost(HttpSession sesion, Model modelo, @RequestParam String idComercio, @RequestParam String id, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) throws Exception {
+    public String editarProductoPost(HttpSession sesion, ModelMap modelo, @RequestParam String idComercio, @RequestParam String id, MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) throws Exception {
 
         Producto producto = null;
 
         try {
-
             Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
             producto = productoServicio.findById(id);
 
-            if (comercio == null || !comercio.getId().equals(idComercio) || !comercio.getProducto().contains(producto)) {
+            if (comercio == null || !comercio.getId().equals(idComercio) || !comercioServicio.listaProducto(comercio.getId()).contains(producto)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
                 return "redirect:/";
             }
@@ -108,44 +107,37 @@ public class ProductoControlador {
 
             sesion.setAttribute("usuariosesion", comercio);
 
+            redirect.addFlashAttribute("exito", "El producto se ha editado correctamente");
         } catch (ErrorServicio error) {
-
-            System.out.println("error" + error.getMessage());
+            modelo.addAttribute("error", error.getMessage());
             modelo.addAttribute("producto", producto);
-            return "redirect:/producto/editar";
+            return "editar-producto.html";
 
         }
-        return "redirect:/perfil-comercio";
-    }
-
-    @GetMapping("/baja")
-    public String darBajaProducto() {
-
-        return "eliminar.html";
+        return "redirect:/perfil-comercio?id=" + idComercio;
     }
 
     @PostMapping("/baja")
-    public String darBajaProductoPost(ModelMap modelo, HttpSession sesion, @RequestParam String idComercio, @RequestParam String id, RedirectAttributes redirect) throws ErrorServicio {
+    public String darBajaProductoPost(ModelMap modelo, HttpSession sesion, @RequestParam String idComercio, @RequestParam String id, RedirectAttributes redirect) {
         try {
             Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
 
-            if (comercio == null || !comercio.getId().equals(idComercio) || !comercio.getProducto().contains(productoServicio.findById(id))) {
+            if (comercio == null || !comercio.getId().equals(idComercio) || !comercioServicio.listaProducto(idComercio).contains(productoServicio.findById(id))) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
                 return "redirect:/";
             }
 
             productoServicio.darDeBaja(id);
-            
+
             sesion.setAttribute("usuariosesion", comercio);
 
-        } catch (ErrorServicio e) {
+            redirect.addFlashAttribute("exito", "El producto se ha eliminado con exito");
 
-            modelo.addAttribute("error", e.getMessage());
-            return "redirect:/producto/editar";
+        } catch (ErrorServicio error) {
 
+            redirect.addFlashAttribute("error", error.getMessage());
         }
-
-        return "redirect:/logout";
+        return "redirect:/perfil-comercio?id=" + idComercio;
     }
 
 }

@@ -35,7 +35,7 @@ public class ProductoServicio {
     @Transactional
     public Producto editar(String id, String nombre, Double precio, String descripcion, MultipartFile archivo) throws ErrorServicio, Exception {
         validacion(nombre, precio, descripcion);
-        Producto producto = findById(nombre);
+        Producto producto = findById(id);
         producto.setNombre(nombre);
         producto.setPrecio(precio);
         producto.setDescripcion(descripcion);

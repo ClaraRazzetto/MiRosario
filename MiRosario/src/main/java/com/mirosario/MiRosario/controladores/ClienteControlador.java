@@ -42,7 +42,7 @@ public class ClienteControlador {
 
         modelo.put("zonas", zonaServicio.listarZonas());
         modelo.put("rubros", rubroServicio.listarRubros());
-
+       
         if (id != null) {
 
             try {
@@ -64,9 +64,9 @@ public class ClienteControlador {
         }
 
         if (q != null || rubro != null || zona != null) {
-
-            modelo.put("comercios", comercioServicio.listarBusqueda(q, rubro, zona));
         
+            modelo.put("comercios", comercioServicio.listarBusqueda(q, rubro, zona));
+            
         } else {
             
             modelo.put("comercios", comercioServicio.listar());

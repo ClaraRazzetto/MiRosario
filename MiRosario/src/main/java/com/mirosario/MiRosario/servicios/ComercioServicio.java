@@ -55,7 +55,6 @@ public class ComercioServicio {
         comercio.setZona(zona);
         comercio.setDescripcion(descripcion);
         comercio.setMail(mail);
-        comercio.setProducto(null);
 
         Foto foto = fotoServicio.guardar(archivo);
         comercio.setFoto(foto);
@@ -114,13 +113,16 @@ public class ComercioServicio {
     }
      
     @Transactional
-    public List<Producto> guardarProducto(String idComercio, MultipartFile archivo, String nombre, Double precio, String descripcion) throws ErrorServicio, Exception {
+    public void guardarProducto(String idComercio, MultipartFile archivo, String nombre, Double precio, String descripcion) throws ErrorServicio, Exception {
 
         Comercio comercio = findById(idComercio);
 
         comercio.getProducto().add(productoServicio.guardar(nombre, precio, descripcion, archivo));
 
-        return comercio.getProducto();
+    }
+    
+    public List<Producto> listaProducto(String id) throws ErrorServicio{
+        return findById(id).getProducto();
     }
 
     public void validar(String nombreUsuario, String password, String password2, String cuit, String nombreComercio, Rubro rubro, String direccion, Zona zona, String descripcion, String telefono, String mail) throws ErrorServicio {
@@ -172,32 +174,55 @@ public class ComercioServicio {
         }
     }
     
-    public List<Comercio> listarBusqueda(String q, Rubro rubro, Zona zona){
-        List<Comercio> comercios = new ArrayList<>();
-        if(q != null){
-            if (rubro !=null && zona != null) {
-                comercios = comercioRepositorio.buscarComercioRubroZona("%"+ q + "%", zona, rubro);
-            }else{
-                comercios = comercioRepositorio.buscarComercio("%"+ q + "%");
-            }
-            if (zona == null && rubro != null) {
-                comercios = comercioRepositorio.buscarComercioRubro("%"+ q + "%", rubro);
-            } else {
-                comercios = comercioRepositorio.buscarComercioZona("%"+ q + "%", zona);
-            }
-        }else{  
-            if(rubro != null && zona == null){
-                comercios = comercioRepositorio.buscarPorRubro(rubro);
-            } else {
-                comercios = comercioRepositorio.buscarPorZona(zona);
-            }       
-            if (rubro != null && zona != null) {
-                comercios = comercioRepositorio.buscarPorRubroZona(zona, rubro);
-            }
-        }
-        return comercios;
-    }
+//    public List<Comercio> listarBusqueda(String q, Rubro rubro, Zona zona){
+//        List<Comercio> comercios = new ArrayList<>();
+//        if(q != null || !q.isEmpty()){
+//            if (rubro !=null && zona != null) {
+//                comercios = comercioRepositorio.buscarComercioRubroZona("%"+ q + "%", zona, rubro);
+//            }else{
+//                comercios = comercioRepositorio.buscarComercio("%"+ q + "%");
+//            }
+//            if (zona == null && rubro != null) {
+//                comercios = comercioRepositorio.buscarComercioRubro("%"+ q + "%", rubro);
+//            } else {
+//                comercios = comercioRepositorio.buscarComercioZona("%"+ q + "%", zona);
+//            }
+//        }else{  
+//            if(rubro != null && zona == null){
+//                comercios = comercioRepositorio.buscarPorRubro(rubro);
+//            } else {
+//                comercios = comercioRepositorio.buscarPorZona(zona);
+//            }       
+//            if (rubro != null && zona != null) {
+//                comercios = comercioRepositorio.buscarPorRubroZona(zona, rubro);
+//            }
+//        }
+//        return comercios;
+//    }
     
+     public List<Comercio> listarBusqueda(String q, Rubro rubro, Zona zona){
+        if (zona != null && rubro != null) {
+            return comercioRepositorio.buscarPorRubroZona(zona, rubro);
+        }
+        if (q != null || !q.isEmpty()) {
+            return comercioRepositorio.buscarComercio("%"+ q + "%");
+        }
+        if (q != null || !q.isEmpty() && rubro != null) {
+            return comercioRepositorio.buscarComercioRubro("%"+ q + "%",rubro);
+        }
+        if (q != null && !q.isEmpty() && zona != null) {
+            return comercioRepositorio.buscarComercioZona("%"+ q + "%",zona);
+        }
+        if (rubro != null) {
+            return comercioRepositorio.buscarPorRubro(rubro);
+        }
+        if (zona != null) {
+            return comercioRepositorio.buscarPorZona(zona);
+        }
+        return comercioRepositorio.buscarComercioRubroZona("%"+ q + "%", zona, rubro);
+     }
+ 
+   
     public List<Comercio> listar(){
         return comercioRepositorio.findAll();
     }

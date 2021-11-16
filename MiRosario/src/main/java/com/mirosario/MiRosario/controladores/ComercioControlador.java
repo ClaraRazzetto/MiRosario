@@ -48,7 +48,6 @@ public class ComercioControlador {
     try {
         comercioServicio.guardar( archivo, nombreUsuario, password, password2, cuit, nombreComercio, rubro, direccion, zona, descripcion, telefono, mail);
         redirect.addFlashAttribute("exito", "Te registraste con exito!");
-        return "redirect:/perfil-comercio.html";
         
     }   
     catch (ErrorServicio error){
@@ -66,8 +65,8 @@ public class ComercioControlador {
         modelo.put("descripcion", descripcion);
             
         return "formulario-comercio.html";
-
         }
+        return "redirect:/";
     }
     
     @PreAuthorize("hasAnyRole('ROLE_COMERCIO')")
@@ -120,7 +119,7 @@ public class ComercioControlador {
             modelo.put("comercio", comercio);   
         }
         
-        return "redirect:/perfil-comercio.html";
+        return "redirect:/perfil-comercio?id=" + id;
     }
 
     @PreAuthorize("hasAnyRole('ROLE_COMERCIO')")

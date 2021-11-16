@@ -30,7 +30,8 @@
   <div th:replace="/fragmentos/mensajes :: exito"></div> 
 
     <div class="registration-form">
-        <form method="post" action="/producto/editar" enctype="multipart/form-data">
+        <form method="POST" action="/producto/editar" enctype="multipart/form-data">
+
             <div class="">
                 <span>
                     <img src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
@@ -39,27 +40,28 @@
             </div>
             
             <input hidden name="idComercio" th:value="${idComercio}">
+            <input hidden name="id" th:value="${producto.id}">
 
             <div class="form-group">
                 <label for="nombreProducto">Nombre del producto</label>
-                <input id="nombreProducto" th:value="${producto.nombre}" name="producto.nombre" type="text" class="form-control item"
+                <input id="nombreProducto" th:value="${producto.nombre}" name="nombre" type="text" class="form-control item"
                     placeholder="Nombre Producto" required>
             </div>
 
             <div class="form-group">
                 <label for="foto">Foto</label>
-                <input id="foto" type="file" class="form-control item" name="producto.foto" th:value="${producto.foto}">
+                <input id="foto" type="file" class="form-control item" name="foto" th:value="${producto.foto}">
             </div>
 
             <div class="form-group">
                 <label for="precioProducto">Precio</label>
-                <input id="precioProducto" th:value="${producto.precio}" name="producto.precio" type="double" class="form-control item"
+                <input id="precioProducto" th:value="${producto.precio}" name="precio" type="double" class="form-control item"
                     placeholder="Precio" required>
             </div>
 
             <div class="form-group">
                 <label for="descripcion">Descripcion del producto</label>
-                <input id="descripcion" th:value="${producto.descripcion}" name="producto.descripcion" type="text"
+                <input id="descripcion" th:value="${producto.descripcion}" name="descripcion" type="text"
                     class="form-control item" placeholder="Descripcion" minlength="0" maxlength="200" required>
             </div>
 
