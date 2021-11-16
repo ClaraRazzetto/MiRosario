@@ -35,25 +35,25 @@
     <!--<div th:object="${comercio}">-->
     <title>Perfil comercio</title>
 
-    <div style="margin:2rem">
+    <div style="margin:m-1">
 
-        <div class="header">
+        <div class="header m-3 p-3" style="border-radius:20px">
             <img class="avatar" src="/img/coto.png">
-            <h1 th:text="${comercio.nombreComercio}" style="color:black"></h1>
+            <h1 th:text="${comercio.nombreComercio}" style="color:black; padding:2rem; "></h1>
         </div>
 
-        <div class="col-sm-12" style="text-align:right; margin:2rem; margin-left:5px; background-color: white">
-            <div class="socials">
-                <div class="" style="margin-right:30%">
-                    <p th:text="${comercio.descripcion}"></p>
+        <div class=" m-3 mb-3" style="text-align:center; background-color:white; border-radius:20px">
+            <div class="socials " style="background-position:center; background-color:white; color:black; border-radius:20px" >
+                <div class="socials" style=" background-color:white" >
+                    <h5 th:text="'Descripcion: '+ ${comercio.descripcion}"></h5>
                     <hr>
-                    <p th:text="'Zona ' + ${comercio.zona}"></p>
+                    <h5 th:text="'Zona: ' + ${comercio.zona}"></h5>
                     <hr>
-                    <p th:text="${comercio.direccion}"></p>
+                    <h5 th:text="'Direccion: '+ ${comercio.direccion}"></h5>
                     <hr>
-                    <p th:text="${comercio.telefono}"></p>
+                    <h5 th:text=" 'Telefono: '+ ${comercio.telefono}"></h5>
                     <hr>
-                    <p th:text="${comercio.mail}"></p>
+                    <h5 th:text="'Mail: '+ ${comercio.mail}"></h5>
                 </div>
 
                 <form sec:authorize="hasRole('ROLE_CLIENTE')" method="post"
@@ -62,10 +62,10 @@
                 </form>
             </div>
 
-            <div th:if="${producto.alta == true}" th:each="producto : ${productos}">
-                <caption>Lista de Productos</caption>
-                <a class="btn btn-primary" th:href="@{/producto/guardar}">Agregar Producto</a>
-                <table class="table caption-top">
+            <div  style=" color:white" th:if="${producto.alta == true}" th:each="producto : ${productos}">
+                <caption class="" style=" color:black" >Lista de Productos</caption>
+                <a class="btn btn-primary " th:href="@{/producto/guardar}">Agregar Producto</a>
+                <table class="table caption-top p-3">
                     <thead>
                         <tr>
                             <th scope="col">Foto</th>
