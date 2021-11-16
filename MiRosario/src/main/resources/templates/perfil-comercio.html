@@ -65,10 +65,10 @@
                 </form>
             </div>
 
-            <div th:if="${producto.alta == true}" th:each="producto : ${productos}">
+            <div>
                 <caption>Lista de Productos</caption>
                 <a class="btn btn-primary" th:href="@{/producto/guardar}">Agregar Producto</a>
-                <table class="table caption-top">
+                <table th:if="${producto.alta == true}" th:each="producto : ${productos}" class="table caption-top">
                     <thead>
                         <tr>
                             <th scope="col">Foto</th>
@@ -82,7 +82,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td> Foto</td>
+                            <td th:if="${producto.foto != null}"><img th:src="${'/foto/producto?id=' + producto.id}" width="100px" height="100px"></td>
                             <td th:text="${producto.nombre}"></td>
                             <td th:text="${producto.descripcion}"></td>
                             <td th:text="${producto.precio}"></td>

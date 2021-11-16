@@ -40,7 +40,7 @@
       <div class="">
         <span>
             <img th:if="${cliente.foto != null}" th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="rounded" width="300px" height="300px"  style="margin-left: 33%; margin-top: 0%; margin-block-end: 5%;" alt="">
-          <img th:if="${cliente.foto == null}" th:src="$/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
+            <img th:if="${cliente.foto == null}" src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
             style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;" alt="">
         </span>
       </div>
