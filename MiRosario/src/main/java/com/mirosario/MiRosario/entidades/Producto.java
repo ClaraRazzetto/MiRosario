@@ -16,8 +16,10 @@ public class Producto {
     private String nombre;
     private Double precio;
     private String descripcion;
+    
     @OneToOne
     private Foto foto;
+    
     private Boolean alta;
 
 

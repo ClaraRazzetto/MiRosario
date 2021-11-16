@@ -9,6 +9,7 @@ import com.mirosario.MiRosario.servicios.RubroServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,6 +70,7 @@ public class ComercioControlador {
         }
     }
     
+    @PreAuthorize("hasAnyRole('ROLE_COMERCIO')")
     @GetMapping("/editar")
     public String editar(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect){
        
@@ -94,6 +96,7 @@ public class ComercioControlador {
         return "editar-comercio.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_COMERCIO')")
     @PostMapping("/editar")
     public String editarPost( HttpSession sesion, @RequestParam String id, RedirectAttributes redirect, ModelMap modelo, MultipartFile archivo, @RequestParam String nombreUsuario, @RequestParam String password, @RequestParam String password2, @RequestParam String cuit, @RequestParam String nombreComercio, @RequestParam Rubro rubro, @RequestParam String direccion, @RequestParam Zona zona, @RequestParam String descripcion, @RequestParam String telefono, @RequestParam String mail) throws Exception {
                 
@@ -120,6 +123,7 @@ public class ComercioControlador {
         return "redirect:/perfil-comercio.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_COMERCIO')")
     @PostMapping("/baja")
     public String darDeBajaPost(HttpSession sesion, ModelMap modelo, @RequestParam String id, RedirectAttributes redirect) throws Exception {
         Comercio comercio = null;

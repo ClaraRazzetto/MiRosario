@@ -7,6 +7,7 @@ import com.mirosario.MiRosario.servicios.ComercioServicio;
 import com.mirosario.MiRosario.servicios.ProductoServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 @Controller
 @RequestMapping("/producto")
+@PreAuthorize("hasAnyRole('ROLE_COMERCIO')")
 public class ProductoControlador {
 
     @Autowired
@@ -33,17 +36,17 @@ public class ProductoControlador {
     }
 
     @PostMapping("/guardar")
-    public String agregarProductoPost(ModelMap modelo, HttpSession sesion, @RequestParam String idComercio, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) {
+    public String agregarProductoPost(ModelMap modelo, HttpSession sesion, @RequestParam MultipartFile archivo, @RequestParam String nombre, @RequestParam Double precio, @RequestParam String descripcion, RedirectAttributes redirect) {
         try {
 
             Comercio comercio = (Comercio) sesion.getAttribute("usuariosesion");
 
-            if (comercio == null || !comercio.getId().equals(idComercio)) {
+            if (comercio == null) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
                 return "redirect:/";
             }
 
-            comercioServicio.guardarProducto(idComercio, archivo, nombre, precio, descripcion);
+            comercioServicio.guardarProducto(comercio.getId(), archivo, nombre, precio, descripcion);
 
             sesion.setAttribute("usuariosesion", comercio);
 
@@ -72,9 +75,10 @@ public class ProductoControlador {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
                 return "redirect:/";
             }
-
+            
             modelo.put("producto", producto);
-
+            modelo.put("idComercio", comercio.getId());
+            
             return "editar-producto.html";
         } catch (ErrorServicio error) {
 

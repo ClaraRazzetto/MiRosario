@@ -28,9 +28,9 @@
     <nav th:replace="/fragmentos/navbar :: navbar"></nav>
 
     <!-- Mensajes de exito y error -->
-    
-  <div th:replace="/fragmentos/mensajes :: error"></div>
-  <div th:replace="/fragmentos/mensajes :: exito"></div> 
+
+    <div th:replace="/fragmentos/mensajes :: error"></div>
+    <div th:replace="/fragmentos/mensajes :: exito"></div>
 
     <!--<div th:object="${comercio}">-->
     <title>Perfil comercio</title>
@@ -56,46 +56,65 @@
                     <p th:text="${comercio.mail}"></p>
                 </div>
 
-                <!-- <div class="" style="margin-right:30%">
-                    <ul>
-                        <li th:text="${comercio.descripcion}"></li>
-                        <hr>
-                        <li th:text="'Zona ' + ${comercio.zona}"></li>
-                        <hr>
-                        <li th:text="${comercio.direccion}"></li>
-                        <hr>
-                        <li th:text="${comercio.telefono}"></li>
-                        <hr>
-                        <li th:text="${comercio.mail}"></li>
-                    </ul>
-                </div> -->
-
-                <form method="post" th:action="@{/cliente/comercio-favorito(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
+                <form method="post"
+                    th:action="@{/cliente/comercio-favorito(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
                     <button style="margin:20px" type="submit">Agregar a favoritos</button>
                 </form>
-           
+            </div>
+
+            <div>
+                <caption>Lista de Productos</caption>
+                <table class="table caption-top"> 
+                    <thead>
+                        <tr>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Precio</th>
+                            <th sec:authorize="hasRole('ROLE_COMERCIO')" scope="col">Editar</th>
+                            <th sec:authorize="hasRole('ROLE_COMERCIO')" scope="col">Eliminar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${producto.alta == true}" th:each="producto : ${comercio.producto}">
+                            <th></th>
+                            <td th:text="${producto.nombre}"></td>
+                            <td th:text="${producto.descripcion}"></td>
+                            <td th:text="${producto.Precio}"></td>
+                            <a class="btn" sec:authorize="hasRole('ROLE_COMERCIO')"
+                                th:href="@{/producto/editar(id=producto.id,idComercio=session.usuariosesion.id)}">
+                                Editar
+                            </a>
+                            <form method="POST"
+                                th:action="@{/producto/editar(id=producto.id,idComercio=session.usuariosesion.id)}">
+                                <a class="btn" sec:authorize="hasRole('ROLE_COMERCIO')">Eliminar</a>
+                            </form>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="card">
-                <div class="card" th:each="comentario : ${comentarios}">
+                <div class="card" th:if="${comentario.alta == true}" th:each="comentario : ${comentarios}">
                     <div class="card-header">
                         <h5 th:text="${comentario.cliente.nombreUsuario}"></h5>
                     </div>
                     <div class="card-body">
                         <p class="card-text" th:text="${comentario.descripcion}"></p>
-                        <a th:if="${comentario.cliente.id == session.usuariosesion.id}"
-                            th:href="@{/comentario/editar(id=${session.usuariosesion.id},idComentario=${comentario.id},idComercio='${comercio.id})}"
-                            class="btn btn-primary">Editar
-                        </a>
+                        <form method="POST" sec:authorize="hasRole('ROLE_CLIENTE')" th:if="${comentario.cliente.id == session.usuariosesion.id}"
+                            th:action="@{/comentario/baja(id=${session.usuariosesion.id},idComentario=${comentario.id},idComercio=${comercio.id})}">
+                            <button type="submit">Eliminar</button>
+                        </form>
                     </div>
-                    <div class=""></div>
                 </div>
-                <form method="POST" th:action="@{/comentario/guardar(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
-                    <textarea name="descripcion" rows="10" cols="40">Escribe tu comentario…</textarea>
+                <form method="POST" sec:authorize="hasRole('ROLE_CLIENTE')"
+                    th:action="@{/comentario/guardar(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
+                    <textarea name="descripcion" rows="10" cols="40" placeholder="Escribe un comentario..."></textarea>
                     <button type="submit">Agregar comentario</button>
                 </form>
             </div>
-            
+
         </div>
     </div>
 

@@ -8,10 +8,7 @@ import com.mirosario.MiRosario.enums.Rubro;
 import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.ComercioRepositorio;
-import com.mirosario.MiRosario.repositorios.FotoRepositorio;
-import com.mirosario.MiRosario.repositorios.ProductoRepositorio;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -58,6 +55,7 @@ public class ComercioServicio {
         comercio.setZona(zona);
         comercio.setDescripcion(descripcion);
         comercio.setMail(mail);
+        comercio.setProducto(null);
 
         Foto foto = fotoServicio.guardar(archivo);
         comercio.setFoto(foto);

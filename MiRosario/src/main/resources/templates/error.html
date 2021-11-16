@@ -14,7 +14,7 @@
       <p th:text="${mensaje == null ? 'Intenta nuevamete' : mensaje}">
         Quizas esta pagina se movio? Se elimino? Nunca existio en primer lugar?
       </p>
-      <p>Vuelve al <a href="@{/}">inicio</a> he intenta desde ahi.</p>
+      <p>Vuelve al <a th:href="@{/}">inicio</a> he intenta desde ahi.</p>
     </div>
   </div>
 </body>

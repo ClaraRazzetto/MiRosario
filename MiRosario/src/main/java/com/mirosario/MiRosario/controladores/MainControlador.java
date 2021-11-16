@@ -9,6 +9,7 @@ import com.mirosario.MiRosario.servicios.ComentarioServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,15 +30,9 @@ public class MainControlador {
     @GetMapping("")
     public String inicio(){
         return "inicio.html";
-    }
-//     @GetMapping("/perfil-comercio")
-//     public String perfilComercio(){
-//         return "perfil-comercio";
-//                
-//             
-//     }
-             
+    }             
     
+    @PreAuthorize("hasAnyRole('ROLE_COMERCIO','ROLE_CLIENTE')")
     @GetMapping("/perfil-comercio")
     public String perfilComercio(ModelMap modelo, @RequestParam(required = false) String id, HttpSession sesion, RedirectAttributes redirect){
         
@@ -54,10 +49,15 @@ public class MainControlador {
             
         }else{
             comercio = (Comercio) sesion.getAttribute("usuariosesion");
+            
+            if(comercio == null){
+                redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos necesarios para realizar esa accion");
+                return "redirect:/";
+            }
             modelo.addAttribute("comercio", comercio);
         }
         
-        //modelo.put("comentarios", comentarioServicio.listaComentariosPorComercio(comercio.getId()));
+        modelo.put("comentarios", comentarioServicio.listaComentariosPorComercio(comercio.getId()));
         
         return "perfil-comercio.html";
     }

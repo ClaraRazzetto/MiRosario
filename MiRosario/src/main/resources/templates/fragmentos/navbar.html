@@ -18,7 +18,7 @@
     </div>
 
     <!--botoones derechos navbar-->
-    <div sec:authorize="isAuthenticated()" class="btn-group" role="group">
+    <div sec:authorize="hasRole('ROLE_CLIENTE')" class="btn-group" role="group">
 
       <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div sec:authorize="isAuthenticated()" class="btn-group" role="group">
+  <div sec:authorize="hasRole('ROLE_COMERCIO')" class="btn-group" role="group">
 
     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
@@ -61,11 +61,12 @@
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
       <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
       <a class="dropdown-item" th:href="@{/comercio/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
+      <a class="dropdown-item" th:href="@{/producto/guardar}">Agregar Producto</a>
       <!--  confirmacion de eliminar cuenta --->
       <form method="post" th:action="@{/comercio/baja}+'?id='+${session.usuariosesion.id}" onsubmit="return confirmation()">
         <button class="dropdown-item" type="submit">Eliminar cuenta</button>
       </form>
-
+      
       <script type="text/javascript">
         function confirmation() {
           if (confirm("Esta seguro que desea eliminar la cuenta?")) {

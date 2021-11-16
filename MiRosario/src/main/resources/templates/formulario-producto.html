@@ -30,7 +30,7 @@
   <div th:replace="/fragmentos/mensajes :: exito"></div> 
 
     <div class="registration-form">
-        <form method="post" action="/producto/guardar" enctype="multipart/form-data">
+        <form method="post" th:href="@{/producto/guardar}+'?id='+${session.usuariosesion.id}" enctype="multipart/form-data">
             <div class="">
                 <span>
                     <img src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-                <label for="nombreProducto">Nonbre del producto</label>
+                <label for="nombreProducto">Nombre del producto</label>
                 <input th:value="${nombre}" name="nombre" type="text" class="form-control item" id="nombreProducto"
                     placeholder="Nombre Producto" required>
             </div>

@@ -8,11 +8,9 @@ import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
 import com.mirosario.MiRosario.servicios.RubroServicio;
 import com.mirosario.MiRosario.servicios.ZonaServicio;
-import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,10 +36,7 @@ public class ClienteControlador {
     @Autowired
     private RubroServicio rubroServicio;
 
-//      @GetMapping("/vista-cliente")
-//    public String vistaCliente(){
-//     return "vista-cliente.html";
-//}
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")
     @GetMapping("/vista-cliente")
     public String vistaCliente(ModelMap modelo, @RequestParam(required = false) String q, @RequestParam(required = false) Rubro rubro, @RequestParam(required = false) Zona zona, @RequestParam(required = false) String id, HttpSession sesion, RedirectAttributes redirect) {
 
@@ -115,6 +110,7 @@ public class ClienteControlador {
         }
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")
     @GetMapping("/editar")
     public String editar(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect) {
 
@@ -132,6 +128,7 @@ public class ClienteControlador {
         return "editar-cliente.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")
     @PostMapping("/editar")
     public String editarPost(ModelMap modelo, MultipartFile archivo, @RequestParam String id, @RequestParam String nombreUsuario, @RequestParam String password, @RequestParam String password2, @RequestParam String dni, @RequestParam String nombre, @RequestParam String apellido, @RequestParam String direccion, @RequestParam String telefono, @RequestParam String mail, @RequestParam Zona zona, RedirectAttributes redirect, HttpSession sesion) throws Exception {
         Cliente cliente = null;
@@ -152,6 +149,7 @@ public class ClienteControlador {
         return "redirect:/vista-cliente.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")
     @PostMapping("/baja")
     public String darDeBajaPost(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect) {
         Cliente cliente = null;
@@ -169,6 +167,7 @@ public class ClienteControlador {
         return "redirect:/logout";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")
     @GetMapping("/comercios-favoritos")
     public String listaComercios(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect) {
         Cliente cliente = null;
@@ -185,6 +184,7 @@ public class ClienteControlador {
         return "comercios-favoritos.html";
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")
     @PostMapping("/comercio-favorito")
     public String guardarComercio(ModelMap modelo, HttpSession sesion, @RequestParam String id, @RequestParam String idComercio, RedirectAttributes redirect) {
         Cliente cliente = null;

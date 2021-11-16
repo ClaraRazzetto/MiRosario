@@ -40,6 +40,12 @@ body {
         margin: 0;
         margin-bottom: 10px;
       }
+/*estilo labels formularios y editar*/
+label{
+  color: white;
+}
+/*fin estilo labels formularios y editar*/
+
       footer {
         background-color: black;
         position:relative;
