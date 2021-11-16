@@ -37,18 +37,10 @@
 
     <div style="margin:m-1">
 
-<<<<<<< HEAD
         <div class="header m-3 p-3" style="border-radius:20px">
-            <img class="avatar" src="/img/coto.png">
+            <img class="avatar"  th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" >
+            <img  calss="avatar" th:if="${comercio.foto == null}" th:src="$/img/logoMIR1.jpeg" >
             <h1 th:text="${comercio.nombreComercio}" style="color:black; padding:2rem; "></h1>
-=======
-        <div class="header">
-<!--            <img class="avatar" src="/img/coto.png">-->
-           <img th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" class="rounded" width="250px" height="250px"  style="margin-left: 43%; margin-right: 50%; margin-top: 0%; margin-block-end: 5%;" alt="">
-           <img th:if="${comercio.foto == null}" th:src="$/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
-            style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;" alt="">
-            <h1 th:text="${comercio.nombreComercio}" style="color:black"></h1>
->>>>>>> 490c57ed50ce533f52ec5d63a92410e23ba7fc9c
         </div>
 
         <div class=" m-3 mb-3" style="text-align:center; background-color:white; border-radius:20px">
@@ -71,17 +63,11 @@
                 </form>
             </div>
 
-<<<<<<< HEAD
-            <div  style=" color:white" th:if="${producto.alta == true}" th:each="producto : ${productos}">
+
+            <div  style=" color:white">
                 <caption class="" style=" color:black" >Lista de Productos</caption>
                 <a class="btn btn-primary " th:href="@{/producto/guardar}">Agregar Producto</a>
-                <table class="table caption-top p-3">
-=======
-            <div>
-                <caption>Lista de Productos</caption>
-                <a class="btn btn-primary" th:href="@{/producto/guardar}">Agregar Producto</a>
-                <table th:if="${producto.alta == true}" th:each="producto : ${productos}" class="table caption-top">
->>>>>>> 490c57ed50ce533f52ec5d63a92410e23ba7fc9c
+                <table th:if="${producto.alta == true}" th:each="producto : ${productos}"  class="table caption-top p-3">
                     <thead>
                         <tr>
                             <th scope="col">Foto</th>
