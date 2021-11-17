@@ -11,7 +11,9 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
     <div class="navbar-nav">
-      <a class="nav-item nav-link" th:href="@{/}">Inicio<span class="sr-only"></span></a>
+      <a class="nav-item nav-link" sec:authorize="!isAuthenticated()" th:href="@{/}">Inicio<span class="sr-only"></span></a>
+      <a class="nav-item nav-link" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/cliente/vista-cliente}">Inicio<span class="sr-only"></span></a>
+      <a class="nav-item nav-link" sec:authorize="hasRole('ROLE_COMERCIO')" th:href="@{/perfil-comercio}">Inicio<span class="sr-only"></span></a>
       <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
       <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
     </div>

@@ -49,8 +49,9 @@ public class MainControlador {
                     return "redirect:/";
                 }
                 modelo.addAttribute("comercio", comercio);
-                modelo.put("productos", comercioServicio.listaProducto(comercio.getId()));
-            }
+               
+            } 
+            modelo.put("productos", comercioServicio.listaProducto(comercio.getId()));
         } catch (ErrorServicio error) {
             redirect.addFlashAttribute("error", error);
             return "redirect:/vista-cliente";

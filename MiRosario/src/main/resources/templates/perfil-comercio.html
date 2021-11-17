@@ -39,13 +39,8 @@
 
         <div class="header m-3 p-3" style="border-radius:20px">
             <img class="avatar"  th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" >
-<<<<<<< HEAD
-            <img  class="avatar" th:if="${comercio.foto == null}" th:src="$/img/logoMIR1.jpeg" >
-            <h1 th:text="${comercio.nombreComercio}" style="color:black; padding:2rem; "></h1>
-=======
             <img  calss="avatar" th:if="${comercio.foto == null}" th:src="$/img/logoMIR1.jpeg" >
             <h1 th:text="${comercio.nombreComercio}" style="color:white; padding:2rem; "></h1>
->>>>>>> 15f6b56e6cafca0cd6441d8faacb1dcb056cc4c1
         </div>
 
         <div class=" m-3 mb-3" style="text-align:center; background-color:white; border-radius:20px">
@@ -68,7 +63,7 @@
 
                 <form sec:authorize="hasRole('ROLE_CLIENTE')" method="post"
                     th:action="@{/cliente/comercio-favorito(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
-                    <button style="margin:20px" type="submit">Agregar a favoritos</button>
+                    <button class="btn btn-dark" style="margin:20px" type="submit">Agregar a favoritos</button>
                 </form>
             </div>
 
@@ -78,7 +73,7 @@
                     <span style="margin-left:0%;">
                         <h2 style="color:black;">Lista de Productos</h2>
                     </span>
-                    <span style="margin-left:80%;"> <a sec:authorize="hasRole('ROLE_COMERCIO')" class="btn btn-primary"
+                    <span style="margin-left:80%;"> <a sec:authorize="hasRole('ROLE_COMERCIO')" class="btn btn-dark"
                             th:href="@{/producto/guardar}">Agregar Producto</a></span>
                 </div>
                 <table class="table caption-top p-3">
@@ -104,14 +99,14 @@
                             <td th:text="${producto.descripcion}"></td>
                             <td th:text="${producto.precio}"></td>
                             <td sec:authorize="hasRole('ROLE_COMERCIO')">
-                                <a class="btn btn-primary"
+                                <a class="btn btn-dark"
                                     th:href="@{/producto/editar(id=${producto.id},idComercio=${session.usuariosesion.id})}">Editar</a>
                             </td>
 
                             <td sec:authorize="hasRole('ROLE_COMERCIO')">
                                 <form method="POST"
                                     th:action="@{/producto/baja(id=${producto.id},idComercio=${session.usuariosesion.id})}">
-                                    <button type="submit" class="btn btn-primary">Eliminar</button>
+                                    <button type="submit" class="btn btn-dark">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
@@ -132,7 +127,7 @@
                         <form method="POST" sec:authorize="hasRole('ROLE_CLIENTE')"
                             th:if="${comentario.cliente.id == session.usuariosesion.id}"
                             th:action="@{/comentario/baja(id=${session.usuariosesion.id},idComentario=${comentario.id},idComercio=${comercio.id})}">
-                            <button type="submit" class="btn btn-primary">Eliminar</button>
+                            <button type="submit" class="btn btn-dark">Eliminar</button>
                         </form>
                     </div>
                 </div>
@@ -140,7 +135,7 @@
                 <form class="m-3" method="POST" sec:authorize="hasRole('ROLE_CLIENTE')"
                     th:action="@{/comentario/guardar(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
                     <input type="text" name="descripcion" rows="10" cols="40" placeholder="Escribe un comentario...">
-                    <button type="submit" class="btn btn-primary">Agregar comentario</button>
+                    <button type="submit" class="btn btn-dark">Agregar comentario</button>
                 </form>
 
             </div>
