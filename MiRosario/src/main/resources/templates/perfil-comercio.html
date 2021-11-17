@@ -39,7 +39,7 @@
 
         <div class="header m-3 p-3" style="border-radius:20px">
             <img class="avatar"  th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" >
-            <img  calss="avatar" th:if="${comercio.foto == null}" th:src="$/img/logoMIR1.jpeg" >
+            <img  class="avatar" th:if="${comercio.foto == null}" th:src="$/img/logoMIR1.jpeg" >
             <h1 th:text="${comercio.nombreComercio}" style="color:black; padding:2rem; "></h1>
         </div>
 

@@ -43,14 +43,15 @@ body {
            
         }
         .avatar{
+            
             width: 200px;
             height: 200px;
-            border-radius: 50%;
+            border-radius: 10%;
             border-style:solid;
-            border-color:black;
+            border-color:darkblue;
         }
         .user-name{
-            front-size: 18px;
+            font-size: 18px;
             margin-top: 14px;
             color: #fff;
         }
@@ -81,7 +82,7 @@ body {
         position: relative;
       }
       body {
-        margin: 0;
+        margin: 0%;
         margin-bottom: 10px;
       }
       footer {
