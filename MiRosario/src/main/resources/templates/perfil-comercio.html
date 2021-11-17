@@ -40,14 +40,16 @@
         <div class="header m-3 p-3" style="border-radius:20px">
             <img class="avatar"  th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" >
             <img  calss="avatar" th:if="${comercio.foto == null}" th:src="$/img/logoMIR1.jpeg" >
-            <h1 th:text="${comercio.nombreComercio}" style="color:black; padding:2rem; "></h1>
+            <h1 th:text="${comercio.nombreComercio}" style="color:white; padding:2rem; "></h1>
         </div>
 
         <div class=" m-3 mb-3" style="text-align:center; background-color:white; border-radius:20px">
             <div class="socials " style="background-position:center; background-color:white; color:black; border-radius:20px" >
                 <div class="socials" style=" background-color:white" >
-                    <h5 th:text="'Descripcion: '+ ${comercio.descripcion}"></h5>
+                 
+                    <h5 th:text="${comercio.descripcion}"></h5>
                     <hr>
+                       <div class="" style="text-align:left">
                     <h5 th:text="'Zona: ' + ${comercio.zona}"></h5>
                     <hr>
                     <h5 th:text="'Direccion: '+ ${comercio.direccion}"></h5>
@@ -55,6 +57,8 @@
                     <h5 th:text=" 'Telefono: '+ ${comercio.telefono}"></h5>
                     <hr>
                     <h5 th:text="'Mail: '+ ${comercio.mail}"></h5>
+                    <hr>
+                    </div>
                 </div>
 
                 <form sec:authorize="hasRole('ROLE_CLIENTE')" method="post"
@@ -64,10 +68,15 @@
             </div>
 
 
-            <div  style=" color:white">
-                <caption class="" style=" color:black" >Lista de Productos</caption>
-                <a class="btn btn-primary " th:href="@{/producto/guardar}">Agregar Producto</a>
-                <table th:if="${producto.alta == true}" th:each="producto : ${productos}"  class="table caption-top p-3">
+          <div style="color:black">
+                <div style="margin-bottom:1em;">
+                    <span style="margin-left:0%;">
+                        <h2 style="color:black;">Lista de Productos</h2>
+                    </span>
+                    <span style="margin-left:80%;"> <a sec:authorize="hasRole('ROLE_COMERCIO')" class="btn btn-primary"
+                            th:href="@{/producto/guardar}">Agregar Producto</a></span>
+                </div>
+                <table class="table caption-top p-3">
                     <thead>
                         <tr>
                             <th scope="col">Foto</th>
@@ -77,18 +86,23 @@
                             <th sec:authorize="hasRole('ROLE_COMERCIO')" scope="col">Editar</th>
                             <th sec:authorize="hasRole('ROLE_COMERCIO')" scope="col">Eliminar</th>
 
-                        </tr>
+
+                   </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td th:if="${producto.foto != null}"><img th:src="${'/foto/producto?id=' + producto.id}" width="100px" height="100px"></td>
+                        <tr th:if="${producto.alta == true}" th:each="producto : ${productos}">
+                            <div>
+                                <td th:if="${producto.foto != null}"><img th:src="${'/foto/producto?id=' + producto.id}"
+                                        style="border-radius:50%" width="100px" height="100px"></td>
+                            </div>
                             <td th:text="${producto.nombre}"></td>
                             <td th:text="${producto.descripcion}"></td>
                             <td th:text="${producto.precio}"></td>
-                            <td>
+                            <td sec:authorize="hasRole('ROLE_COMERCIO')">
                                 <a class="btn btn-primary"
                                     th:href="@{/producto/editar(id=${producto.id},idComercio=${session.usuariosesion.id})}">Editar</a>
                             </td>
+
                             <td sec:authorize="hasRole('ROLE_COMERCIO')">
                                 <form method="POST"
                                     th:action="@{/producto/baja(id=${producto.id},idComercio=${session.usuariosesion.id})}">
@@ -99,6 +113,8 @@
                     </tbody>
                 </table>
             </div>
+
+
 
             <div class="card mb-2">
                 
