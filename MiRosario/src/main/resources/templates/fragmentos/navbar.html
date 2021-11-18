@@ -19,7 +19,7 @@
     </div>
 
     <!--botoones derechos navbar-->
-    <div sec:authorize="hasRole('ROLE_CLIENTE')" class="btn-group" role="group">
+    <div sec:authorize="hasRole('ROLE_CLIENTE')" class="btn-group" role="group" style="position: absolute; right: 1%;">
 
       <button style="padding: 0px; border: 10px;" id="btnGroupDrop1" type="button" class="btn btn-secondary bg-dark dropdown-toggle" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
@@ -48,12 +48,11 @@
 
         <!-- fin  confirmacion de eliminar cuenta --->
       </div>
-      <buttom class="dropdown-item" th:href="@{/cliente/vista-cliente(id=${session.usuariosesion.id})}">Comercios
-        Favoritos</buttom>
+      <buttom style="align-self: center;" class="dropdown-item" th:href="@{/cliente/vista-cliente(id=${session.usuariosesion.id})}">Comercios Favoritos</buttom>
     </div>
   </div>
 
-  <div sec:authorize="hasRole('ROLE_COMERCIO')" class="btn-group" role="group">
+  <div sec:authorize="hasRole('ROLE_COMERCIO')" class="btn-group" role="group" style="position: absolute; right: 1%;">
 
     <button style=" padding: 0px; border: 10px; " id="btnGroupDrop1" type="button" class="btn  bg-dark dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
