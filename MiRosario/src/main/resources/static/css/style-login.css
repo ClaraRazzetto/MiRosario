@@ -175,6 +175,7 @@ margin: auto;
 padding: 50px 70px;
 border-radius: 20px;
 box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+background-color:darkslategray;
 }
 
 .registration-form .form-icon{
