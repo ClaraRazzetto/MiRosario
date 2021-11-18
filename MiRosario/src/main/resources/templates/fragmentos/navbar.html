@@ -7,7 +7,7 @@
     <img src="/img/logoMIR1.jpeg" width="60px" height="50px" class="d-inline-block align-top rounded">
   </a>
   <a class="navbar-brand" style="margin-left:10px" sec:authorize="hasRole('ROLE_COMERCIO')" th:href="@{/perfil-comercio}">
-    <img src="/img/logoMIR1.jpeg" width="60px" height="50px" class="d-inline-block align-top rounded">
+    <img src="/img/logoMIR1.jpeg" width="60px" height="50px" class="d-inline-block align-top rounded">                   
   </a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -34,8 +34,10 @@
 
     <button id="btnGroupDrop1" type="button" class="btn btn-secondary bg-dark dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-      <!--<span th:text="${session.usuariosesion.nombreUsuario}"></span>-->
-      <img th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="avatarNAV">
+      
+      <img th:if="${session.usuariosesion.foto != null}" th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="avatarNAV">
+      <img th:if="${session.usuariosesion.foto == null}" src="/img/sinusuario.jpg" class="avatarNAV">
+
     </button>
 
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -70,7 +72,8 @@
     <button id="btnGroupDrop1" type="button" class="btn  bg-dark dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       <!--<span th:text="${session.usuariosesion.nombreUsuario}"></span>-->
-      <img th:src="${'/foto/comercio?id=' + session.usuariosesion.id}" class="avatarNAV">
+      <img th:if="${session.usuariosesion.foto != null}" th:src="${'/foto/comercio?id=' + session.usuariosesion.id}" class="avatarNAV">
+      <img th:if="${session.usuariosesion.foto.mime == null}" src="/img/sinusuario.jpg" class="avatarNAV">
     </button>
 
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">

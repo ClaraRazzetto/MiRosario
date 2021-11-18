@@ -38,9 +38,10 @@
     <div style="margin:m-1">
 
         <div class="header m-3 p-3" style="border-radius:20px">
-            <img class="avatar" th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}">
-            <img calss="avatar" th:if="${comercio.foto == null}" src="/img/logoMIR1.jpeg">
-            <h1 th:text="${comercio.nombreComercio}" style="color:white; padding:2rem; text-transform: uppercase; "></h1>
+            <img class="avatar" th:if="${comercio.foto.mime != application/octet-stream}" th:src="${'/foto/comercio?id=' + comercio.id}">
+            <img calss="avatar" th:if="${comercio.foto.mime == application/octet-stream}" src="/img/sinusuario.jpg">
+            <h1 th:text="${comercio.nombreComercio}" style="color:white; padding:2rem; text-transform: uppercase; ">
+            </h1>
         </div>
 
         <div class="contenido m-3 mb-3">
@@ -68,12 +69,13 @@
             </div>
 
 
-            <div style="color:black; margin-top: 3rem;" >
+            <div style="color:black; margin-top: 3rem;">
                 <div class="d-flex justify-content-between" style="margin-bottom:1em;">
-                
-                        <h5 style="color:black;">Lista de Productos</h5>
-             
-                        <a sec:authorize="hasRole('ROLE_COMERCIO')" class="btn btn-dark"th:href="@{/producto/guardar}">Agregar Producto</a>
+
+                    <h5 style="color:black;">Lista de Productos</h5>
+
+                    <a sec:authorize="hasRole('ROLE_COMERCIO')" class="btn btn-dark"
+                        th:href="@{/producto/guardar}">Agregar Producto</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table">
@@ -90,9 +92,10 @@
                         <tbody>
                             <tr th:if="${producto.alta == true}" th:each="producto : ${productos}">
                                 <div>
-                                    <td th:if="${producto.foto != null}"><img
+                                    <td th:if="${producto.foto.mime != application/octet-stream}"><img
                                             th:src="${'/foto/producto?id=' + producto.id}" style="border-radius:50%"
-                                            width="100px" height="100px"></td>
+                                            width="100px" height="100px">
+                                    </td>
                                 </div>
                                 <td th:text="${producto.nombre}"></td>
                                 <td th:text="${producto.descripcion}"></td>
@@ -120,8 +123,12 @@
                 <h5 class="align-self-center" style="color:black;">Comentarios</h5>
                 <div class="card" th:if="${comentario.alta == true}" th:each="comentario : ${comentarios}">
                     <div class="card-header d-flex justify-content-left align-items-center">
-                        <img th:src="${'/foto/cliente?id='+ comentario.cliente.id}" class="avatarNAV">
-                        <h5 style="padding-left: 0.5rem; text-transform: capitalize;" th:text="${comentario.cliente.nombreUsuario}"></h5>
+
+                            <img th:if="${comentario.cliente.foto.mime != 'application/octet-stream'}" th:src="${'/foto/cliente?id='+ comentario.cliente.id}" class="avatarNAV">
+                            <img th:if="${comentario.cliente.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatarNAV">
+
+                        <h5 style="padding-left: 0.5rem; text-transform: capitalize;"
+                            th:text="${comentario.cliente.nombreUsuario}"></h5>
                     </div>
                     <div class="card-body">
                         <p class="card-text" style="text-align: start;" th:text="${comentario.descripcion}"></p>
@@ -134,9 +141,12 @@
 
                 </div>
 
-                <form class="mt-3 d-flex justify-content-between aling-self-middle " method="POST" sec:authorize="hasRole('ROLE_CLIENTE')"
+                <form class="mt-3 d-flex justify-content-between aling-self-middle " method="POST"
+                    sec:authorize="hasRole('ROLE_CLIENTE')"
                     th:action="@{/comentario/guardar(id=${session.usuariosesion.id},idComercio=${comercio.id})}">
-                    <input class="flex-fill pe-2" style="margin-right: 1%; border-radius: 0.25rem; border-color: #343a40;" type="text" name="descripcion" rows="10" cols="40" placeholder="Escribe un comentario...">
+                    <input class="flex-fill pe-2"
+                        style="margin-right: 1%; border-radius: 0.25rem; border-color: #343a40;" type="text"
+                        name="descripcion" rows="10" cols="40" placeholder="Escribe un comentario...">
                     <button type="submit" class="btn btn-dark">Agregar comentario</button>
                 </form>
 
@@ -157,4 +167,4 @@
 
 </body>
 
-</html> 
+</html>

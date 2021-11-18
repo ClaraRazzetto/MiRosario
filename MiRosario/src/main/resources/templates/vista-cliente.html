@@ -81,7 +81,8 @@
     <div class="row g-0">
       <div class="col-5 col-sm-2">
 <!--        <img src="/img/coto.png" class="img-fluid w-80 m-2" alt="card-horizontal-image" style="border-radius: 100px;">-->
-            <img th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" class="avatar m-1" alt="card-horizontal-image" style="width: 150px; height: 150px;">
+            <img th:if="${comercio.foto.mime != application/octet-stream}" th:src="${'/foto/comercio?id=' + comercio.id}" class="avatar m-1" alt="card-horizontal-image" style="width: 150px; height: 150px;">
+            <img th:if="${comercio.foto.mime != application/octet-stream}" src="/img/sinusuario.jpg" class="avatar m-1" alt="card-horizontal-image" style="width: 150px; height: 150px;">
       </div>
       <div class="col-7 col-sm-10">
         <div class="card-body">
