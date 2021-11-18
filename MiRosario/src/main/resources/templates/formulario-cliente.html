@@ -97,8 +97,7 @@
 
       <div class="form-group">
         <label for="telefono">Numero de telefono</label>
-        <input th:value="${telefono}" name="telefono" type="text" class="form-control item" id="telefono"
-          placeholder="Telefono" required>
+        <input th:value="${telefono}" name="telefono" type="text" class="form-control item" id="telefono" minlength="7" maxlength="15" placeholder="Telefono" required>
       </div>
 
       <div class="form-group">
