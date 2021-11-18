@@ -33,8 +33,7 @@
         <form method="post" th:href="@{/producto/guardar}+'?id='+${session.usuariosesion.id}" enctype="multipart/form-data">
             <div class="">
                 <span>
-                    <img src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
-                        style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;" alt="">
+                    <img src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px" style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;">
                 </span>
             </div>
 
@@ -46,7 +45,7 @@
 
             <div class="form-group">
                 <label for="foto"></label>
-                <input  type="file" class="form-control item" id="foto" name="archivo" th:value="${archivo}" >
+                <input type="file" class="form-control item" id="foto" name="archivo" th:value="${archivo}" >
             </div>
 
             <div class="form-group">
