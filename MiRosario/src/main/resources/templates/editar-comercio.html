@@ -102,7 +102,7 @@
       <div class="form-group">
         <label for="telefonoComercio"> Numero de telefono</label>
         <input th:value="${comercio.telefono}" name="telefono" type="text" class="form-control item"
-          id="telefonoComercio" placeholder="Telefono" required>
+          id="telefonoComercio" placeholder="Telefono" minlength="7" maxlength="15" required>
       </div>
 
       <div class="form-group">

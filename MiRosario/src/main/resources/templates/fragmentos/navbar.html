@@ -3,7 +3,7 @@
   <a class="navbar-brand" style="margin-left:10px" sec:authorize="!isAuthenticated()" th:href="@{/}">
     <img src="/img/logoMIR1.jpeg" width="60px" height="50px" class="d-inline-block align-top rounded">
   </a>
-  <a class="navbar-brand" style="margin-left:10px" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/cliene/vista-cliente}">
+  <a class="navbar-brand" style="margin-left:10px" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/cliente/vista-cliente}">
     <img src="/img/logoMIR1.jpeg" width="60px" height="50px" class="d-inline-block align-top rounded">
   </a>
   <a class="navbar-brand" style="margin-left:10px" sec:authorize="hasRole('ROLE_COMERCIO')" th:href="@{/perfil-comercio}">
