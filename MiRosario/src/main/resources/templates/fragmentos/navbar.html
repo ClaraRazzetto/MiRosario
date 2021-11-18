@@ -1,5 +1,5 @@
 <nav th:fragment="navbar" style="margin: 0%;" class="navbar navbar-expand-lg navbar-dark bg-dark row">
-  <a class="navbar-brand; margin-left:10px" th:href="@{/}">
+  <a class="navbar-brand" style="margin-left:10px" th:href="@{/}">
     <img src="/img/logoMIR1.jpeg" width="60px" height="50px" class="d-inline-block align-top rounded">
   </a>
 
@@ -11,64 +11,38 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 
     <div class="navbar-nav">
-      <a class="nav-item nav-link" sec:authorize="!isAuthenticated()" th:href="@{/}">Inicio<span class="sr-only"></span></a>
-      <a class="nav-item nav-link" sec:authorize="hasRole('ROLE_CLIENTE')" th:href="@{/cliente/vista-cliente}">Inicio<span class="sr-only"></span></a>
-      <a class="nav-item nav-link" sec:authorize="hasRole('ROLE_COMERCIO')" th:href="@{/perfil-comercio}">Inicio<span class="sr-only"></span></a>
+      <a class="nav-item nav-link" sec:authorize="!isAuthenticated()" th:href="@{/}">Inicio<span
+          class="sr-only"></span></a>
+      <a class="nav-item nav-link" sec:authorize="hasRole('ROLE_CLIENTE')"
+        th:href="@{/cliente/vista-cliente}">Inicio<span class="sr-only"></span></a>
+      <a class="nav-item nav-link" sec:authorize="hasRole('ROLE_COMERCIO')" th:href="@{/perfil-comercio}">Inicio<span
+          class="sr-only"></span></a>
       <a class="nav-item nav-link" href="#ancla-1">Nosotros</a>
       <a class="nav-item nav-link" href="#ancla-3">Contactos</a>
     </div>
 
-    <!--botoones derechos navbar-->
-    <div sec:authorize="hasRole('ROLE_CLIENTE')" class="btn-group" role="group" style="position: absolute; right: 1%;">
-
-      <button style="padding: 0px; border: 10px;" id="btnGroupDrop1" type="button" class="btn btn-secondary bg-dark dropdown-toggle" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        <!--<span th:text="${session.usuariosesion.nombreUsuario}"></span>-->
-        <img th:src="${'/foto/cliente?id=' + session.usuariosesion.id}"  class="avatar" style=" border-radius: 50%; position: relative; width: 70px; height: 70px;" alt="">
-      </button>
-
-      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
-        <a class="dropdown-item" th:href="@{/cliente/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
-        <!--  confirmacion de eliminar cuenta --->
-        <form method="post" th:action="@{/cliente/baja}+'?id='+${session.usuariosesion.id}" onsubmit="return confirmation()">
-          <button class="dropdown-item" type="submit">Eliminar cuenta</button>
-        </form>
-
-        <script type="text/javascript">
-          function confirmation() {
-            if (confirm("Esta seguro que desea eliminar la cuenta?")) {
-              return true;
-            }
-            else {
-              return false;
-            }
-          }
-        </script>
-
-        <!-- fin  confirmacion de eliminar cuenta --->
-      </div>
-      <buttom style="align-self: center;" class="dropdown-item" th:href="@{/cliente/vista-cliente(id=${session.usuariosesion.id})}">Comercios Favoritos</buttom>
-    </div>
   </div>
 
-  <div sec:authorize="hasRole('ROLE_COMERCIO')" class="btn-group" role="group" style="position: absolute; right: 1%;">
+  <!--botoones derechos navbar-->
+  <div sec:authorize="hasRole('ROLE_CLIENTE')" class="btn-group" role="group">
 
-    <button style=" padding: 0px; border: 10px; " id="btnGroupDrop1" type="button" class="btn  bg-dark dropdown-toggle" data-toggle="dropdown"
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary bg-dark dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       <!--<span th:text="${session.usuariosesion.nombreUsuario}"></span>-->
-      <img th:src="${'/foto/comercio?id=' + session.usuariosesion.id}"  class="avatar" style=" border-radius: 50%; position: relative; width: 70px; height: 70px;" alt="">
+      <img th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="avatarNAV">
     </button>
 
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
       <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
-      <a class="dropdown-item" th:href="@{/comercio/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
-      <a class="dropdown-item" th:href="@{/producto/guardar}">Agregar Producto</a>
+      <a class="dropdown-item" th:href="@{/cliente/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
       <!--  confirmacion de eliminar cuenta --->
-      <form method="post" th:action="@{/comercio/baja}+'?id='+${session.usuariosesion.id}" onsubmit="return confirmation()">
+      <form method="post" th:action="@{/cliente/baja}+'?id='+${session.usuariosesion.id}"
+        onsubmit="return confirmation()">
         <button class="dropdown-item" type="submit">Eliminar cuenta</button>
       </form>
-      
+      <a style="align-self: center;" class="dropdown-item"
+        th:href="@{/cliente/vista-cliente(id=${session.usuariosesion.id})}">Comercios Favoritos</a>
+
       <script type="text/javascript">
         function confirmation() {
           if (confirm("Esta seguro que desea eliminar la cuenta?")) {
@@ -83,7 +57,38 @@
       <!-- fin  confirmacion de eliminar cuenta --->
     </div>
   </div>
-  </div>
 
+
+  <div sec:authorize="hasRole('ROLE_COMERCIO')" class="btn-group" role="group">
+
+    <button id="btnGroupDrop1" type="button" class="btn  bg-dark dropdown-toggle" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      <!--<span th:text="${session.usuariosesion.nombreUsuario}"></span>-->
+      <img th:src="${'/foto/comercio?id=' + session.usuariosesion.id}" class="avatarNAV">
+    </button>
+
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" th:href="@{/logout}">Cerrar sesion</a>
+      <a class="dropdown-item" th:href="@{/comercio/editar}+'?id='+${session.usuariosesion.id}">Editar perfil</a>
+      <a class="dropdown-item" th:href="@{/producto/guardar}">Agregar Producto</a>
+      <!--  confirmacion de eliminar cuenta --->
+      <form method="post" th:action="@{/comercio/baja}+'?id='+${session.usuariosesion.id}"
+        onsubmit="return confirmation()">
+        <button class="dropdown-item" type="submit">Eliminar cuenta</button>
+      </form>
+
+      <script type="text/javascript">
+        function confirmation() {
+          if (confirm("Esta seguro que desea eliminar la cuenta?")) {
+            return true;
+          }
+          else {
+            return false;
+          }
+        }
+      </script>
+
+      <!-- fin  confirmacion de eliminar cuenta --->
+    </div>
   </div>
 </nav>

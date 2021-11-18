@@ -35,7 +35,7 @@
 
 
   <!-- buscador -->
-  <div class="card" style="background-color: cadetblue;" th:if="${busqueda == null}">
+  <div class="card" style="background-color : white;" th:if="${busqueda == null}">
     <form method="GET" class="flex-container m-3">
 
       <div class="col-12 m-1">
@@ -73,15 +73,19 @@
     </form>
   </div>
 
-  <div class="card" th:each="comercio : ${comercios}" style="background-color: cadetblue;">
+  <!-- fin buscador -->
+
+  <!-- lista de comercios -->
+
+  <div class="card" th:each="comercio : ${comercios}" style="background-color:white" >
     <div class="row g-0">
       <div class="col-5 col-sm-2">
 <!--        <img src="/img/coto.png" class="img-fluid w-80 m-2" alt="card-horizontal-image" style="border-radius: 100px;">-->
-            <img th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" class="img-fluid w-80 m-2" alt="card-horizontal-image" style="border-radius: 100px;">
+            <img th:if="${comercio.foto != null}" th:src="${'/foto/comercio?id=' + comercio.id}" class="avatar m-1" alt="card-horizontal-image" style="width: 150px; height: 150px;">
       </div>
       <div class="col-7 col-sm-10">
         <div class="card-body">
-          <a th:href="@{/perfil-comercio}+'?id='+${comercio.id}">
+          <a th:href="@{/perfil-comercio}+'?id='+${comercio.id}" style="color: black; text-transform: uppercase;">
             <h5 class="card-title" th:text="${comercio.nombreComercio}"></h5>
           </a>
           <p class="card-text" th:text="${comercio.descripcion}"></p>
@@ -91,11 +95,6 @@
       </div>
     </div>
   </div>
-
-  <!-- fin buscador -->
-
-  <!-- lista de comercios -->
-
 
   <!--Container quienes somos-->
   <div th:replace="/fragmentos/quienesSomos :: quienesSomos"></div>
