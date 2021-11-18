@@ -55,10 +55,9 @@ body {
   
   width: 200px;
   height: 200px;
-  border-radius: 10%;
-  border-style:solid;
-  border-color:darkblue;
+  border-radius: 50%;
 }
+
 .user-name{
   font-size: 18px;
   margin-top: 14px;
