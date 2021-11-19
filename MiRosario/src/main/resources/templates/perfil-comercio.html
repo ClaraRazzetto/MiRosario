@@ -38,8 +38,8 @@
     <div style="margin:m-1">
 
         <div class="header m-3 p-3" style="border-radius:20px">
-            <img class="avatar" th:if="${comercio.foto.mime != application/octet-stream}" th:src="${'/foto/comercio?id=' + comercio.id}">
-            <img calss="avatar" th:if="${comercio.foto.mime == application/octet-stream}" src="/img/sinusuario.jpg">
+            <img th:if="${comercio.foto.mime != 'application/octet-stream'}" th:src="${'/foto/comercio?id=' + comercio.id}" class="avatar">
+            <img th:if="${comercio.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatar">
             <h1 th:text="${comercio.nombreComercio}" style="color:white; padding:2rem; text-transform: uppercase; ">
             </h1>
         </div>
@@ -92,10 +92,12 @@
                         <tbody>
                             <tr th:if="${producto.alta == true}" th:each="producto : ${productos}">
                                 <div>
-                                    <td th:if="${producto.foto.mime != application/octet-stream}"><img
+                                    <td th:if="${producto.foto.mime != 'application/octet-stream'}"><img
                                             th:src="${'/foto/producto?id=' + producto.id}" style="border-radius:50%"
                                             width="100px" height="100px">
                                     </td>
+                                
+
                                 </div>
                                 <td th:text="${producto.nombre}"></td>
                                 <td th:text="${producto.descripcion}"></td>

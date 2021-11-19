@@ -39,9 +39,9 @@
     <form method="post" action="/cliente/editar" enctype="multipart/form-data">
       <div class="">
         <span>
-            <img th:if="${cliente.foto.mime != application/octet-stream}" th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="avatar"x  style="margin-left: 38%; margin-top: 0%; margin-block-end: 5%;" alt="">
-            <img th:if="${cliente.foto.mime == application/octet-stream}" src="/img/sinusuario.jpg" class="rounded" width="100px" height="100px"
-            style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;" alt="">
+            <img th:if="${cliente.foto.mime != 'application/octet-stream'}" th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="avatar"x  style="margin-left: 38%; margin-top: 0%; margin-block-end: 5%;" alt="">
+            <img th:if="${cliente.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatar" width="100px" height="100px"
+            style="margin-left: 38%; margin-top: 0%; margin-block-end: 5%;" alt="">
         </span>
       </div>
 
@@ -90,7 +90,7 @@
       </div>
 
       <div class="form-group">
-        <label for="confirmacionContraseña">Confrimar contraseña</label>
+        <label for="confirmacionContraseña">Confirmar contraseña</label>
         <input name="password2" type="password" class="form-control item"
           id="confirmacionContraseña" placeholder="Confirmar contraseña" minlength="5" maxlength="10" required>
       </div>

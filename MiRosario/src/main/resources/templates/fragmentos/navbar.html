@@ -34,16 +34,10 @@
 
     <button id="btnGroupDrop1" type="button" class="btn btn-secondary bg-dark dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
-<<<<<<< HEAD
       <!--<span th:text="${session.usuariosesion.nombreUsuario}"></span>-->
-      <img th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="avatarNAV">
+      <img th:if="${session.usuariosesion.foto.mime != 'application/octet-stream'}" th:src="${'/foto/cliente?id=' + cliente.id}" class="avatarNAV">
+      <img th:if="${session.usuariosesion.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatarNAV">
       
-=======
-      
-      <img th:if="${session.usuariosesion.foto != null}" th:src="${'/foto/cliente?id=' + session.usuariosesion.id}" class="avatarNAV">
-      <img th:if="${session.usuariosesion.foto == null}" src="/img/sinusuario.jpg" class="avatarNAV">
-
->>>>>>> ea467f1e756b51c3e6ac95c46b3adc368fe9b2b5
     </button>
 
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
@@ -78,8 +72,8 @@
     <button id="btnGroupDrop1" type="button" class="btn  bg-dark dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       <!--<span th:text="${session.usuariosesion.nombreUsuario}"></span>-->
-      <img th:if="${session.usuariosesion.foto != null}" th:src="${'/foto/comercio?id=' + session.usuariosesion.id}" class="avatarNAV">
-      <img th:if="${session.usuariosesion.foto.mime == null}" src="/img/sinusuario.jpg" class="avatarNAV">
+      <img th:if="${session.usuariosesion.foto.mime != 'application/octet-stream'}" th:src="${'/foto/comercio?id=' + session.usuariosesion.id}" class="avatarNAV">
+      <img th:if="${session.usuariosesion.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatarNAV">
     </button>
 
     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
