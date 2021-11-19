@@ -144,9 +144,9 @@ public class ClienteControlador {
         } catch (ErrorServicio error) {
             modelo.put("error", error.getMessage());
             modelo.put("cliente", cliente);
-            return "editar-cliente.html";
+            return "editar-cliente";
         }
-        return "redirect:/vista-cliente.html";
+        return "redirect:/cliente/vista-cliente";
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")

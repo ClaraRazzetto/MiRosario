@@ -53,6 +53,7 @@ public class ComercioServicio {
         comercio.setRubro(rubro);
         comercio.setDireccion(direccion);
         comercio.setZona(zona);
+        comercio.setTelefono(telefono);
         comercio.setDescripcion(descripcion);
         comercio.setMail(mail);
 

@@ -96,6 +96,10 @@
                                             th:src="${'/foto/producto?id=' + producto.id}" style="border-radius:50%"
                                             width="100px" height="100px">
                                     </td>
+                                    <td th:if="${producto.foto.mime == 'application/octet-stream'}"><img
+                                        src="/img/sinusuario.jpg" style="border-radius:50%"
+                                        width="100px" height="100px">
+                                </td>
                                 
 
                                 </div>
@@ -113,6 +117,9 @@
                                         <button type="submit" class="btn btn-dark">Eliminar</button>
                                     </form>
                                 </td>
+                            </tr>
+                            <tr th:if="${producto.alta == false || productos.isEmpty()}" th:each="producto : ${productos}"> 
+                               <td>No hay productos para mostrar.</td>    
                             </tr>
                         </tbody>
                     </table>

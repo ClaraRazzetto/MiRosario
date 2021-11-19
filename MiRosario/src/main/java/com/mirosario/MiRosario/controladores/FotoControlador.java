@@ -36,9 +36,11 @@ public class FotoControlador {
 
     @GetMapping("/cliente")
     public ResponseEntity<byte[]> fotoCliente(@RequestParam String id, HttpSession sesion) {
+          Cliente cliente = null;
         try {
-//            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");;
-                     Cliente cliente = clienteServicio.findById(id);
+          
+//            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");
+                 cliente = clienteServicio.findById(id);
             if (cliente.getFoto() == null) {
                 throw new ErrorServicio("El usuario no posee una foto asignada");
             }
@@ -46,8 +48,11 @@ public class FotoControlador {
             byte[] foto = cliente.getFoto().getContenido();
 
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_JPEG);
-
+            headers.setContentType(MediaType.IMAGE_JPEG);          
+             if (sesion.getAttribute("usuariosesion") instanceof Cliente) {
+                 cliente = (Cliente) sesion.getAttribute("usuariosesion");
+                   sesion.setAttribute("usuarioSesion", cliente);
+            }
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
 
         } catch (ErrorServicio ex) {
@@ -68,7 +73,10 @@ public class FotoControlador {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
-
+             if (sesion.getAttribute("usuariosesion") instanceof Comercio) {
+                 comercio = (Comercio) sesion.getAttribute("usuariosesion");
+                   sesion.setAttribute("usuarioSesion", comercio);
+            }
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
 
         } catch (ErrorServicio ex) {
