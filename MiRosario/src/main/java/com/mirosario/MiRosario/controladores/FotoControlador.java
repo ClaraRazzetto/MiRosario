@@ -40,7 +40,7 @@ public class FotoControlador {
         try {
           
 //            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");
-                 cliente = clienteServicio.findById(id);
+            cliente = clienteServicio.findById(id);
             if (cliente.getFoto() == null) {
                 throw new ErrorServicio("El usuario no posee una foto asignada");
             }
@@ -49,10 +49,12 @@ public class FotoControlador {
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);          
-             if (sesion.getAttribute("usuariosesion") instanceof Cliente) {
-                 cliente = (Cliente) sesion.getAttribute("usuariosesion");
-                   sesion.setAttribute("usuarioSesion", cliente);
+            
+            if (sesion.getAttribute("usuariosesion") instanceof Cliente) {
+                cliente = (Cliente) sesion.getAttribute("usuariosesion");
+                sesion.setAttribute("usuariosesion", cliente);
             }
+            
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
 
         } catch (ErrorServicio ex) {
@@ -74,8 +76,8 @@ public class FotoControlador {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
              if (sesion.getAttribute("usuariosesion") instanceof Comercio) {
-                 comercio = (Comercio) sesion.getAttribute("usuariosesion");
-                   sesion.setAttribute("usuarioSesion", comercio);
+                comercio = (Comercio) sesion.getAttribute("usuariosesion");
+                sesion.setAttribute("usuariosesion", comercio);
             }
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
 

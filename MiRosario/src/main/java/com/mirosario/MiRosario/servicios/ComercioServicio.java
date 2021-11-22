@@ -202,6 +202,12 @@ public class ComercioServicio {
 //    }
     
      public List<Comercio> listarBusqueda(String q, Rubro rubro, Zona zona){
+        if (q == null || q.isEmpty() && rubro != null) {
+            return comercioRepositorio.buscarPorRubro(rubro);
+        }
+        if (q == null || q.isEmpty() && zona != null) {
+            return comercioRepositorio.buscarPorZona(zona);
+        }
         if (zona != null && rubro != null) {
             return comercioRepositorio.buscarPorRubroZona(zona, rubro);
         }
@@ -211,15 +217,10 @@ public class ComercioServicio {
         if (q != null || !q.isEmpty() && rubro != null) {
             return comercioRepositorio.buscarComercioRubro("%"+ q + "%",rubro);
         }
-        if (q != null && !q.isEmpty() && zona != null) {
+        if (q != null || !q.isEmpty() && zona != null) {
             return comercioRepositorio.buscarComercioZona("%"+ q + "%",zona);
         }
-        if (rubro != null) {
-            return comercioRepositorio.buscarPorRubro(rubro);
-        }
-        if (zona != null) {
-            return comercioRepositorio.buscarPorZona(zona);
-        }
+        
         return comercioRepositorio.buscarComercioRubroZona("%"+ q + "%", zona, rubro);
      }
  

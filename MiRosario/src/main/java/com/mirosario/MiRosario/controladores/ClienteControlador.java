@@ -139,7 +139,7 @@ public class ClienteControlador {
                 return "redirect:/";
             }
             cliente = clienteServicio.editar(id, nombreUsuario, password, password2, dni, nombre, apellido, direccion, telefono, mail, zona, archivo);
-            sesion.setAttribute("usuarioSesion", cliente);
+            sesion.setAttribute("usuariosesion", cliente);
             redirect.addFlashAttribute("exito", "Los cambios se guardaron con exito");
         } catch (ErrorServicio error) {
             modelo.put("error", error.getMessage());
