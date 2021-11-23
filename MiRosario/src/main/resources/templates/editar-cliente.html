@@ -61,11 +61,11 @@
 
       <div class="form-group">
         <label for="foto" style="color: ivory;">Foto</label>
-        <input id="foto" type="file" class="form-control item" name="archivo" >
+        <input id="foto" type="file" class="form-control item" name="archivo" required >
       </div>
 
       <div class="form-group">
-        <label for="nombreUsuario"></label>
+        <label for="nombreUsuario" style="color: ivory;">Usuario</label>
         <input th:value="${cliente.nombreUsuario}" name="nombreUsuario" type="text" class="form-control item"
           id="nombreUsuario" placeholder="Nombre Usuario" required>
       </div>
