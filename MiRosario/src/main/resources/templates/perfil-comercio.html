@@ -38,8 +38,8 @@
     <div style="margin:m-1">
 
         <div class="header m-3 p-3" style="border-radius:20px">
-            <img th:if="${comercio.foto.mime != 'application/octet-stream'}" th:src="${'/foto/comercio?id=' + comercio.id}" class="avatar">
-            <img th:if="${comercio.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatar">
+            <img th:if="${comercio.foto != null}" th:src="${'/foto/comercio/' + comercio.id}" class="avatar">
+            <img th:if="${comercio.foto == null}" src="/img/sinusuario.jpg" class="avatar">
             <h1 th:text="${comercio.nombreComercio}" style="color:white; padding:2rem; text-transform: uppercase; ">
             </h1>
         </div>
@@ -92,11 +92,11 @@
                         <tbody>
                             <tr th:if="${producto.alta == true}" th:each="producto : ${productos}">
                                 <div>
-                                    <td th:if="${producto.foto.mime != 'application/octet-stream'}"><img
-                                            th:src="${'/foto/producto?id=' + producto.id}" style="border-radius:50%"
+                                    <td th:if="${producto.foto != null}"><img
+                                            th:src="${'/foto/producto/' + producto.id}" style="border-radius:50%"
                                             width="100px" height="100px">
                                     </td>
-                                    <td th:if="${producto.foto.mime == 'application/octet-stream'}"><img
+                                    <td th:if="${producto.foto == null}"><img
                                         src="/img/sinusuario.jpg" style="border-radius:50%"
                                         width="100px" height="100px">
                                 </td>
@@ -133,8 +133,8 @@
                 <div class="card" th:if="${comentario.alta == true}" th:each="comentario : ${comentarios}">
                     <div class="card-header d-flex justify-content-left align-items-center">
 
-                            <img th:if="${comentario.cliente.foto.mime != 'application/octet-stream'}" th:src="${'/foto/cliente?id='+ comentario.cliente.id}" class="avatarNAV">
-                            <img th:if="${comentario.cliente.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatarNAV">
+                            <img th:if="${comentario.cliente.foto != null}" th:src="${'/foto/cliente/'+ comentario.cliente.id}" class="avatarNAV">
+                            <img th:if="${comentario.cliente.foto == null}" src="/img/sinusuario.jpg" class="avatarNAV">
 
                         <h5 style="padding-left: 0.5rem; text-transform: capitalize;"
                             th:text="${comentario.cliente.nombreUsuario}"></h5>

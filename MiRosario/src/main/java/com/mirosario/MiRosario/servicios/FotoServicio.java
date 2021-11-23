@@ -17,7 +17,7 @@ public class FotoServicio {
 
     @Transactional
     public Foto guardar(MultipartFile archivo) throws Exception {
-        if (archivo != null) {
+        if (archivo != null && !archivo.isEmpty()) {
             try {
                 Foto foto = new Foto();
                 foto.setMime(archivo.getContentType());
@@ -34,15 +34,10 @@ public class FotoServicio {
 
     @Transactional
     public Foto editar(String idFoto, MultipartFile archivo) throws Exception {
-        if (archivo != null) {
+        Foto foto = null;
+        if (archivo != null && !archivo.isEmpty()) {
             try {
-                Foto foto = new Foto();
-                if (idFoto != null) {
-                    Optional<Foto> resp = fotoRepositorio.findById(idFoto);
-                    if (resp.isPresent()) {
-                        foto = resp.get();
-                    }
-                }
+                foto = new Foto();
                 foto.setMime(archivo.getContentType());
                 foto.setNombre(archivo.getName());
                 foto.setContenido(archivo.getBytes());
@@ -50,6 +45,14 @@ public class FotoServicio {
                 return fotoRepositorio.save(foto);
             } catch (Exception e) {
                 System.err.println(e.getMessage());
+            }
+        } else {
+            if (idFoto != null) {
+                Optional<Foto> resp = fotoRepositorio.findById(idFoto);
+                if (resp.isPresent()) {
+                    foto = resp.get();
+                }
+                return foto;
             }
         }
         //si el archivo falla creo uno en blanco

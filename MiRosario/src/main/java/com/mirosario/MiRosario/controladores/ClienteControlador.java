@@ -6,8 +6,6 @@ import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ClienteServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
-import com.mirosario.MiRosario.servicios.RubroServicio;
-import com.mirosario.MiRosario.servicios.ZonaServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,18 +28,13 @@ public class ClienteControlador {
     @Autowired
     private ClienteServicio clienteServicio;
 
-    @Autowired
-    private ZonaServicio zonaServicio;
-
-    @Autowired
-    private RubroServicio rubroServicio;
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENTE')")
     @GetMapping("/vista-cliente")
     public String vistaCliente(ModelMap modelo, @RequestParam(required = false) String q, @RequestParam(required = false) Rubro rubro, @RequestParam(required = false) Zona zona, @RequestParam(required = false) String id, HttpSession sesion, RedirectAttributes redirect) {
 
-        modelo.put("zonas", zonaServicio.listarZonas());
-        modelo.put("rubros", rubroServicio.listarRubros());
+        modelo.put("zonas", Zona.values());
+        modelo.put("rubros",Rubro.values());
        
         if (id != null) {
 
@@ -79,7 +72,7 @@ public class ClienteControlador {
     @GetMapping("/registro")
     public String registro(ModelMap modelo) {
 
-        modelo.put("zonas", zonaServicio.listarZonas());
+        modelo.put("zonas", Zona.values());
 
         return "formulario-cliente.html";
     }
@@ -104,7 +97,7 @@ public class ClienteControlador {
             modelo.put("direccion", direccion);
             modelo.put("telefono", telefono);
             modelo.put("mail", mail);
-            modelo.put("zonas", zonaServicio.listarZonas());
+            modelo.put("zonas", Zona.values());
 
             return "formulario-cliente.html";
         }
@@ -114,14 +107,15 @@ public class ClienteControlador {
     @GetMapping("/editar")
     public String editar(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect) {
 
-        modelo.put("zonas", zonaServicio.listarZonas());
+        modelo.put("zonas", Zona.values());
         try {
             Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");
             if (cliente == null || !cliente.getId().equals(id)) {
                 redirect.addFlashAttribute("error", "Tu usuario no tiene los permisos para realizar esta acción");
                 return "redirect:/";
             }
-            modelo.addAttribute("cliente", clienteServicio.findById(id));
+            cliente = clienteServicio.findById(id);
+            modelo.addAttribute("cliente", cliente);
         } catch (ErrorServicio error) {
             modelo.put("error", error.getMessage());
         }

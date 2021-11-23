@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,8 +35,8 @@ public class FotoControlador {
     @Autowired
     private ProductoServicio productoServicio;
 
-    @GetMapping("/cliente")
-    public ResponseEntity<byte[]> fotoCliente(@RequestParam String id, HttpSession sesion) {
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<byte[]> fotoCliente(@PathVariable String id, HttpSession sesion) {
           Cliente cliente = null;
         try {
           
@@ -62,8 +63,8 @@ public class FotoControlador {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-      @GetMapping("/comercio")
-    public ResponseEntity<byte[]> fotoComercio(@RequestParam String id, HttpSession sesion) {
+      @GetMapping("/comercio/{id}")
+    public ResponseEntity<byte[]> fotoComercio(@PathVariable String id, HttpSession sesion) {
         try {
 //            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");;
                      Comercio comercio = comercioServicio.findById(id);
@@ -86,8 +87,8 @@ public class FotoControlador {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-      @GetMapping("/producto")
-    public ResponseEntity<byte[]> fotoProducto(@RequestParam String id, HttpSession sesion) {
+      @GetMapping("/producto/{id}")
+    public ResponseEntity<byte[]> fotoProducto(@PathVariable String id, HttpSession sesion) {
         try {
 //            Cliente cliente = (Cliente) sesion.getAttribute("usuariosesion");;
                      Producto producto = productoServicio.findById(id);

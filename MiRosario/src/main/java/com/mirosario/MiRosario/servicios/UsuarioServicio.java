@@ -1,11 +1,9 @@
 package com.mirosario.MiRosario.servicios;
 
 import com.mirosario.MiRosario.entidades.Usuario;
-import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.repositorios.UsuarioRepositorio;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

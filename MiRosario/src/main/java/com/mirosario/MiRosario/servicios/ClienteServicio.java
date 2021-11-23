@@ -147,6 +147,12 @@ public class ClienteServicio {
         cliente.setAlta(false);
         clienteRepositorio.save(cliente);
     }
+    
+//    @Transactional
+//    public void darDeBaja(String id) throws ErrorServicio {
+//        Cliente cliente = findById(id);
+//        clienteRepositorio.delete(cliente);
+//    }
 
     public void comentar(String id, String descripcion, String idComercio) throws ErrorServicio {
         comentarioServicio.guardar(id, descripcion, idComercio);

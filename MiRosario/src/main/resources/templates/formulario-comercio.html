@@ -50,12 +50,10 @@
       </div>
       <label for="rubros" style="color: ivory;">Rubros</label>
       <select  id="rubros" name="rubro" class="form-control form-control-lg" style="border-radius: inherit; font-size: initial;">
-        
         <option th:each="rubro,iterator :${rubros}" th:text="${rubro}" ></option>
       </select>
       <label for="zonas" style="color: ivory;">Zonas</label>
       <select id="zonas" name="zona" class="form-control form-control-lg" style="border-radius: inherit; font-size: initial;">
-      
         <option th:each="zona,iterator :${zonas}" th:text="${zona}"></option>
 
       </select>
