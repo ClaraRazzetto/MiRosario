@@ -48,20 +48,20 @@
       <input hidden name="id" th:value="${cliente.id}">
 
       <div class="form-group">
-        <label for="nombreCliente">Nombre</label>
+        <label for="nombreCliente" style="color: ivory;">Nombre</label>
         <input th:value="${cliente.nombre}" name="nombre" type="text" class="form-control item"
           id="nombreCliente" placeholder="Nombre" required>
       </div>
 
       <div class="form-group">
-        <label for="apellidoCliente"> Apellido </label>
+        <label for="apellidoCliente" style="color: ivory;"> Apellido </label>
         <input th:value="${cliente.apellido}" name="apellido" type="text" class="form-control item"
           id="apellidoCliente" placeholder="Apellido" required>
       </div>
 
       <div class="form-group">
-        <label for="foto">Foto</label>
-        <input id="foto" type="file" class="form-control item" name="archivo">
+        <label for="foto" style="color: ivory;">Foto</label>
+        <input id="foto" type="file" class="form-control item" name="archivo" >
       </div>
 
       <div class="form-group">
@@ -71,49 +71,49 @@
       </div>
 
       <div class="form-group">
-        <label for="zonas">Zonas</label> 
+        <label for="zonas" style="color: ivory;">Zonas</label> 
         <select id="zonas" name="zona" class="form-control item" >
           <option th:each="zona,iterator :${zonas}" th:text="${zona}" ></option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="dniCliente">D.N.I</label>
+        <label for="dniCliente" style="color: ivory;">D.N.I</label>
         <input th:value="${cliente.dni}" name="dni" type="text" class="form-control item" id="dniCliente"
           placeholder="D.N.I" minlength="8" maxlength="8" required>
       </div>
 
       <div class="form-group">
-        <label for="Contraseña">Contraseña</label>
+        <label for="Contraseña" style="color: ivory;">Contraseña</label>
         <input name="password" type="password" class="form-control item"
           id="Contraseña" placeholder="Contraseña" minlength="5" maxlength="10" required>
       </div>
 
       <div class="form-group">
-        <label for="confirmacionContraseña">Confirmar contraseña</label>
+        <label for="confirmacionContraseña" style="color: ivory;">Confirmar contraseña</label>
         <input name="password2" type="password" class="form-control item"
           id="confirmacionContraseña" placeholder="Confirmar contraseña" minlength="5" maxlength="10" required>
       </div>
 
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email" style="color: ivory;">Email</label>
         <input th:value="${cliente.mail}" name="mail" type="text" class="form-control item" id="email"
           placeholder="Email" required>
       </div>
 
       <div class="form-group">
-        <label for="telefono">Telefono</label>
+        <label for="telefono" style="color: ivory;">Telefono</label>
         <input th:value="${cliente.telefono}" name="telefono" type="text" class="form-control item"
           id="telefono" placeholder="Telefono" minlength="7" maxlength="15" required>
       </div>
 
       <div class="form-group">
-        <label for="direccion"> Direccion</label>
+        <label for="direccion" style="color: ivory;"> Direccion</label>
         <input th:value="${cliente.direccion}" name="direccion" type="text" class="form-control item"
           id="direccion" placeholder="Direccion" required>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" style="color: ivory;">
         <button type="submit" class="btn btn-block create-account">Guardar Cambios</button>
       </div>
 

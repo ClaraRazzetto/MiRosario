@@ -38,28 +38,28 @@
             </div>
 
             <div class="form-group">
-                <label for="nombreProducto">Nombre del producto</label>
+                <label for="nombreProducto" style="color: ivory;">Nombre del producto</label>
                 <input th:value="${nombre}" name="nombre" type="text" class="form-control item" id="nombreProducto"
                     placeholder="Nombre Producto" required>
             </div>
-
+            <label for="foto" style="color: ivory;">Foto</label>
             <div class="form-group">
-                <label for="foto"></label>
+               
                 <input type="file" class="form-control item" id="foto" name="archivo" >
             </div>
 
             <div class="form-group">
-                <label for="precio"> Precio</label>
+                <label for="precio" style="color: ivory;"> Precio</label>
                 <input  id="precio" th:value="${precio}" name="precio" type="double" class="form-control item" placeholder="Precio">
             </div>
 
             <div class="form-group">
-                <label for="descripcion">Descripcion</label>
+                <label for="descripcion" style="color: ivory;">Descripcion</label>
                 <input id="descripcion" th:value="${descripcion}" name="descripcion" type="text" class="form-control item"
                     placeholder="Descripcion" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="color: ivory;">
                 <button type="submit" class="btn btn-block create-account">Subir</button>
             </div>
         </form>

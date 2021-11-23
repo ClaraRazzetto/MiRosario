@@ -46,29 +46,29 @@
             <input hidden name="id" th:value="${producto.id}">
 
             <div class="form-group">
-                <label for="nombreProducto">Nombre del producto</label>
+                <label for="nombreProducto" style="color: ivory;">Nombre del producto</label>
                 <input id="nombreProducto" th:value="${producto.nombre}" name="nombre" type="text" class="form-control item"
                     placeholder="Nombre Producto" required>
             </div>
 
             <div class="form-group">
-                <label for="foto">Foto</label>
-                <input id="foto" type="file" class="form-control item" name="archivo">
+                <label for="foto" style="color: ivory;">Foto</label>
+                <input id="foto" type="file" class="form-control item" name="archivo" required>
             </div>
 
             <div class="form-group">
-                <label for="precioProducto">Precio</label>
+                <label for="precioProducto" style="color: ivory;">Precio</label>
                 <input id="precioProducto" th:value="${producto.precio}" name="precio" type="double" class="form-control item"
                     placeholder="Precio" required>
             </div>
 
             <div class="form-group">
-                <label for="descripcion">Descripcion del producto</label>
+                <label for="descripcion" style="color: ivory;">Descripcion del producto</label>
                 <input id="descripcion" th:value="${producto.descripcion}" name="descripcion" type="text"
                     class="form-control item" placeholder="Descripcion" minlength="0" maxlength="200" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="color: ivory;">
                 <button type="submit" class="btn btn-block create-account">Subir</button>
             </div>
         </form>
