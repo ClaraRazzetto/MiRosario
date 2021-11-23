@@ -1,7 +1,5 @@
 package com.mirosario.MiRosario.controladores;
 
-import com.mirosario.MiRosario.servicios.UsuarioServicio;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/login")
 public class UsuarioControlador {
-    
-    @Autowired
-    private UsuarioServicio usuarioServicio;
     
     @GetMapping("")
     public String login(ModelMap model, @RequestParam(required = false) String error, @RequestParam(required = false) String logout, @RequestParam(required = false) String nombreUsuario){

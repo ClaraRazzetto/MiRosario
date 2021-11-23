@@ -5,8 +5,6 @@ import com.mirosario.MiRosario.enums.Rubro;
 import com.mirosario.MiRosario.enums.Zona;
 import com.mirosario.MiRosario.excepciones.ErrorServicio;
 import com.mirosario.MiRosario.servicios.ComercioServicio;
-import com.mirosario.MiRosario.servicios.RubroServicio;
-import com.mirosario.MiRosario.servicios.ZonaServicio;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,17 +24,11 @@ public class ComercioControlador {
     @Autowired
     private ComercioServicio comercioServicio;
 
-    @Autowired
-    private ZonaServicio zonaServicio;
-
-    @Autowired
-    private RubroServicio rubroServicio;
-
     @GetMapping("/registro") 
     public String registro(ModelMap modelo) {
 
-        modelo.put("zonas", zonaServicio.listarZonas());
-        modelo.put("rubros", rubroServicio.listarRubros());
+        modelo.put("zonas", Zona.values());
+        modelo.put("rubros", Rubro.values());
 
         return "formulario-comercio.html";
     }
@@ -58,8 +50,8 @@ public class ComercioControlador {
         modelo.put("cuit", cuit);
         modelo.put("nombreComercio", nombreComercio);
         modelo.put("direccion", direccion);
-        modelo.put("zonas", zonaServicio.listarZonas());
-        modelo.put("rubros", rubroServicio.listarRubros());
+        modelo.put("zonas", Zona.values());
+        modelo.put("rubros", Rubro.values());
         modelo.put("telefono", telefono);
         modelo.put("mail", mail);
         modelo.put("descripcion", descripcion);
@@ -73,8 +65,8 @@ public class ComercioControlador {
     @GetMapping("/editar")
     public String editar(ModelMap modelo, HttpSession sesion, @RequestParam String id, RedirectAttributes redirect){
        
-        modelo.put("zonas", zonaServicio.listarZonas());
-        modelo.put("rubros", rubroServicio.listarRubros());
+        modelo.put("zonas", Zona.values());
+        modelo.put("rubros", Rubro.values());
         
         try {
             

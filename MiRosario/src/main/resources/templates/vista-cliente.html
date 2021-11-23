@@ -52,7 +52,7 @@
 
           <label for="rubro">Rubro</label>
           <select name="rubro" id="rubro" class="form-control">
-            <option disabled selected>Selecciona una Rubro</option>
+            <option disabled selected>Selecciona un Rubro</option>
             <option th:each="rubro,iterator :${rubros}" th:text="${rubro}"></option>
           </select>
         </div>
@@ -80,8 +80,8 @@
   <div class="card" th:each="comercio : ${comercios}" style="background-color:white" >
     <div class="row g-0">
       <div class="col-5 col-sm-2">
-       <img th:if="${comercio.foto.mime != 'application/octet-stream'}" th:src="${'/foto/comercio?id=' + comercio.id}" class="avatar" alt="card-horizontal-image" style="border-radius: 100px;">
-       <img th:if="${comercio.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="avatar" alt="card-horizontal-image" style="border-radius: 100px;">
+       <img th:if="${comercio.foto != null}" th:src="${'/foto/comercio/' + comercio.id}" class="avatar" alt="card-horizontal-image" style="border-radius: 100px;">
+       <img th:if="${comercio.foto == null}" src="/img/sinusuario.jpg" class="avatar" alt="card-horizontal-image" style="border-radius: 100px;">
       </div>
       <div class="col-7 col-sm-10">
         <div class="card-body">

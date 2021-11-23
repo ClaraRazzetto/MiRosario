@@ -103,6 +103,12 @@ public class ComercioServicio {
         comercio.setAlta(false);
         comercioRepositorio.save(comercio);
     }
+    
+//    @Transactional
+//    public void darDeBaja(String id) throws ErrorServicio {
+//        Comercio comercio = findById(id);
+//        comercioRepositorio.delete(comercio);
+//    }
 
     public Comercio findById(String id) throws ErrorServicio {
         Optional<Comercio> respuesta = comercioRepositorio.findById(id);

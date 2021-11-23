@@ -36,8 +36,8 @@
                 <span>
 <!--                    <img src="/img/logoMIR1.jpeg" class="rounded" width="100px" height="100px"
                         style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;" alt="">-->
-                    <img th:if="${producto.foto.mime != 'application/octet-stream'}" th:src="${'/foto/producto?id=' + producto.id}" class="avatar" style="margin-left: 38%; margin-top: 0%; margin-block-end: 5%;" alt="">
-          <img th:if="${producto.foto.mime == 'application/octet-stream'}" src="/img/sinusuario.jpg" class="rounded" width="100px" height="100px"
+                    <img th:if="${producto.foto != null}" th:src="${'/foto/producto/' + producto.id}" class="avatar" style="margin-left: 38%; margin-top: 0%; margin-block-end: 5%;" alt="">
+          <img th:if="${producto.foto == null}" src="/img/sinusuario.jpg" class="rounded" width="100px" height="100px"
             style="margin-left: 45%; margin-top: 0%; margin-block-end: 5%;" alt="">
                 </span>
             </div>
@@ -53,7 +53,7 @@
 
             <div class="form-group">
                 <label for="foto" style="color: ivory;">Foto</label>
-                <input id="foto" type="file" class="form-control item" name="archivo" required>
+                <input id="foto" type="file" class="form-control item" name="archivo">
             </div>
 
             <div class="form-group">
